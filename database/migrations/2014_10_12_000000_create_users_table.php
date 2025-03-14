@@ -9,16 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+        Schema::create('utilisateurs', function (Blueprint $table) {
+            $table->id('id_Utilisateur');
+            $table->string('nomUtilisateur');
+            $table->string('prenom');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->enum('status',['active', 'suspended']);
-            $table->rememberToken();
+            $table->string('motDePasse');
+            $table->string('telephone')->nullable();
+            $table->dateTime('dateCreation')->useCurrent();
+            $table->enum('statut', ['actif', 'inactif'])->default('actif');
             $table->timestamps();
         });
     }

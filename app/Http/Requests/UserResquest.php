@@ -22,7 +22,8 @@ class UserResquest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nom_User' => 'required|min:3|max:255',
+            'prenom' => 'required|min:3|max:255'
         ];
     }
 }
