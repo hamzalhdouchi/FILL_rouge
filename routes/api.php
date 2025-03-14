@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::delete('/User/{id}', [User::class, 'destroy']);
+Route::put('/User/{id}/change-status', [User::class, 'changeStatus']);
+Route::put('/User/{id}/update-profile', [User::class, 'updateProfile']);

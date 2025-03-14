@@ -65,6 +65,29 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $utilisateur = User::findOrFail($id);
+
+        $utilisateur->delete();
+    
+        return response()->json([
+            'message' => 'Compte utilisateur supprimé avec succès'
+        ], 200);
     }
+
+    public function changeStatus(Request $request, $id)
+{
+    $request->validate([
+        'statut' => 'required|in:actif,inactif',
+    ]);
+
+    $utilisateur = User::findOrFail($id);
+
+    $utilisateur->statut = $request->statut;
+    $utilisateur->save();
+
+    return response()->json([
+        'message' => 'Statut mis à jour avec succès',
+        'utilisateur' => $utilisateur
+    ], 200);
+}
 }
