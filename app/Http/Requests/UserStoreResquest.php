@@ -25,7 +25,7 @@ class UserStoreResquest extends FormRequest
             'nom_Utilisateur' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:utilisateurs',
-            'motDePasse' => 'required|string|min:8',
+            'password' => 'required|string|min:8',
             'telephone' => 'nullable|string|max:20',
             'statut' => 'nullable|in:actif,inactif',
         ];
