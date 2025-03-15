@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ResaurantResquest;
 use App\Http\Requests\RestaurantUpdateRequest;
 use App\Models\Restaurant;
+use Auth;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
@@ -17,7 +18,7 @@ class RestaurantController extends Controller
 
     public function show($id)
     {
-        $restaurant = Restaurant::findOrFail($id);
+        $restaurant = Auth::user()->restaurants()->findOrFail($id);
         return response()->json($restaurant);
     }
 
@@ -43,6 +44,6 @@ class RestaurantController extends Controller
     {
         $restaurant = Restaurant::findOrFail($id);
         $restaurant->delete();
-        return response()->json(null, 204);
+        return response()->json('suppreme is successfully', 204);
     }
 }
