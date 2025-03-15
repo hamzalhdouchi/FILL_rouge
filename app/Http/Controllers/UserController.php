@@ -64,7 +64,7 @@ class UserController extends Controller
     {
         $user = $request->user();
 
-        $validate = $request->validated($request);
+        $validate = $request->validated();
 
         if ($validate->fails()) {
             return response()->json(['errors' => $validate->errors()], 422);

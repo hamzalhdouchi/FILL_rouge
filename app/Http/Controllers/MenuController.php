@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MenuResquest;
+use App\Http\Requests\MenuUpdateRequest;
 use App\Models\Menu;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
@@ -74,9 +75,17 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Menu $menu)
+    public function update(MenuUpdateRequest $request, $idRestaurant, $idMenu)
     {
-        //
+        $menu = Menu::where('idRestaurant', $idRestaurant)->find($idMenu);
+        if (!$menu) {
+            return response()->json(['message' => 'Menu non trouvé'], 404);
+        }
+
+        $request->validated();
+
+        $menu->update($request->only(['nameMenu', 'isActif']));
+        return response()->json($menu);
     }
 
     /**
