@@ -13,4 +13,9 @@ class Menu extends Model
         'name_Menu',
         'isActif',
     ];
+
+    public function Restaurant()
+    {
+        return $this->belongsTo(Restaurant::class);
+    }
 }

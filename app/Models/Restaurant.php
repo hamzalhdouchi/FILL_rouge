@@ -17,4 +17,9 @@ class Restaurant extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function Menu()
+    {
+        return $this->hasOne(Menu::class);
+    }
 }
