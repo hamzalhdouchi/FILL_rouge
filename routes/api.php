@@ -21,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::delete('/User/{id}', [User::class, 'destroy']);
 Route::put('/User/{id}/change-status', [User::class, 'changeStatus']);
 Route::put('/User/{id}/update-profile', [User::class, 'updateProfile']);
+
+Route::post('/forgot-password', [User::class, 'sendResetLink']);
+Route::post('/reset-password', [User::class, 'resetPassword']);

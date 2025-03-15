@@ -19,10 +19,14 @@ class UpdateProfileRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            //
+            'nom_Utilisateur' => 'sometimes|string|max:255',
+            'prenom' => 'sometimes|string|max:255',
+            'email' => 'sometimes|string|email|max:255|unique:utilisateurs,email,' . $this->route('id'),
+            'password' => 'sometimes|string|min:8',
+            'telephone' => 'nullable|string|max:20',
         ];
     }
 }
