@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\UserStoreResquest;
 use App\Models\User;
 use Carbon\Carbon;
@@ -54,19 +55,14 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updateProfile(Request $request)
+    public function updateProfile(UpdateProfileRequest $request)
     {
         $user = $request->user();
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'sometimes|string|max:255',
-            'email' => 'sometimes|email|unique:users,email,' . $user->id,
-            'password' => 'sometimes|string|min:6|confirmed',
-            'telephone' => 'sometimes|integer|min:10|max:15',
-        ]);
+        $validate = $request->validated($request);
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+        if ($validate->fails()) {
+            return response()->json(['errors' => $validate->errors()], 422);
         }
 
         if ($request->has('last_password') && $request->last_password = $user->password) {
