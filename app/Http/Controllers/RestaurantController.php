@@ -2,64 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ResaurantResquest;
+use App\Http\Requests\RestaurantUpdateRequest;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $restaurants = Restaurant::all();
+        return response()->json($restaurants);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        $restaurant = Restaurant::findOrFail($id);
+        return response()->json($restaurant);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(ResaurantResquest $request)
     {
-        //
+        $request->validated($request);
+
+        $restaurant = Restaurant::create($request->all());
+        return response()->json($restaurant, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Restaurant $restaurant)
+    public function update(RestaurantUpdateRequest $request, $id)
     {
-        //
+        $restaurant = Restaurant::findOrFail($id);
+
+        $request->validated($request);
+
+        $restaurant->update($request->all());
+        return response()->json($restaurant);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Restaurant $restaurant)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Restaurant $restaurant)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Restaurant $restaurant)
-    {
-        //
+        $restaurant = Restaurant::findOrFail($id);
+        $restaurant->delete();
+        return response()->json(null, 204);
     }
 }
