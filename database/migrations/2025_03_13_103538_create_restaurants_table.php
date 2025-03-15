@@ -12,7 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('restaurants', function (Blueprint $table) {
-            $table->id();
+            $table->id('idRestaurant');
+            $table->string('nomRestaurant');
+            $table->string('adresse');
+            $table->string('telephone');
+            $table->double('notation')->nullable();
+            $table->enum('statut', ['ouvert', 'fermé'])->default('ouvert');
+            $table->string('zoneLivraison');
             $table->timestamps();
         });
     }

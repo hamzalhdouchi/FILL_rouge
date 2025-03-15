@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::middleware('auth:sanctum')->get('/profile', [User::class, 'showProfile']);
+
 Route::delete('/User/{id}', [User::class, 'destroy']);
 Route::put('/User/{id}/change-status', [User::class, 'changeStatus']);
 Route::put('/User/{id}/update-profile', [User::class, 'updateProfile']);

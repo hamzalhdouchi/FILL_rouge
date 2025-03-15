@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReservationResquest;
+use App\Http\Requests\ResetpasswordRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\UserStoreResquest;
 use App\Models\User;
@@ -10,8 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class UserController extends Controller
@@ -47,9 +47,14 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function showProfile(Request $request)
     {
-        //
+        $user = $request->user();
+
+        return response()->json([
+            'message' => 'Profile fetched successfully.',
+            'user' => $user
+        ]);
     }
 
     /**
@@ -131,13 +136,9 @@ class UserController extends Controller
         return response()->json(['message' => 'Password reset link sent to your email.']);
     }
 
-    public function resetPassword(Request $request)
+    public function resetPassword(ResetpasswordRequest $request)
     {
-        $request->validate([
-            'email' => 'required|email|exists:users,email',
-            'token' => 'required',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+        $request->validated($request);
 
         $resetRecord = DB::table('password_resets')->where('email', $request->email)->first();
         if (!$resetRecord || !Hash::check($request->token, $resetRecord->token)) {
