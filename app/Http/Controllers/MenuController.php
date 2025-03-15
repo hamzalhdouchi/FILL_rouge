@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -10,9 +11,14 @@ class MenuController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($idRestaurant)
     {
-        $menus = Menu::all();
+        $restaurant = Restaurant::find($idRestaurant);
+        if (!$restaurant) {
+            return response()->json(['message' => 'Restaurant non trouvé'], 404);
+        }
+
+        $menus = $restaurant->menus;
         return response()->json($menus);
     }
 
