@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MenuResquest;
 use App\Models\Menu;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
@@ -33,9 +34,21 @@ class MenuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MenuResquest $request, $idRestaurant)
     {
-        //
+        $restaurant = Restaurant::find($idRestaurant);
+        if (!$restaurant) {
+            return response()->json(['message' => 'Restaurant non trouvé'], 404);
+        }
+
+        $request->validated();
+
+        $menu = $restaurant->menus()->create([
+            'name_Menu' => $request->nameMenu,
+            'isActif' => $request->isActif ?? true,
+        ]);
+
+        return response()->json($menu, 201);
     }
 
     /**

@@ -22,7 +22,8 @@ class MenuResquest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name_Menu' => 'required|string',
+            'isActif' => 'boolean',
         ];
     }
 }
