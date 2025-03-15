@@ -91,8 +91,14 @@ class MenuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Menu $menu)
+    public function destroy($idRestaurant, $idMenu)
     {
-        //
+        $menu = Menu::where('idRestaurant', $idRestaurant)->find($idMenu);
+        if (!$menu) {
+            return response()->json(['message' => 'Menu non trouvé'], 404);
+        }
+
+        $menu->delete();
+        return response()->json(['message' => 'Menu supprimé']);
     }
 }
