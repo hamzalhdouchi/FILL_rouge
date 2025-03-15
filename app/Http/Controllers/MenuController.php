@@ -41,9 +41,13 @@ class MenuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Menu $menu)
+    public function show($idRestaurant, $idMenu)
     {
-        //
+        $menu = Menu::where('id_Restaurant', $idRestaurant)->find($idMenu);
+        if (!$menu) {
+            return response()->json(['message' => 'Menu non trouvé'], 404);
+        }
+        return response()->json($menu);
     }
 
     /**
