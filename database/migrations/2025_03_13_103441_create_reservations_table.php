@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->id('idReservation');
+            $table->dateTime('dateHeure');
+            $table->integer('duree');
+            $table->enum('statut', ['en_attente', 'confirmee', 'annulee']); 
+            $table->integer('nombrePersonnes');
+            $table->foreignId('idTable')->constrained('tables')->onDelete('cascade'); 
             $table->timestamps();
         });
     }
