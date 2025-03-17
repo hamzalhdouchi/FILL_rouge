@@ -28,7 +28,14 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'mon_categorie' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'order' => 'required|integer',
+        ]);
+
+        $category = Categorie::create($request->all());
+        return response()->json($category, 201);
     }
 
     /**
