@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Menu;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,3 +27,10 @@ Route::put('/User/{id}/update-profile', [User::class, 'updateProfile']);
 
 Route::post('/forgot-password', [User::class, 'sendResetLink']);
 Route::post('/reset-password', [User::class, 'resetPassword']);
+Route::prefix('restaurants/{idRestaurant}/menus')->group(function () {
+    Route::get('/', [Menu::class, 'index']);
+    Route::get('/{idMenu}', [Menu::class, 'show']);
+    Route::post('/', [Menu::class, 'store']);
+    Route::put('/{idMenu}', [Menu::class, 'update']);
+    Route::delete('/{idMenu}', [Menu::class, 'destroy']);
+});

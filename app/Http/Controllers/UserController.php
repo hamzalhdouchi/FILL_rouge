@@ -41,6 +41,8 @@ class UserController extends Controller
 
         $utilisateur = User::create($validatedData);
 
+        $token = $utilisateur->createToken('User')->plainTextToken;
+
         return response()->json($utilisateur, 201);
     }
 

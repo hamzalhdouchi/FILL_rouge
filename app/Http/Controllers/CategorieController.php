@@ -28,7 +28,7 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

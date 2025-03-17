@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('mon_categorie');
-            $table->string('description');
-            $table->integer('order');
+        Schema::create('categorie_menu', function (Blueprint $table) {
+            $table->foreignId('id_menu')->constrained('menus');
+            $table->foreignId('id_categorie')->constrained('categorie');
+            $table->primary(['id_menu', 'id_categorie']);
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('categorie_menu');
     }
 };
