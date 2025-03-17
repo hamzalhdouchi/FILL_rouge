@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement("CREATE TABLE administrateur (
-            role_id BIGINT CHECK (role_id = 1)
+        DB::statement("CREATE livreur admin (
+            role_id BIGINT CHECK (role_id = 2)
         ) INHERITS (users);");
-        DB::statement("ALTER TABLE administrateur ADD PRIMARY KEY (id)");
+        DB::statement("ALTER TABLE livreur ADD PRIMARY KEY (id)");
     }
 
     /**
@@ -22,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_administrateur');
+        Schema::dropIfExists('livreur');
     }
 };

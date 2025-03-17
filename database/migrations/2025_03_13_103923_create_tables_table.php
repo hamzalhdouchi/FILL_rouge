@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('qrCode')->nullable(); 
             $table->integer('capacite'); 
             $table->enum('statut', ['libre', 'occupee', 'reservee']); 
+            
             $table->timestamps();
         });
     }
