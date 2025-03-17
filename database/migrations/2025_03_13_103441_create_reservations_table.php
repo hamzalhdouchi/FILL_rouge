@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('duree');
             $table->enum('statut', ['en_attente', 'confirmee', 'annulee']); 
             $table->integer('nombrePersonnes');
-            $table->foreignId('idTable')->constrained('tables')->onDelete('cascade'); 
+            $table->foreignId('client_id')->constrained('client');
             $table->timestamps();
         });
     }

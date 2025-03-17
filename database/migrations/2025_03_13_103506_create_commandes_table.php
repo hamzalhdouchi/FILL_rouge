@@ -17,6 +17,9 @@ return new class extends Migration
             $table->integer('quantite'); 
             $table->text('instructions')->nullable(); 
             $table->double('prixTotal', 8, 2);
+            $table->foreignId('cleint_id')->constrained('clients');
+            $table->foreignId('livreur_id')->constrained('livreur');
+            $table->foreignId('restaurant_id')->constrained('restaurants');
             $table->timestamps();
         });
     }

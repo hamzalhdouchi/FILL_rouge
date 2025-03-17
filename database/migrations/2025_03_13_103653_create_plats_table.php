@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('temps_Preparation');
             $table->boolean('disponible')->default(1);
             $table->string('image');
+            $table->foreignId('categorie_id')->constrained('categorie');
             $table->timestamps();
         });
     }
