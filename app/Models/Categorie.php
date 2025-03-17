@@ -19,4 +19,9 @@ class Categorie extends Model
     {
         return $this->belongsToMany(Menu::class,'categoriemenu','id_menu','id_categorie');
     }
+
+    public function plat()
+    {
+        return $this->hasMany(Plat::class);
+    }
 }

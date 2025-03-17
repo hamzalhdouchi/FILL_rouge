@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('plats', function (Blueprint $table) {
             $table->id();
+            $table->string('nom_plat');
+            $table->string('desciption');
+            $table->integer('prix');
+            $table->integer('temps_Preparation');
+            $table->boolean('disponible')->default(1);
+            $table->string('image');
             $table->timestamps();
         });
     }
