@@ -9,6 +9,16 @@ class Plat extends Model
 {
     use HasFactory;
 
+    protected $fillable=[
+        'image',
+        'temps_Preparation',
+        'prix',
+        'desciption',
+        'nom_plat',
+
+    ];
+
+
     public function categorie()
     {
         return $this->belongsTo(Categorie::class);

@@ -11,12 +11,14 @@ class PaymentFactureNotification extends Notification
 {
     use Queueable;
 
+    protected $payment;
+
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($payment)
     {
-        //
+        $this->payment = $payment;
     }
 
     /**
@@ -24,20 +26,22 @@ class PaymentFactureNotification extends Notification
      *
      * @return array<int, string>
      */
-    public function via(object $notifiable): array
+    public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database']; 
     }
 
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable): MailMessage
+    public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->subject('Payment Successful')
+            ->greeting('Hello ' . $notifiable->name . '!')
+            ->line('Your payment of $' . $this->payment->amount . ' was successful.')
+            ->line('Transaction ID: ' . $this->payment->payment_id)
+            ->line('Thank you for your purchase!');
     }
 
     /**
@@ -45,10 +49,14 @@ class PaymentFactureNotification extends Notification
      *
      * @return array<string, mixed>
      */
-    public function toArray(object $notifiable): array
+    public function toDatabase($notifiable)
     {
         return [
-            //
+            'message' => 'Your payment of $' . $this->payment->amount . ' was successful.',
+            'payment_id' => $this->payment->id,
+            'amount' => $this->payment->amount,
+            
         ];
     }
+
 }

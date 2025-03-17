@@ -12,8 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('paiements', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('id'); 
+            $table->foreignId('commande_id')->constrained('commandes')->onDelete('cascade'); 
+            $table->double('montant', 8, 2); 
+            $table->enum('type', ['carte', 'paypal', 'virement']); 
+            $table->enum('statut', ['en_attente', 'valide', 'rembourse']);
+            $table->string('reference')->unique();
+            $table->dateTime('dateTransaction')->default(now()); 
+            $table->timestamps(); 
         });
     }
 
