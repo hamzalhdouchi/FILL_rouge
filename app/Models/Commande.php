@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Commande extends Model
 {
     use HasFactory;
+    
+    protected $fillable=[
+        'statut',
+        'quantite',
+        'instructions',
+        'prixTotal',
+    ];
+    public function plat()
+    {
+        return $this->hasMany(Plat::class);
+    }
 }
+

@@ -9,8 +9,14 @@ class Plat extends Model
 {
     use HasFactory;
 
-public function categorie()
-{
-    return $this->belongsTo(Categorie::class);
-}
+    public function categorie()
+    {
+        return $this->belongsTo(Categorie::class);
+    }
+
+    public function commande()
+    {
+        return $this->belongsTo(Commande::class);
+    }
+
 }

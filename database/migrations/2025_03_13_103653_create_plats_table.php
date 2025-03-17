@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom_plat');
             $table->string('desciption');
-            $table->integer('prix');
+            $table->double('prix',8,2);
             $table->integer('temps_Preparation');
             $table->boolean('disponible')->default(1);
             $table->string('image');

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
+            $table->enum('statut', ['en_attente', 'en_cours', 'terminee', 'annulee']); // Statut de la commande
+            $table->integer('quantite'); 
+            $table->text('instructions')->nullable(); 
+            $table->double('prixTotal', 8, 2);
             $table->timestamps();
         });
     }
