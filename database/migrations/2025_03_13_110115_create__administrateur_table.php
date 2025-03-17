@@ -13,7 +13,7 @@ return new class extends Migration
     {
         DB::statement("CREATE TABLE administrateur (
             role_id BIGINT CHECK (role_id = 1)
-        ) INHERITS (users);");
+        ) INHERITS (utilisateurs);");
         DB::statement("ALTER TABLE administrateur ADD PRIMARY KEY (id)");
     }
 

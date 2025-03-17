@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nom_ingredient');
             $table->integer('stock');
             $table->string('unite_mesure');
-            $table->foreignId('plate_id')->constrained('plate');
+            $table->foreignId('plate_id')->constrained('plats');
             $table->timestamps();
         });
     }

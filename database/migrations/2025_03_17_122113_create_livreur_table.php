@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement("CREATE livreur admin (
+        DB::statement("CREATE table livreur (
             role_id BIGINT CHECK (role_id = 2)
-        ) INHERITS (users);");
+        ) INHERITS (utilisateurs);");
         DB::statement("ALTER TABLE livreur ADD PRIMARY KEY (id)");
     }
 
