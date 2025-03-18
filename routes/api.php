@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CharacterController;
+use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\UserController;
 use App\Models\Menu;
 use App\Models\User;
@@ -32,18 +33,19 @@ use Illuminate\Support\Facades\Route;
 
     Route::post('/forgot-password', [UserController::class, 'sendResetLink']);
     Route::post('/reset-password', [UserController::class, 'resetPassword']);
-    Route::prefix('restaurants/{idRestaurant}/menus')->group(function () {
+    Route::prefix('menus/{idRestaurant}')->group(function () {
     Route::get('/', [Menu::class, 'index']);
     Route::get('/{idMenu}', [Menu::class, 'show']);
     Route::post('/', [Menu::class, 'store']);
     Route::put('/{idMenu}', [Menu::class, 'update']);
     Route::delete('/{idMenu}', [Menu::class, 'destroy']);
+});
+    Route::get('/restaurants', [RestaurantController::class, 'index']);
+    Route::get('/restaurants/{id}', [RestaurantController::class, 'show']);
+    Route::post('/restaurants', [RestaurantController::class, 'store']);
+    Route::put('/restaurants/{id}', [RestaurantController::class, 'update']);
+    Route::delete('/restaurants/{id}', [RestaurantController::class, 'destroy']);
 
-    Route::get(
-        'characters/{id}',
-    CharacterController::class
-    );
     Route::apiResource('categories', CategorieController::class);
 
 
-});
