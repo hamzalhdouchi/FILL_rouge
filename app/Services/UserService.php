@@ -2,7 +2,8 @@
 
 namespace App\Services;
 
-use App\Repositories\Interfaces\UserRepositoryInterface;
+use App\Http\Requests\UserStoreResquest;
+use App\RepositoryInterfaces\UserRepositoryInterface;
 use App\Services\Interfaces\UserServiceInterface;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,7 @@ class UserService implements UserServiceInterface
         $this->userRepository = $userRepository;
     }
 
-    public function createUser( $validatedData)
+    public function createUser($validatedData): mixed
     {
         return $this->userRepository->create($validatedData);
     }

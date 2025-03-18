@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\UserController;
 use App\Models\Menu;
 use App\Models\User;
@@ -38,6 +39,10 @@ use Illuminate\Support\Facades\Route;
     Route::put('/{idMenu}', [Menu::class, 'update']);
     Route::delete('/{idMenu}', [Menu::class, 'destroy']);
 
+    Route::get(
+        'characters/{id}',
+    CharacterController::class
+    );
     Route::apiResource('categories', CategorieController::class);
 
 
