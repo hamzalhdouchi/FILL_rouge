@@ -19,7 +19,7 @@ return new class extends Migration
             $table->double('notation')->nullable();
             $table->enum('statut', ['ouvert', 'fermé'])->default('ouvert');
             $table->string('zone_Livraison');
-            $table->foreignId('user_create_id')->constrained('utilisateurs');
+            $table->foreignId('user_create_id')->constrained('users');
             $table->timestamps();
         });
     }

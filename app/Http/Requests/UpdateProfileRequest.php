@@ -11,7 +11,7 @@ class UpdateProfileRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class UpdateProfileRequest extends FormRequest
         return [
             'nom_Utilisateur' => 'sometimes|string|max:255',
             'prenom' => 'sometimes|string|max:255',
-            'email' => 'sometimes|string|email|max:255|unique:utilisateurs,email,' . $this->route('id'),
+            'email' => 'sometimes|string|email|max:255|unique:users,email,' . $this->route('id'),
             'password' => 'sometimes|string|min:8',
             'telephone' => 'nullable|string|max:20',
         ];

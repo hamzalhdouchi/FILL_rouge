@@ -11,7 +11,7 @@ class UserStoreResquest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,10 +24,11 @@ class UserStoreResquest extends FormRequest
         return [
             'nom_Utilisateur' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:utilisateurs',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'telephone' => 'nullable|string|max:20',
             'statut' => 'nullable|in:actif,inactif',
+            'role_id' => 'required'
         ];
     }
 }

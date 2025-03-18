@@ -13,7 +13,7 @@ return new class extends Migration
     {
         DB::statement("CREATE TABLE client (
             role_id BIGINT CHECK (role_id = 3)
-        ) INHERITS (utilisateurs);");
+        ) INHERITS (users);");
         DB::statement("ALTER TABLE client ADD PRIMARY KEY (id)");
     }
 

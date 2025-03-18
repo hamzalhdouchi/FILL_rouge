@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategorieResquest;
+use App\Http\Requests\categorieUpdaterequest;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,8 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categorie::all();
+        return response()->json($categories);
     }
 
     /**
@@ -30,7 +32,7 @@ class CategorieController extends Controller
     public function store(CategorieResquest $request)
     {
         $request->validated();
-
+        
         $category = Categorie::create($request->all());
         return response()->json($category, 201);
     }
@@ -38,9 +40,9 @@ class CategorieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Categorie $categorie)
+    public function show(Categorie $category)
     {
-        //
+        return response()->json($category);
     }
 
     /**
@@ -54,13 +56,9 @@ class CategorieController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(categorieUpdaterequest $request, Categorie $category)
     {
-        $request->validate([
-            'mon_categorie' => 'sometimes|string|max:255',
-            'description' => 'sometimes|string|max:1000',
-            'order' => 'sometimes|integer',
-        ]);
+        $request->validated();
 
         $category->update($request->all());
         return response()->json($category);
@@ -69,8 +67,9 @@ class CategorieController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categorie $categorie)
+    public function destroy(Categorie $category)
     {
-        //
+        $category->delete();
+        return response()->json(null, 204);
     }
 }

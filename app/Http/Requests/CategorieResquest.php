@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Dotenv\Exception\ValidationException;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CategorieResquest extends FormRequest
@@ -26,5 +27,15 @@ class CategorieResquest extends FormRequest
             'description' => 'required|string|max:1000',
             'order' => 'required|integer',
         ];
+    }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        $response = response()->json([
+            'error' => 'Validation failed',
+            'messages' => $validator->errors(),
+        ], 422);
+
+        throw new ValidationException($validator, $response);
     }
 }

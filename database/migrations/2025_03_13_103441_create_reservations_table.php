@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('duree');
             $table->enum('statut', ['en_attente', 'confirmee', 'annulee']); 
             $table->integer('nombrePersonnes');
-            $table->foreignId('client_id')->constrained('utilisateurs');
+            $table->foreignId('client_id')->constrained('users');
             $table->timestamps();
         });
     }

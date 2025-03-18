@@ -38,7 +38,6 @@ class UserController extends Controller
     public function store(UserStoreResquest $request)
     {
         $validatedData = $request->validated();
-
         $utilisateur = User::create($validatedData);
 
         $token = $utilisateur->createToken('User')->plainTextToken;
@@ -49,9 +48,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function showProfile(Request $request)
+    public function showProfile($id)
     {
-        $user = $request->user();
+        $user = User::findOrFail($id);
 
         return response()->json([
             'message' => 'Profile fetched successfully.',
@@ -62,32 +61,36 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updateProfile(UpdateProfileRequest $request)
+    public function updateProfile(UpdateProfileRequest $request, $id)
     {
-        $user = $request->user();
-
-        $validate = $request->validated();
-
-        if ($validate->fails()) {
-            return response()->json(['errors' => $validate->errors()], 422);
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json(['message' => 'User not found.'], 404);
         }
-
-        if ($request->has('last_password') && $request->last_password = $user->password) {
-
+    
+        $validate = $request->validated();
+    
+        if ($request->has('last_password')) {
+            if (!Hash::check($request->last_password, $user->password)) {
+                return response()->json(['message' => 'The current password is incorrect.'], 400);
+            }
+    
             if ($request->has('new_password')) {
-                if (Hash::check($request->new_password, $user->new_password)) {
+                if (Hash::check($request->new_password, $user->password)) {
                     return response()->json(['message' => 'New password cannot be the same as the current password.'], 400);
                 }
                 $user->password = Hash::make($request->new_password);
-            } 
+            }
         }
+    
         $user->save();
-
+    
         return response()->json([
             'message' => 'Profile updated successfully.',
             'user' => $user
         ]);
     }
+    
 
 
     /**
