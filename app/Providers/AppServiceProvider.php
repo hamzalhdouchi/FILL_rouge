@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Repositories\Interfaces\MenuRepositoryInterface;
+use App\RepositoryInterfaces\MenuRepositoryInterface;
 use App\Repositories\MenuRepository;
 use App\Repositories\RestaurantRepository;
 use App\Repositories\RestaurantRepositoryInterface;

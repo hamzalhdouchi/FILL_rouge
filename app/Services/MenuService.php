@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Repositories\Interfaces\MenuRepositoryInterface;
+use App\RepositoryInterfaces\MenuRepositoryInterface;
 use App\Services\Interfaces\MenuServiceInterface;
 
 class MenuService implements MenuServiceInterface

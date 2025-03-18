@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Menu;
 use App\Models\Restaurant;
-use App\Repositories\Interfaces\MenuRepositoryInterface;
+use App\RepositoryInterfaces\MenuRepositoryInterface;
 
 class MenuRepository implements MenuRepositoryInterface
 {
