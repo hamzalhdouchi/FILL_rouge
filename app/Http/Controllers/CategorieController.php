@@ -3,73 +3,53 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategorieResquest;
-use App\Http\Requests\categorieUpdaterequest;
+use App\Http\Requests\CategorieUpdateRequest;
 use App\Models\Categorie;
+use App\Services\Interfaces\CategorieServiceInterface;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class CategorieController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $categorieService;
+
+    public function __construct(CategorieServiceInterface $categorieService)
     {
-        $categories = Categorie::all();
+        $this->categorieService = $categorieService;
+    }
+
+    public function index(): JsonResponse
+    {
+        $categories = $this->categorieService->getAllCategories();
         return response()->json($categories);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(CategorieResquest $request): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(CategorieResquest $request)
-    {
-        $request->validated();
-        
-        $category = Categorie::create($request->all());
+        $validated = $request->validated();
+        $category = $this->categorieService->createCategory($validated);
         return response()->json($category, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Categorie $category)
+    public function show($id): JsonResponse
     {
+        $category = $this->categorieService->getCategoryById($id);
+        if (!$category) {
+            return response()->json(['message' => 'Catégorie non trouvée'], 404);
+        }
         return response()->json($category);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Categorie $categorie)
+    public function update(CategorieUpdateRequest $request, Categorie $category): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(categorieUpdaterequest $request, Categorie $category)
-    {
-        $request->validated();
-
-        $category->update($request->all());
+        $validated = $request->validated();
+        $this->categorieService->updateCategory($category, $validated);
         return response()->json($category);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Categorie $category)
+    public function destroy(Categorie $category): JsonResponse
     {
-        $category->delete();
-        return response()->json(null, 204);
+        $this->categorieService->deleteCategory($category);
+        return response()->json(['message' => 'Catégorie supprimée'], 204);
     }
 }
