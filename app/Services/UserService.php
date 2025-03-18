@@ -53,6 +53,7 @@ class UserService implements UserServiceInterface
 
     public function changeStatus($request, $id)
     {
+        
         $user = $this->userRepository->find($id);
         $user->statut = $request->statut;
         $user->save();

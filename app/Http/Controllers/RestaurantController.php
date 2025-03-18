@@ -18,7 +18,7 @@ class RestaurantController extends Controller
 
     public function show($id)
     {
-        $restaurant = Auth::user()->restaurants()->findOrFail($id);
+        $restaurant = Restaurant::find($id);
         return response()->json($restaurant);
     }
 
