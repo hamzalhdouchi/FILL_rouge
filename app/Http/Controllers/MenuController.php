@@ -4,101 +4,46 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MenuResquest;
 use App\Http\Requests\MenuUpdateRequest;
-use App\Models\Menu;
-use App\Models\Restaurant;
+use App\Services\Interfaces\MenuServiceInterface;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected $menuService;
+
+    public function __construct(MenuServiceInterface $menuService)
+    {
+        $this->menuService = $menuService;
+    }
+
     public function index($idRestaurant)
     {
-        $restaurant = Restaurant::find($idRestaurant);
-        if (!$restaurant) {
-            return response()->json(['message' => 'Restaurant non trouvé'], 404);
-        }
-
-        $menus = $restaurant->menus;
-        return response()->json($menus);
+        $menus = $this->menuService->getAllMenus($idRestaurant);
+        return $menus ? response()->json($menus) : response()->json(['message' => 'Restaurant non trouvé'], 404);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(MenuResquest $request, $idRestaurant)
-    {
-        $restaurant = Restaurant::find($idRestaurant);
-        if (!$restaurant) {
-            return response()->json(['message' => 'Restaurant non trouvé'], 404);
-        }
-
-        $request->validated();
-
-        $menu = $restaurant->menus()->create([
-            'name_Menu' => $request->nameMenu,
-            'isActif' => $request->isActif ?? true,
-        ]);
-
-        return response()->json($menu, 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show($idRestaurant, $idMenu)
     {
-        $menu = Menu::where('id_Restaurant', $idRestaurant)->find($idMenu);
-        if (!$menu) {
-            return response()->json(['message' => 'Menu non trouvé'], 404);
-        }
-        return response()->json($menu);
+        $menu = $this->menuService->getMenuById($idRestaurant, $idMenu);
+        return $menu ? response()->json($menu) : response()->json(['message' => 'Menu non trouvé'], 404);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Menu $menu)
+    public function store(MenuResquest $request, $idRestaurant)
     {
-        //
+        $menu = $this->menuService->createMenu($idRestaurant, $request->validated());
+        return $menu ? response()->json($menu, 201) : response()->json(['message' => 'Restaurant non trouvé'], 404);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(MenuUpdateRequest $request, $idRestaurant, $idMenu)
     {
-        $menu = Menu::where('idRestaurant', $idRestaurant)->find($idMenu);
-        if (!$menu) {
-            return response()->json(['message' => 'Menu non trouvé'], 404);
-        }
-
-        $request->validated();
-
-        $menu->update($request->only(['nameMenu', 'isActif']));
-        return response()->json($menu);
+        $menu = $this->menuService->updateMenu($idRestaurant, $idMenu, $request->validated());
+        return $menu ? response()->json($menu) : response()->json(['message' => 'Menu non trouvé'], 404);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($idRestaurant, $idMenu)
     {
-        $menu = Menu::where('idRestaurant', $idRestaurant)->find($idMenu);
-        if (!$menu) {
-            return response()->json(['message' => 'Menu non trouvé'], 404);
-        }
-
-        $menu->delete();
-        return response()->json(['message' => 'Menu supprimé']);
+        return $this->menuService->deleteMenu($idRestaurant, $idMenu)
+            ? response()->json(['message' => 'Menu supprimé'])
+            : response()->json(['message' => 'Menu non trouvé'], 404);
     }
 }
