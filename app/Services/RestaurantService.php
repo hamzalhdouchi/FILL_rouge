@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\RestaurantRepositoryInterface;
+use App\Services\Interfaces\RestaurantServiceInterface;
 
 class RestaurantService implements RestaurantServiceInterface
 {
