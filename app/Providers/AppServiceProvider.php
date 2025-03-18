@@ -2,12 +2,16 @@
 
 namespace App\Providers;
 
+use App\Repositories\CategorieRepository;
+use App\RepositoryInterfaces\CategorieRepositoryInterface;
 use App\RepositoryInterfaces\MenuRepositoryInterface;
 use App\Repositories\MenuRepository;
 use App\Repositories\RestaurantRepository;
 use App\Repositories\RestaurantRepositoryInterface;
 use App\RepositoryInterfaces\UserRepositoryInterface;
 use App\Repositories\UserRepository;
+use App\Services\CategorieService;
+use App\Services\Interfaces\CategorieServiceInterface;
 use App\Services\Interfaces\MenuServiceInterface;
 use App\Services\Interfaces\UserServiceInterface;
 use App\Services\Interfaces\RestaurantServiceInterface;
@@ -32,11 +36,11 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(MenuRepositoryInterface::class, MenuRepository::class);
         $this->app->bind(MenuServiceInterface::class, MenuService::class);
+
+        $this->app->bind(CategorieRepositoryInterface::class, CategorieRepository::class);
+        $this->app->bind(CategorieServiceInterface::class, CategorieService::class);
         }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         //
