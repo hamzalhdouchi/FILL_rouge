@@ -31,8 +31,9 @@ use Illuminate\Support\Facades\Route;
     Route::put('/User/{id}/change-status', [UserController::class, 'changeStatus']);
     Route::put('/User/{id}/update-profile', [UserController::class, 'updateProfile']);
 
-    Route::post('/forgot-password', [UserController::class, 'sendResetLink']);
+    // Route::post('/forgot-password', [UserController::class, 'sendResetLink']);
     Route::post('/reset-password', [UserController::class, 'resetPassword']);
+    
     Route::prefix('menus/{idRestaurant}')->group(function () {
     Route::get('/', [Menu::class, 'index']);
     Route::get('/{idMenu}', [Menu::class, 'show']);

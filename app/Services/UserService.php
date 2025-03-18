@@ -82,8 +82,6 @@ class UserService implements UserServiceInterface
 
     public function resetPassword($request)
     {
-        $request->validated();
-
         $resetRecord = DB::table('password_resets')->where('email', $request->email)->first();
         if (!$resetRecord || !Hash::check($request->token, $resetRecord->token)) {
             return response()->json(['message' => 'Invalid or expired token.'], 400);
