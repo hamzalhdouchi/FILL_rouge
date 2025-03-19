@@ -8,6 +8,7 @@ use App\Models\Categorie;
 use App\Services\Interfaces\CategorieServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\ValidationException;
 
 class CategorieController extends Controller
 {
@@ -18,20 +19,20 @@ class CategorieController extends Controller
         $this->categorieService = $categorieService;
     }
 
-    public function index(): JsonResponse
+    public function index()
     {
         $categories = $this->categorieService->getAllCategories();
         return response()->json($categories);
     }
 
-    public function store(CategorieResquest $request): JsonResponse
+    public function store(CategorieResquest $request)
     {
         $validated = $request->validated();
         $category = $this->categorieService->createCategory($validated);
         return response()->json($category, 201);
     }
 
-    public function show($id): JsonResponse
+    public function show($id)
     {
         $category = $this->categorieService->getCategoryById($id);
         if (!$category) {
@@ -40,14 +41,14 @@ class CategorieController extends Controller
         return response()->json($category);
     }
 
-    public function update(CategorieUpdateRequest $request, Categorie $category): JsonResponse
+    public function update(CategorieUpdateRequest $request, Categorie $category)
     {
         $validated = $request->validated();
         $this->categorieService->updateCategory($category, $validated);
         return response()->json($category);
     }
 
-    public function destroy(Categorie $category): JsonResponse
+    public function destroy(Categorie $category)
     {
         $this->categorieService->deleteCategory($category);
         return response()->json(['message' => 'Catégorie supprimée'], 204);

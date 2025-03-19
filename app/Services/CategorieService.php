@@ -25,7 +25,7 @@ class CategorieService implements CategorieServiceInterface
         return $this->categorieRepository->findById($id);
     }
 
-    public function createCategory(array $data)
+    public function createCategory( $data)
     {
         return $this->categorieRepository->create($data);
     }

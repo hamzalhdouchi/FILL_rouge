@@ -29,13 +29,13 @@ class CategorieResquest extends FormRequest
         ];
     }
 
-    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
-    {
-        $response = response()->json([
-            'error' => 'Validation failed',
-            'messages' => $validator->errors(),
-        ], 422);
+    // protected function failedValidation( $validator)
+    // {
+    //     $response = response()->json([
+    //         'error' => 'Validation failed',
+    //         'messages' => $validator->errors(),
+    //     ], 422);
 
-        throw new ValidationException($validator, $response);
-    }
+    //     throw new ValidationException($validator, $response);
+    // }
 }

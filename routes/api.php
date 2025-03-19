@@ -35,8 +35,6 @@ use Illuminate\Support\Facades\Route;
     // Route::post('/forgot-password', [UserController::class, 'sendResetLink']);
     Route::post('/reset-password', [UserController::class, 'resetPassword']);
 
-
-
     Route::prefix('restaurants/{restaurantId}/menus')->group(function () {
         Route::get('/', [MenuController::class, 'index']);
         Route::get('{menuId}', [MenuController::class, 'show']);
@@ -45,7 +43,6 @@ use Illuminate\Support\Facades\Route;
         Route::delete('{menuId}', [MenuController::class, 'destroy']);
     });
 
-
     Route::get('/restaurants', [RestaurantController::class, 'index']);
     Route::get('/restaurants/{id}', [RestaurantController::class, 'show']);
     Route::post('/restaurants', [RestaurantController::class, 'store']);
@@ -53,5 +50,13 @@ use Illuminate\Support\Facades\Route;
     Route::delete('/restaurants/{id}', [RestaurantController::class, 'destroy']);
 
     Route::apiResource('categories', CategorieController::class);
+
+    Route::prefix('categories')->group(function () {
+        Route::get('/', [CategorieController::class, 'index']);
+        Route::post('/', [CategorieController::class, 'store']);
+        Route::get('/{id}', [CategorieController::class, 'show']);
+        Route::put('/{category}', [CategorieController::class, 'update']);
+        Route::delete('/{category}', [CategorieController::class, 'destroy']);
+    });
 
 
