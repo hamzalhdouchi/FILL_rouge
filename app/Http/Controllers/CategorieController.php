@@ -29,7 +29,11 @@ class CategorieController extends Controller
     {
         $validated = $request->validated();
         $category = $this->categorieService->createCategory($validated);
-        return response()->json($category, 201);
+        
+        return response()->json([
+            'message' => 'Catégorie créée avec succès',
+            'category' => $category
+        ], 201);
     }
 
     public function show($id)
@@ -45,12 +49,19 @@ class CategorieController extends Controller
     {
         $validated = $request->validated();
         $this->categorieService->updateCategory($category, $validated);
-        return response()->json($category);
+        
+        return response()->json([
+            'message' => 'Catégorie mise à jour avec succès',
+            'category' => $category
+        ]);
     }
 
     public function destroy(Categorie $category)
     {
         $this->categorieService->deleteCategory($category);
-        return response()->json(['message' => 'Catégorie supprimée'], 204);
+        
+        return response()->json([
+            'message' => 'Catégorie supprimée avec succès'
+        ], 200);
     }
 }

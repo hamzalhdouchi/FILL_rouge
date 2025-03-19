@@ -7,59 +7,39 @@ use Illuminate\Http\Request;
 
 class IngredientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function ajouterIngredient(Request $request)
     {
-        //
+        $ingredient = new Ingredient();
+        return $ingredient->ajouterIngredient($request->all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function afficherIngredient()
     {
-        //
+        $ingredient = new Ingredient();
+        return $ingredient->afficherIngredient();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function modifierIngredient(Request $request, $id)
     {
-        //
+        $ingredient = new Ingredient();
+        return $ingredient->modifierIngredient($id, $request->all());
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Ingredient $ingredient)
+    public function supprimerIngredient($id)
     {
-        //
+        $ingredient = new Ingredient();
+        return $ingredient->supprimerIngredient($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Ingredient $ingredient)
+    public function mettreAJourStock(Request $request, $id)
     {
-        //
+        $ingredient = new Ingredient();
+        return $ingredient->mettreAJourStock($id, $request->quantite);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Ingredient $ingredient)
+    public function verifierDisponibilite($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Ingredient $ingredient)
-    {
-        //
+        $ingredient = new Ingredient();
+        return $ingredient->verifierDisponibilite($id);
     }
 }
