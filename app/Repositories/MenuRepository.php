@@ -19,13 +19,13 @@ class MenuRepository implements MenuRepositoryInterface
         return Menu::where('idRestaurant', $restaurantId)->find($menuId);
     }
 
-    public function createMenu($restaurantId, array $data)
+    public function createMenu($restaurantId,  $data)
     {
         $restaurant = Restaurant::find($restaurantId);
         return $restaurant ? $restaurant->menus()->create($data) : null;
     }
 
-    public function updateMenu($restaurantId, $menuId, array $data)
+    public function updateMenu($restaurantId, $menuId,  $data)
     {
         $menu = $this->getMenuById($restaurantId, $menuId);
         return $menu ? tap($menu)->update($data) : null;

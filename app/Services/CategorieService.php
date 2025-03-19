@@ -30,7 +30,7 @@ class CategorieService implements CategorieServiceInterface
         return $this->categorieRepository->create($data);
     }
 
-    public function updateCategory(Categorie $category, array $data)
+    public function updateCategory(Categorie $category,  $data)
     {
         return $this->categorieRepository->update($category, $data);
     }

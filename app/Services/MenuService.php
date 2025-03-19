@@ -24,12 +24,12 @@ class MenuService implements MenuServiceInterface
         return $this->menuRepository->getMenuById($restaurantId, $menuId);
     }
 
-    public function createMenu($restaurantId, array $data)
+    public function createMenu($restaurantId,  $data)
     {
         return $this->menuRepository->createMenu($restaurantId, $data);
     }
 
-    public function updateMenu($restaurantId, $menuId, array $data)
+    public function updateMenu($restaurantId, $menuId,  $data)
     {
         return $this->menuRepository->updateMenu($restaurantId, $menuId, $data);
     }

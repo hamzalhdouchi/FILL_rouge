@@ -14,7 +14,7 @@ class PlatService implements PlatServiceInterface
         $this->platRepository = $platRepository;
     }
 
-    public function ajouterPlat(array $data)
+    public function ajouterPlat( $data)
     {
         $plat = $this->platRepository->ajouterPlat($data);
         return $plat ? ['message' => 'Plat ajouté avec succès!', 'data' => $plat] : ['message' => 'Erreur lors de l\'ajout du plat'];
@@ -26,7 +26,7 @@ class PlatService implements PlatServiceInterface
         return $plats ? ['message' => 'Plats récupérés avec succès!', 'data' => $plats] : ['message' => 'Aucun plat trouvé'];
     }
 
-    public function modifierPlat($id, array $data)
+    public function modifierPlat($id,  $data)
     {
         $plat = $this->platRepository->modifierPlat($id, $data);
         return $plat ? ['message' => 'Plat modifié avec succès!', 'data' => $plat] : ['message' => 'Plat non trouvé'];

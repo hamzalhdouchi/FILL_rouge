@@ -24,12 +24,12 @@ class RestaurantService implements RestaurantServiceInterface
         return $this->restaurantRepository->getById($id);
     }
 
-    public function createRestaurant(array $data)
+    public function createRestaurant( $data)
     {
         return $this->restaurantRepository->create($data);
     }
 
-    public function updateRestaurant(array $data, $id)
+    public function updateRestaurant( $data, $id)
     {
         return $this->restaurantRepository->update($data, $id);
     }

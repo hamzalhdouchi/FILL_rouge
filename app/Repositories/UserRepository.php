@@ -7,7 +7,7 @@ use App\RepositoryInterfaces\UserRepositoryInterface;
 
 class UserRepository implements UserRepositoryInterface
 {
-    public function create(array $data)
+    public function create( $data)
     {
         return User::create($data);
     }
@@ -17,7 +17,7 @@ class UserRepository implements UserRepositoryInterface
         return User::find($id);
     }
 
-    public function update($id, array $data)
+    public function update($id,  $data)
     {
         $user = User::find($id);
         $user->update($data);

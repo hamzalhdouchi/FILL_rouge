@@ -7,7 +7,7 @@ use App\RepositoryInterfaces\PlatRepositoryInterface;
 
 class PlatRepository implements PlatRepositoryInterface
 {
-    public function ajouterPlat(array $data)
+    public function ajouterPlat( $data)
     {
         return Plat::create($data);
     }
@@ -17,7 +17,7 @@ class PlatRepository implements PlatRepositoryInterface
         return Plat::all();
     }
 
-    public function modifierPlat($id, array $data)
+    public function modifierPlat($id,  $data)
     {
         $plat = Plat::find($id);
         if ($plat) {

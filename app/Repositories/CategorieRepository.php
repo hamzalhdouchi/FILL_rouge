@@ -17,12 +17,12 @@ class CategorieRepository implements CategorieRepositoryInterface
         return Categorie::find($id);
     }
 
-    public function create(array $data)
+    public function create( $data)
     {
         return Categorie::create($data);
     }
 
-    public function update(Categorie $category, array $data)
+    public function update(Categorie $category,  $data)
     {
         return $category->update($data);
     }

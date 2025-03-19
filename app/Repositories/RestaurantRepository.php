@@ -17,12 +17,12 @@ class RestaurantRepository implements RestaurantRepositoryInterface
     }
 
     // Créer un restaurant
-    public function create(array $data)
+    public function create( $data)
     {
         return Restaurant::create($data); 
     }
 
-    public function update(array $data, $id)
+    public function update( $data, $id)
     {
         $restaurant = Restaurant::findOrFail($id); 
         $restaurant->update($data);

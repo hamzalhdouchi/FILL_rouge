@@ -8,7 +8,7 @@ interface CategorieRepositoryInterface
 {
     public function getAll();
     public function findById($id);
-    public function create(array $data);
-    public function update(Categorie $category, array $data);
+    public function create( $data);
+    public function update(Categorie $category,  $data);
     public function delete(Categorie $category);
 }

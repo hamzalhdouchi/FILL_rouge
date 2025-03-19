@@ -7,7 +7,7 @@ use App\RepositoryInterfaces\IngredientRepositoryInterface;
 
 class IngredientRepository implements IngredientRepositoryInterface
 {
-    public function ajouterIngredient(array $data)
+    public function ajouterIngredient( $data)
     {
         $ingredient = Ingredient::create($data);
         return $ingredient;
@@ -18,7 +18,7 @@ class IngredientRepository implements IngredientRepositoryInterface
         return Ingredient::all();
     }
 
-    public function modifierIngredient($id, array $data)
+    public function modifierIngredient($id,  $data)
     {
         $ingredient = Ingredient::find($id);
         if ($ingredient) {
