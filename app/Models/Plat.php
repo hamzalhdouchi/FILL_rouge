@@ -29,4 +29,9 @@ class Plat extends Model
         return $this->belongsTo(Commande::class);
     }
 
+    public function ingrediant()
+    {
+        return $this->hasMany(Ingredient::class);
+    }
+
 }
