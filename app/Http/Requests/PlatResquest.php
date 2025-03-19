@@ -22,7 +22,8 @@ class PlatResquest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nom' => 'required|string|max:255',
+            'prix' => 'required|numeric',
         ];
     }
 }

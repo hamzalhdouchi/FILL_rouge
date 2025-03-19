@@ -22,7 +22,7 @@ class IngredientResquest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            
         ];
     }
 }

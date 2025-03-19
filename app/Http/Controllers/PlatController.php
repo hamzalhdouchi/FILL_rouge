@@ -2,64 +2,64 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Plat;
+
+use App\Http\Requests\PlatResquest;
+use App\Services\Interfaces\PlatServiceInterface;
 use Illuminate\Http\Request;
 
 class PlatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $platService;
+
+    public function __construct(PlatServiceInterface $platService)
     {
-        //
+        $this->platService = $platService;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function ajouterPlats(PlatResquest $request)
     {
-        //
+        $response = $this->platService->ajouterPlat($request);
+        return response()->json($response);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function affichePlats()
     {
-        //
+        $response = $this->platService->affichePlats();
+        return response()->json($response);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Plat $plat)
+    public function modifierPlats(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'nom' => 'string|max:255',
+            'prix' => 'numeric',
+        ]);
+        $response = $this->platService->modifierPlat($id, $validated);
+        return response()->json($response);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Plat $plat)
+    public function supprimerPlats($id)
     {
-        //
+        $response = $this->platService->supprimerPlat($id);
+        return response()->json($response);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Plat $plat)
+    public function modifierPlot(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'nom' => 'string|max:255',
+            'prix' => 'numeric',
+        ]);
+        $response = $this->platService->modifierPlat($id, $validated);
+        return response()->json($response);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Plat $plat)
+    public function changerDisponibilite(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'disponible' => 'required|boolean',
+        ]);
+        $response = $this->platService->changerDisponibilite($id, $validated['disponible']);
+        return response()->json($response);
     }
 }

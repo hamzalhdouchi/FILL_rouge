@@ -2,52 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\IngredientRequest;
-use App\Services\IngredientService;
+use App\Models\Ingredient;
 use Illuminate\Http\Request;
 
 class IngredientController extends Controller
 {
-    protected $ingredientService;
-
-    public function __construct(IngredientService $ingredientService)
-    {
-        $this->ingredientService = $ingredientService;
-    }
-
     public function ajouterIngredient(Request $request)
     {
-        $result = $this->ingredientService->ajouterIngredient($request->all());
-        return response()->json($result);
+        $ingredient = new Ingredient();
+        return $ingredient->ajouterIngredient($request->all());
     }
 
     public function afficherIngredient()
     {
-        $result = $this->ingredientService->afficherIngredient();
-        return response()->json($result);
+        $ingredient = new Ingredient();
+        return $ingredient->afficherIngredient();
     }
 
     public function modifierIngredient(Request $request, $id)
     {
-        $result = $this->ingredientService->modifierIngredient($id, $request->all());
-        return response()->json($result);
+        $ingredient = new Ingredient();
+        return $ingredient->modifierIngredient($id, $request->all());
     }
 
     public function supprimerIngredient($id)
     {
-        $result = $this->ingredientService->supprimerIngredient($id);
-        return response()->json($result);
+        $ingredient = new Ingredient();
+        return $ingredient->supprimerIngredient($id);
     }
 
     public function mettreAJourStock(Request $request, $id)
     {
-        $result = $this->ingredientService->mettreAJourStock($id, $request->quantite);
-        return response()->json($result);
+        $ingredient = new Ingredient();
+        return $ingredient->mettreAJourStock($id, $request->quantite);
     }
 
     public function verifierDisponibilite($id)
     {
-        $result = $this->ingredientService->verifierDisponibilite($id);
-        return response()->json($result);
+        $ingredient = new Ingredient();
+        return $ingredient->verifierDisponibilite($id);
     }
 }
