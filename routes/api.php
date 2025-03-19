@@ -4,6 +4,7 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\PlatController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\UserController;
 use App\Models\Menu;
@@ -66,6 +67,12 @@ use Illuminate\Support\Facades\Route;
     Route::put('ingredients/{id}', [IngredientController::class, 'modifierIngredient']);
     Route::delete('ingredients/{id}', [IngredientController::class, 'supprimerIngredient']);
     Route::put('ingredients/{id}/stock', [IngredientController::class, 'mettreAJourStock']);
+
+    Route::post('plats', [PlatController::class, 'ajouterPlats']);
+    Route::get('plats', [PlatController::class, 'affichePlats']);
+    Route::put('plats/{id}', [PlatController::class, 'modifierPlats']);
+    Route::delete('plats/{id}', [PlatController::class, 'supprimerPlats']);
+    Route::put('plats/{id}/disponibilite', [PlatController::class, 'changerDisponibilite']);
 
 
 
