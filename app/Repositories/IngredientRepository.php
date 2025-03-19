@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Ingredient;
-use App\Repositories\Interfaces\IngredientRepositoryInterface;
+use App\RepositoryInterfaces\IngredientRepositoryInterface;
 
 class IngredientRepository implements IngredientRepositoryInterface
 {

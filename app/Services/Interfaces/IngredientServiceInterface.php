@@ -1,8 +1,8 @@
 <?php
 
-namespace App\RepositoryInterfaces;
+namespace App\Services\Interfaces;
 
-interface IngredientRepositoryInterface
+interface IngredientServiceInterface
 {
     public function ajouterIngredient(array $data);
     public function afficherIngredient();

@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Repositories\Interfaces\IngredientRepositoryInterface;
+use App\RepositoryInterfaces\IngredientRepositoryInterface;
 
 class IngredientService
 {

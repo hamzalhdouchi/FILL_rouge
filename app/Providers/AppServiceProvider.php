@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Repositories\CategorieRepository;
+use App\Repositories\IngredientRepository;
 use App\RepositoryInterfaces\CategorieRepositoryInterface;
+use App\RepositoryInterfaces\IngredientRepositoryInterface;
 use App\RepositoryInterfaces\MenuRepositoryInterface;
 use App\Repositories\MenuRepository;
 use App\Repositories\RestaurantRepository;
@@ -39,6 +41,9 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(CategorieRepositoryInterface::class, CategorieRepository::class);
         $this->app->bind(CategorieServiceInterface::class, CategorieService::class);
+
+        $this->app->bind(Ing::class, IngredientRepository::class);
+        $this->app->bind(IngredientRepositoryInterface::class, IngredientRepository::class);
         }
 
     public function boot(): void
