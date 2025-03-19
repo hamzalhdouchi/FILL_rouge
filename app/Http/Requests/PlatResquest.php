@@ -11,7 +11,7 @@ class PlatResquest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,8 +22,13 @@ class PlatResquest extends FormRequest
     public function rules(): array
     {
         return [
-            'nom' => 'required|string|max:255',
-            'prix' => 'required|numeric',
+            'nom_plat' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
+            'prix' => 'required|numeric|min:0',
+            'temps_Preparation' => 'required|integer|min:1',
+            'disponible' => 'required|boolean',
+            'image' => 'required|string|max:255',
+            'categorie_id' => 'required|exists:categories,id'
         ];
     }
 }

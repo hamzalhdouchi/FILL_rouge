@@ -18,7 +18,7 @@ class PlatController extends Controller
 
     public function ajouterPlats(PlatResquest $request)
     {
-        $response = $this->platService->ajouterPlat($request);
+        $response = $this->platService->ajouterPlat($request->validated());
         return response()->json($response);
     }
 
