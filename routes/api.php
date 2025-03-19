@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CharacterController;
+use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\UserController;
@@ -58,5 +59,13 @@ use Illuminate\Support\Facades\Route;
         Route::put('/{category}', [CategorieController::class, 'update']);
         Route::delete('/{category}', [CategorieController::class, 'destroy']);
     });
+
+    Route::post('ingredients', [IngredientController::class, 'ajouterIngredient']);
+    Route::get('ingredients', [IngredientController::class, 'afficherIngredient']);
+    Route::get('ingredients/{id}', [IngredientController::class, 'verifierDisponibilite']);
+    Route::put('ingredients/{id}', [IngredientController::class, 'modifierIngredient']);
+    Route::delete('ingredients/{id}', [IngredientController::class, 'supprimerIngredient']);
+    Route::put('ingredients/{id}/stock', [IngredientController::class, 'mettreAJourStock']);
+
 
 
