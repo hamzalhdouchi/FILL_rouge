@@ -7,25 +7,25 @@ use Illuminate\Http\Request;
 
 class IngredientController extends Controller
 {
-    public function ajouterIngredient(Request $request)
+    public function store(Request $request)
     {
         $ingredient = new Ingredient();
         return $ingredient->ajouterIngredient($request->all());
     }
 
-    public function afficherIngredient()
+    public function index()
     {
         $ingredient = new Ingredient();
         return $ingredient->afficherIngredient();
     }
 
-    public function modifierIngredient(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $ingredient = new Ingredient();
         return $ingredient->modifierIngredient($id, $request->all());
     }
 
-    public function supprimerIngredient($id)
+    public function destroy($id)
     {
         $ingredient = new Ingredient();
         return $ingredient->supprimerIngredient($id);

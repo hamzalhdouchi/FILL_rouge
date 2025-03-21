@@ -17,7 +17,7 @@ class PlatRepository implements PlatRepositoryInterface
         return Plat::all();
     }
 
-    public function modifierPlat($id,  $data)
+    public function modifierPlat($id,$data)
     {
         $plat = Plat::find($id);
         if ($plat) {

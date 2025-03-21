@@ -53,7 +53,7 @@ use Illuminate\Support\Facades\Route;
 
     Route::apiResource('categories', CategorieController::class);
 
-    Route::prefix('categories')->group(function () {
+    Route::prefix('categories')->middleware('auth:sanctum')->group(function () {
         Route::get('/', [CategorieController::class, 'index']);
         Route::post('/', [CategorieController::class, 'store']);
         Route::get('/{id}', [CategorieController::class, 'show']);
@@ -61,18 +61,21 @@ use Illuminate\Support\Facades\Route;
         Route::delete('/{category}', [CategorieController::class, 'destroy']);
     });
 
-    Route::post('ingredients', [IngredientController::class, 'ajouterIngredient']);
-    Route::get('ingredients', [IngredientController::class, 'afficherIngredient']);
-    Route::get('ingredients/{id}', [IngredientController::class, 'verifierDisponibilite']);
-    Route::put('ingredients/{id}', [IngredientController::class, 'modifierIngredient']);
-    Route::delete('ingredients/{id}', [IngredientController::class, 'supprimerIngredient']);
-    Route::put('ingredients/{id}/stock', [IngredientController::class, 'mettreAJourStock']);
+    Route::prefix('ingredients')->middleware('auth:sanctum')->group(function ()  {
+        Route::post('/', [IngredientController::class, 'store']);
+        Route::get('/', [IngredientController::class, 'index']);
+        Route::get('/{id}', [IngredientController::class, 'verifierDisponibilite']);
+        Route::put('/{id}', [IngredientController::class, 'update']);
+        Route::delete('/{id}', [IngredientController::class, 'destroy']);
+        Route::put('/{id}/stock', [IngredientController::class, 'mettreAJourStock']);
+    });
 
-    Route::post('plats', [PlatController::class, 'ajouterPlats']);
-    Route::get('plats', [PlatController::class, 'affichePlats']);
-    Route::put('plats/{id}', [PlatController::class, 'modifierPlats']);
-    Route::delete('plats/{id}', [PlatController::class, 'supprimerPlats']);
-    Route::put('plats/{id}/disponibilite', [PlatController::class, 'changerDisponibilite']);
-
+    Route::prefix('plats')->middleware('auth:sanctum')->group(function ()  {
+    Route::post('/', [PlatController::class, 'store']);
+    Route::get('/', [PlatController::class, 'index']);
+    Route::put(':/{id}', [PlatController::class, 'update']);
+    Route::delete('/{id}', [PlatController::class, 'destroy']);
+    Route::put('/{id}/disponibilite', [PlatController::class, 'changerDisponibilite']);
+    });
 
 

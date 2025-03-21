@@ -16,19 +16,19 @@ class PlatController extends Controller
         $this->platService = $platService;
     }
 
-    public function ajouterPlats(PlatResquest $request)
+    public function store(PlatResquest $request)
     {
         $response = $this->platService->ajouterPlat($request->validated());
         return response()->json($response);
     }
 
-    public function affichePlats()
+    public function index()
     {
         $response = $this->platService->affichePlats();
         return response()->json($response);
     }
 
-    public function modifierPlats(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'nom' => 'string|max:255',
@@ -38,19 +38,9 @@ class PlatController extends Controller
         return response()->json($response);
     }
 
-    public function supprimerPlats($id)
+    public function destroy($id)
     {
         $response = $this->platService->supprimerPlat($id);
-        return response()->json($response);
-    }
-
-    public function modifierPlot(Request $request, $id)
-    {
-        $validated = $request->validate([
-            'nom' => 'string|max:255',
-            'prix' => 'numeric',
-        ]);
-        $response = $this->platService->modifierPlat($id, $validated);
         return response()->json($response);
     }
 
