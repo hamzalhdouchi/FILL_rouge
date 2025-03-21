@@ -65,7 +65,7 @@ class PaiementController extends Controller
             $payment->dateTransaction = now();
             $payment->save();
 
-            // Notifier l'utilisateur
+            
             $user = auth()->user();
             $user->notify(new PaymentFactureNotification($payment));
 

@@ -63,7 +63,6 @@ class UserService implements UserServiceInterface
 
     public function sendResetLink($request)
     {
-        $request->validate(['email' => 'required|email|exists:users,email']);
         $token = Str::random(60);
 
         DB::table('password_resets')->updateOrInsert(
@@ -91,5 +90,23 @@ class UserService implements UserServiceInterface
         DB::table('password_resets')->where('email', $request->email)->delete();
 
         return response()->json(['message' => 'Password has been reset successfully.']);
+    }
+
+    public function login( $credentials)
+    {
+        $user = $this->userRepository->findByEmail($credentials['email']);
+
+        if (!$user || !Hash::check($credentials['password'], $user->password)) {
+           
+                return 'Invalid credentials';
+        }
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return [
+            'message' => 'Login successful',
+            'token' => $token,
+            'user' => $user
+        ];
     }
 }

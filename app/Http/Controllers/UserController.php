@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\sendResetLink;
 use App\Http\Requests\UserStoreResquest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\ResetpasswordRequest;
 use App\ServiceInterfaces\UserServiceInterface;
 //use App\Services\UserService;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -18,7 +20,7 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
-    public function store(UserStoreResquest $request)
+    public function register(UserStoreResquest $request)
     {
         $validatedData = $request->validated();
         $utilisateur = $this->userService->createUser($validatedData);
@@ -32,6 +34,15 @@ class UserController extends Controller
         return $response;
     }
 
+    public function login(Request $request)
+    {
+        $validator = $request->validated();
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        return response()->json($this->userService->login($request->all()));
+    }
     public function destroy($id)
     {
         $response = $this->userService->deleteUser($id);
@@ -44,7 +55,7 @@ class UserController extends Controller
         return $response;
     }
 
-    public function sendResetLink(Request $request)
+    public function sendResetLink(sendResetLink $request)
     {
         $response = $this->userService->sendResetLink($request);
         return $response;

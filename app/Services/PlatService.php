@@ -17,7 +17,7 @@ class PlatService implements PlatServiceInterface
     public function ajouterPlat( $data)
     {
         $plat = $this->platRepository->ajouterPlat($data);
-        return $plat ? ['message' => 'Plat ajouté avec succès!', 'data' => $plat] : ['message' => 'Erreur lors de l\'ajout du plat'];
+        return $plat ? ['message' => 'Plat ajouté avec succès!', 'data' => $plat] : ['message' => 'Erreur lors de l ajout du plat'];
     }
 
     public function affichePlats()
