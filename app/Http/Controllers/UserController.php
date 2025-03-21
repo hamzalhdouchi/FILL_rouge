@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\loginRequest;
 use App\Http\Requests\sendResetLink;
 use App\Http\Requests\UserStoreResquest;
 use App\Http\Requests\UpdateProfileRequest;
@@ -34,7 +35,7 @@ class UserController extends Controller
         return $response;
     }
 
-    public function login(Request $request)
+    public function login(loginRequest $request)
     {
         $validator = $request->validated();
 

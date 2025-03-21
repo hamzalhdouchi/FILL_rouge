@@ -6,7 +6,6 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PlatController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,7 +27,7 @@ Route::post('/login', [UserController::class, 'login']);
         Route::put('/User/{id}/change-status', [UserController::class, 'changeStatus']);
         Route::put('/User/{id}/update-profile', [UserController::class, 'updateProfile']);
     });
-    
+
     // Route::post('/forgot-password', [UserController::class, 'sendResetLink']);
     Route::post('/reset-password', [UserController::class, 'resetPassword']);
 
@@ -53,7 +52,6 @@ Route::post('/login', [UserController::class, 'login']);
         Route::put('/{category}', [CategorieController::class, 'update']);
         Route::delete('/{category}', [CategorieController::class, 'destroy']);
     });
-
     Route::prefix('ingredients')->middleware('auth:sanctum')->group(function ()  {
         Route::post('/', [IngredientController::class, 'store']);
         Route::get('/', [IngredientController::class, 'index']);

@@ -92,7 +92,7 @@ class UserService implements UserServiceInterface
         return response()->json(['message' => 'Password has been reset successfully.']);
     }
 
-    public function login( $credentials)
+    public function login($credentials)
     {
         $user = $this->userRepository->findByEmail($credentials['email']);
 
