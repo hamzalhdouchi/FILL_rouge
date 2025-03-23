@@ -48,6 +48,7 @@ class CommandeRepository implements CommandeRepositoryInterface
     public function calculateSubTotal($id)
     {
         $commande = Commande::findOrFail($id);
-        return $commande->quantite * ($commande->prixTotal * 0.9); // Exemple avec 10% de réduction
+        $total = $commande->quantite * ($commande->prixTotal * 0.9);
+        return $total;
     }
 }
