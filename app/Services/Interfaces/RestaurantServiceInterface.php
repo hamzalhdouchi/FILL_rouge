@@ -9,4 +9,5 @@ interface RestaurantServiceInterface
     public function createRestaurant( $data); 
     public function updateRestaurant( $data, $id); 
     public function deleteRestaurant($id); 
-}
+    public function acceptRestaurant($id);
+    public function rejectRestaurant($id);}

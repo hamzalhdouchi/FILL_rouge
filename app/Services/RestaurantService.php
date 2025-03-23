@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Notifications\RestaurantStatusNotification;
 use App\Repositories\RestaurantRepositoryInterface;
 use App\Services\Interfaces\RestaurantServiceInterface;
 
@@ -37,5 +38,33 @@ class RestaurantService implements RestaurantServiceInterface
     public function deleteRestaurant($id)
     {
         return $this->restaurantRepository->delete($id);
+    }
+
+    public function acceptRestaurant($id)
+    {
+        $restaurant = $this->restaurantRepository->getById($id);
+        $restaurant->status = 'accepted';
+        $restaurant->save();
+
+        if ($restaurant->owner) {
+            $restaurant->owner->notify(new RestaurantStatusNotification($restaurant, 'accepté'));
+        }
+
+        return $restaurant;
+    }
+
+    public function rejectRestaurant($id)
+    {
+        $restaurant = $this->restaurantRepository->getById($id);
+        $restaurant->status = 'rejected';
+        $restaurant->save();
+
+        if ($restaurant->owner) {
+            $restaurant->owner->notify(new RestaurantStatusNotification($restaurant, 'refusé'));
+
+
+        }
+
+        return $restaurant;
     }
 }

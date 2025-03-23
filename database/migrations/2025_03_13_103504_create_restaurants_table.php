@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('adresse');
             $table->string('telephone');
             $table->double('notation')->nullable();
-            $table->enum('statut', ['ouvert', 'fermé'])->default('ouvert');
+            $table->enum('status', ['accepted', 'rejected'])->nullable();
             $table->string('zone_Livraison');
             $table->foreignId('user_create_id')->constrained('users');
             $table->timestamps();

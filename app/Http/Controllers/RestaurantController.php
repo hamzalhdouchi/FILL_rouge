@@ -44,4 +44,16 @@ class RestaurantController extends Controller
             $this->restaurantService->deleteRestaurant($id);
             return response()->json(['message' => 'Suppression réussie'], 204);
         }
+
+        public function accept($id)
+        {
+            $restaurant = $this->restaurantService->acceptRestaurant($id);
+            return response()->json(['message' => 'Restaurant accepté avec succès', 'restaurant' => $restaurant]);
+        }
+    
+        public function reject($id)
+        {
+            $restaurant = $this->restaurantService->rejectRestaurant($id);
+            return response()->json(['message' => 'Restaurant refusé avec succès', 'restaurant' => $restaurant]);
+        }
     }
