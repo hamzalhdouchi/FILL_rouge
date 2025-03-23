@@ -3,60 +3,40 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Storage;
 
-class PaymentFactureNotification extends Notification
+class PaymentFactureNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    protected $payment;
+    protected $facturePath;
+    protected $commandeId;
 
-    /**
-     * Create a new notification instance.
-     */
-    public function __construct($payment)
+    public function __construct($facturePath, $commandeId)
     {
-        $this->payment = $payment;
+        $this->facturePath = $facturePath;
+        $this->commandeId = $commandeId;
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @return array<int, string>
-     */
     public function via($notifiable)
     {
-        return ['mail', 'database']; 
+        return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     */
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Payment Successful')
-            ->greeting('Hello ' . $notifiable->name . '!')
-            ->line('Your payment of $' . $this->payment->amount . ' was successful.')
-            ->line('Transaction ID: ' . $this->payment->payment_id)
-            ->line('Thank you for your purchase!');
+            ->subject('Votre Facture de Commande #' . $this->commandeId)
+            ->greeting('Bonjour ' . $notifiable->name . ',')
+            ->line('Veuillez trouver ci-joint la facture de votre commande.')
+            ->line('Merci pour votre confiance.')
+            ->attach(Storage::path($this->facturePath), [
+                'as' => 'facture_' . $this->commandeId . '.pdf',
+                'mime' => 'application/pdf',
+            ])
+            ->salutation('Cordialement, L\'équipe');
     }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @return array<string, mixed>
-     */
-    public function toDatabase($notifiable)
-    {
-        return [
-            'message' => 'Your payment of $' . $this->payment->amount . ' was successful.',
-            'payment_id' => $this->payment->id,
-            'amount' => $this->payment->amount,
-            
-        ];
-    }
-
 }

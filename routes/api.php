@@ -45,6 +45,8 @@ Route::post('/login', [UserController::class, 'login']);
         Route::post('/', [RestaurantController::class, 'store']);
         Route::put('/{id}', [RestaurantController::class, 'update']);
         Route::delete('/{id}', [RestaurantController::class, 'destroy']);
+        Route::put('/{id}/accept', [RestaurantController::class, 'accept']);
+        Route::put('/{id}/reject', [RestaurantController::class, 'reject']);
     });
     Route::prefix('categories')->middleware('auth:sanctum')->group(function () {
         Route::get('/', [CategorieController::class, 'index']);
