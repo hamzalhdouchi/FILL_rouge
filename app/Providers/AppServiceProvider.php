@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Repositories\CategorieRepository;
 use App\Repositories\IngredientRepository;
+use App\Repositories\PaiementRepository;
 use App\Repositories\PlatRepository;
 use App\RepositoryInterfaces\CategorieRepositoryInterface;
 use App\RepositoryInterfaces\IngredientRepositoryInterface;
@@ -11,6 +12,7 @@ use App\RepositoryInterfaces\MenuRepositoryInterface;
 use App\Repositories\MenuRepository;
 use App\Repositories\RestaurantRepository;
 use App\Repositories\RestaurantRepositoryInterface;
+use App\RepositoryInterfaces\PaiementRepositoryInterface;
 use App\RepositoryInterfaces\PlatRepositoryInterface;
 use App\RepositoryInterfaces\UserRepositoryInterface;
 use App\Repositories\UserRepository;
@@ -19,10 +21,12 @@ use App\Services\IngredientService;
 use App\Services\Interfaces\CategorieServiceInterface;
 use App\Services\Interfaces\IngredientServiceInterface;
 use App\Services\Interfaces\MenuServiceInterface;
+use App\Services\Interfaces\PaiementServiceInterface;
 use App\Services\Interfaces\PlatServiceInterface;
 use App\Services\Interfaces\UserServiceInterface;
 use App\Services\Interfaces\RestaurantServiceInterface;
 use App\Services\MenuService;
+use App\Services\PaiementService;
 use App\Services\PlatService;
 use App\Services\RestaurantService;
 use App\Services\UserService;
@@ -53,6 +57,9 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(PlatRepositoryInterface::class, PlatRepository::class);
         $this->app->bind(PlatServiceInterface::class, PlatService::class);
+
+        $this->app->bind(PaiementRepositoryInterface::class, PaiementRepository::class);
+    $this->app->bind(PaiementServiceInterface::class, PaiementService::class);
         }
 
     public function boot(): void
