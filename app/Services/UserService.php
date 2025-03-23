@@ -92,20 +92,24 @@ class UserService implements UserServiceInterface
         return response()->json(['message' => 'Password has been reset successfully.']);
     }
 
-    public function login($credentials)
+    public function login($data)
     {
-        $user = $this->userRepository->findByEmail($credentials['email']);
 
-        if (!$user || !Hash::check($credentials['password'], $user->password)) {
+    
+        
+        $user = $this->userRepository->findByEmail($data['email']);
+     
+
+        if (!$user || !Hash::check($data['password'], $user->password)) {
            
-                return 'Invalid credentials';
+                return response()->json(['message'=>'ana hna'],500);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return [
             'message' => 'Login successful',
-            'token' => $token,
+             'token' => $token,
             'user' => $user
         ];
     }
