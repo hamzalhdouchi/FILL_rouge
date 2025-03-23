@@ -6,9 +6,6 @@ use App\Http\Requests\CategorieResquest;
 use App\Http\Requests\CategorieUpdateRequest;
 use App\Models\Categorie;
 use App\Services\Interfaces\CategorieServiceInterface;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Validation\ValidationException;
 
 class CategorieController extends Controller
 {
