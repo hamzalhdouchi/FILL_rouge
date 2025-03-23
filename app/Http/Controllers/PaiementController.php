@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\paymentRequest;
 use App\Services\Interfaces\PaiementServiceInterface;
 use Illuminate\Http\Request;
 
@@ -15,13 +16,9 @@ class PaiementController extends Controller
         $this->paiementService = $paiementService;
     }
 
-    public function pay(Request $request)
+    public function pay(paymentRequest $request)
     {
-        $request->validate([
-            'amount' => 'required|numeric|min:0.1',
-            'commande_id' => 'required|integer'
-        ]);
-
+    
         $result = $this->paiementService->processPayment($request->amount, $request->commande_id);
 
         return response()->json($result, $result['success'] ? 200 : 400);
