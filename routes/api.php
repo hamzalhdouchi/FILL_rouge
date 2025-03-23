@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\PlatController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\UserController;
@@ -67,6 +68,13 @@ Route::post('/login', [UserController::class, 'login']);
         Route::put(':/{id}', [PlatController::class, 'update']);
         Route::delete('/{id}', [PlatController::class, 'destroy']);
         Route::put('/{id}/disponibilite', [PlatController::class, 'changerDisponibilite']);
+    });
+
+    Route::prefix('paiement')->group(function () {
+        Route::post('/pay', [PaiementController::class, 'pay']);
+        Route::get('/success', [PaiementController::class, 'success']);
+        Route::get('/error', [PaiementController::class, 'error']);
+        Route::get('/all', [PaiementController::class, 'readAllPayments']);
     });
 
 

@@ -4,46 +4,44 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ResaurantResquest;
 use App\Http\Requests\RestaurantUpdateRequest;
-use App\Models\Restaurant;
-use Auth;
-use Illuminate\Http\Request;
+use App\Services\Interfaces\RestaurantServiceInterface;
 
 class RestaurantController extends Controller
 {
-    public function index()
-    {
-        $restaurants = Restaurant::all();
-        return response()->json($restaurants);
+        protected $restaurantService;
+    
+        public function __construct(RestaurantServiceInterface $restaurantService)
+        {
+            $this->restaurantService = $restaurantService;
+        }
+    
+        public function index()
+        {
+            return response()->json($this->restaurantService->getAllRestaurants());
+        }
+    
+        public function show($id)
+        {
+            return response()->json($this->restaurantService->getRestaurantById($id));
+        }
+    
+        public function store(ResaurantResquest $request)
+        {
+            $request->validated();
+            $restaurant = $this->restaurantService->createRestaurant($request->all());
+            return response()->json($restaurant, 201);
+        }
+    
+        public function update(RestaurantUpdateRequest $request, $id)
+        {
+            $request->validated();
+            $restaurant = $this->restaurantService->updateRestaurant($id, $request->all());
+            return response()->json($restaurant);
+        }
+    
+        public function destroy($id)
+        {
+            $this->restaurantService->deleteRestaurant($id);
+            return response()->json(['message' => 'Suppression réussie'], 204);
+        }
     }
-
-    public function show($id)
-    {
-        $restaurant = Restaurant::find($id);
-        return response()->json($restaurant);
-    }
-
-    public function store(ResaurantResquest $request)
-    {
-        $request->validated($request);
-
-        $restaurant = Restaurant::create($request->all());
-        return response()->json($restaurant, 201);
-    }
-
-    public function update(RestaurantUpdateRequest $request, $id)
-    {
-        $restaurant = Restaurant::findOrFail($id);
-
-        $request->validated($request);
-
-        $restaurant->update($request->all());
-        return response()->json($restaurant);
-    }
-
-    public function destroy($id)
-    {
-        $restaurant = Restaurant::findOrFail($id);
-        $restaurant->delete();
-        return response()->json('suppreme is successfully', 204);
-    }
-}

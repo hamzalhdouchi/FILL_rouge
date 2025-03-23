@@ -16,7 +16,6 @@ class RestaurantRepository implements RestaurantRepositoryInterface
         return Restaurant::findOrFail($id); 
     }
 
-    // Créer un restaurant
     public function create( $data)
     {
         return Restaurant::create($data); 

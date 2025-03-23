@@ -59,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PlatServiceInterface::class, PlatService::class);
 
         $this->app->bind(PaiementRepositoryInterface::class, PaiementRepository::class);
-    $this->app->bind(PaiementServiceInterface::class, PaiementService::class);
+        $this->app->bind(PaiementServiceInterface::class, PaiementService::class);
         }
 
     public function boot(): void
