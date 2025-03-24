@@ -31,7 +31,6 @@ class RestaurantStatusNotification extends Notification
             ->subject("Mise à jour du statut de votre restaurant")
             ->greeting("Bonjour " . $notifiable->name . ",")
             ->line("Votre restaurant **{$this->restaurant->name}** a été **{$this->status}**.")
-            ->action('Voir votre restaurant', url('/restaurants/' . $this->restaurant->id))
-            ->line('Merci d’utiliser notre plateforme !');
+            ->line('Merci d utiliser notre plateforme !');
     }
 }

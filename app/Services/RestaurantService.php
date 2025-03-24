@@ -46,8 +46,8 @@ class RestaurantService implements RestaurantServiceInterface
         $restaurant->status = 'accepted';
         $restaurant->save();
 
-        if ($restaurant->owner) {
-            $restaurant->owner->notify(new RestaurantStatusNotification($restaurant, 'accepté'));
+        if ($restaurant->user->name) {
+            $restaurant->user->name->notify(new RestaurantStatusNotification($restaurant, 'accepté'));
         }
 
         return $restaurant;
@@ -59,8 +59,8 @@ class RestaurantService implements RestaurantServiceInterface
         $restaurant->status = 'rejected';
         $restaurant->save();
 
-        if ($restaurant->owner) {
-            $restaurant->owner->notify(new RestaurantStatusNotification($restaurant, 'refusé'));
+        if ($restaurant->user->name) {
+            $restaurant->user->name->notify(new RestaurantStatusNotification($restaurant, 'refusé'));
 
 
         }

@@ -15,10 +15,10 @@ class PaymentFactureNotification extends Notification implements ShouldQueue
     protected $facturePath;
     protected $commandeId;
 
-    public function __construct($facturePath, $commandeId)
+    public function __construct($commande)
     {
-        $this->facturePath = $facturePath;
-        $this->commandeId = $commandeId;
+    
+        $this->commandeId = $commande;
     }
 
     public function via($notifiable)
@@ -33,10 +33,6 @@ class PaymentFactureNotification extends Notification implements ShouldQueue
             ->greeting('Bonjour ' . $notifiable->name . ',')
             ->line('Veuillez trouver ci-joint la facture de votre commande.')
             ->line('Merci pour votre confiance.')
-            ->attach(Storage::path($this->facturePath), [
-                'as' => 'facture_' . $this->commandeId . '.pdf',
-                'mime' => 'application/pdf',
-            ])
-            ->salutation('Cordialement, L\'équipe');
+            ->salutation('Cordialement, L équipe');
     }
 }
