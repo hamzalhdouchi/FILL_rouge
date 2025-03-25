@@ -30,20 +30,31 @@ class MenuController extends Controller
 
     public function store(MenuResquest $request, $idRestaurant)
     {
-        $menu = $this->menuService->createMenu($idRestaurant, $request->validated());
-        return $menu ? response()->json($menu, 201) : response()->json(['message' => 'Restaurant non trouvé'], 404);
+        $data = $request->all();
+        $menu = $this->menuService->createMenu($idRestaurant, $data);
+        if (!$menu) {
+            return response()->json(['message' => 'Restaurant non trouvé'], 404);
+        }
+        return response()->json($menu, 201);
     }
 
     public function update(MenuUpdateRequest $request, $idRestaurant, $idMenu)
     {
-        $menu = $this->menuService->updateMenu($idRestaurant, $idMenu, $request->validated());
-        return $menu ? response()->json($menu) : response()->json(['message' => 'Menu non trouvé'], 404);
+        $menu = $request->all();
+        $menu = $this->menuService->updateMenu($idRestaurant, $idMenu, $menu);
+        if (!$menu) {
+            return response()->json(['message' => 'Menu non trouvé'], 404);
+        }
+        return  response()->json($menu);
     }
 
     public function destroy($idRestaurant, $idMenu)
     {
-        return $this->menuService->deleteMenu($idRestaurant, $idMenu)
-            ? response()->json(['message' => 'Menu supprimé'])
-            : response()->json(['message' => 'Menu non trouvé'], 404);
+        $menu = $this->menuService->deleteMenu($idRestaurant, $idMenu);
+        if ($menu) {
+            response()->json(['message' => 'Menu non trouvé'], 404);
+        }
+        return response()->json(['message' => 'Menu supprimé']);
+        
     }
 }

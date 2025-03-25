@@ -10,30 +10,46 @@ class MenuRepository implements MenuRepositoryInterface
 {
     public function getAllMenus($restaurantId)
     {
+        
         $restaurant = Restaurant::find($restaurantId);
-        return $restaurant ? $restaurant->menus : null;
+        $restaurants = $restaurant->menu;
+        return $restaurants;
     }
 
     public function getMenuById($restaurantId, $menuId)
     {
-        return Menu::where('idRestaurant', $restaurantId)->find($menuId);
+        $menu =  Menu::where('restaurant_id', $restaurantId)->find($menuId);
+        return $menu;
     }
 
     public function createMenu($restaurantId,  $data)
     {
         $restaurant = Restaurant::find($restaurantId);
-        return $restaurant ? $restaurant->menus()->create($data) : null;
+        if (!$restaurant) {
+            return null;
+        }
+
+        $menuCreate = $restaurant->menu()->create($data);
+        return $menuCreate;
     }
 
     public function updateMenu($restaurantId, $menuId,  $data)
     {
         $menu = $this->getMenuById($restaurantId, $menuId);
-        return $menu ? tap($menu)->update($data) : null;
+        if (!$menu) {
+            return null;
+        }
+        $menuUpdate = tap($menu)->update($data); 
+        return $menuUpdate;
     }
 
     public function deleteMenu($restaurantId, $menuId)
     {
         $menu = $this->getMenuById($restaurantId, $menuId);
-        return $menu ? $menu->delete() : false;
+        if ($menu) {
+            return false;
+        }
+        $deleteMenu = $menu->delete();
+        return $deleteMenu;
     }
 }

@@ -2,52 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\mettreAJouringredient;
+use App\Http\Requests\mettreAJourStock;
+use App\Http\Requests\storeIngredients;
 use App\Services\Interfaces\IngredientServiceInterface;
 use Illuminate\Http\Request;
 
 class IngredientController extends Controller
 {
-    protected $IngredientService;
+    protected $ingredientservice;
 
     public function __construct(IngredientServiceInterface $ingredient)
     {
-        $this->ingredientService = $ingredient;
+        $this->ingredientservice = $ingredient;
     }
 
-    public function store(Request $request)
+    public function store(storeIngredients $request)
     {
         $data = $request->all();
-        $ingredient = $this->IngredientService->ajouterIngredient($data);
+        $ingredient = $this->ingredientservice->ajouterIngredient($data);
         return $ingredient;
     }
 
     public function index()
     {
-        $ingredient = $this->IngredientService->afficherIngredient();
+        $ingredient = $this->ingredientservice->afficherIngredient();
         return $ingredient;
     }
 
-    public function update(Request $request, $id)
+    public function update(mettreAJouringredient $request, $id)
     {
-        $ingredient = $this->IngredientService->modifierIngredient($id, $request->all());
+        $data = $request->all();
+        $ingredient = $this->ingredientservice->modifierIngredient($id, $data);
         return $ingredient;
     }
 
     public function destroy($id)
     {
-        $ingredient = $this->IngredientService->supprimerIngredient($id);
+        $ingredient = $this->ingredientservice->supprimerIngredient($id);
         return $ingredient;
     }
 
-    public function mettreAJourStock(Request $request, $id)
+    public function mettreAJourStock(mettreAJourStock $request, $id)
     {
-        $ingredient = $this->IngredientService->mettreAJourStock($id, $request->quantite);
+        $data = $request->stock;
+        $ingredient = $this->ingredientservice->mettreAJourStock($id, $data);
         return $ingredient;
     }
 
     public function verifierDisponibilite($id)
     {
-        $ingredient = $this->IngredientService->verifierDisponibilite($id);
+        $ingredient = $this->ingredientservice->verifierDisponibilite($id);
         return $ingredient;
     }
 }

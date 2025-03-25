@@ -42,7 +42,7 @@ class IngredientRepository implements IngredientRepositoryInterface
     {
         $ingredient = Ingredient::find($id);
         if ($ingredient) {
-            $ingredient->quantite = $quantite;
+            $ingredient->stock = $quantite;
             $ingredient->save();
             return $ingredient;
         }

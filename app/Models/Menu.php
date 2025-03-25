@@ -16,7 +16,7 @@ class Menu extends Model
 
     public function Restaurant()
     {
-        return $this->belongsTo(Restaurant::class);
+        return $this->belongsTo(Restaurant::class, 'restaurant_id');
     }
 
     public function categorie()

@@ -52,9 +52,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CategorieRepositoryInterface::class, CategorieRepository::class);
         $this->app->bind(CategorieServiceInterface::class, CategorieService::class);
 
-        $this->app->singleton(IngredientRepositoryInterface::class, function ($app) {
-            return new IngredientRepository();
-        });
+        $this->app->bind(IngredientRepositoryInterface::class, IngredientRepository::class);
         $this->app->bind(IngredientServiceInterface::class, IngredientService::class);
 
         $this->app->bind(PlatRepositoryInterface::class, PlatRepository::class);
