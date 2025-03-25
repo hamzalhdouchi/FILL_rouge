@@ -11,4 +11,5 @@ interface UserServiceInterface
     public function sendResetLink($request);
     public function resetPassword($request);
     public function login($request);
+    public function showProfile($id);
 }

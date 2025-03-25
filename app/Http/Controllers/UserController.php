@@ -43,6 +43,12 @@ class UserController extends Controller
         return $response;
     }
 
+    public function showProfile($id)
+    {
+        $response = $this->userService->showProfile($id);
+        return $response;
+    }
+
     public function changeStatus(Request $request, $id)
     {
         $response = $this->userService->changeStatus($request, $id);

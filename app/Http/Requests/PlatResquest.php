@@ -23,7 +23,7 @@ class PlatResquest extends FormRequest
     {
         return [
             'nom_plat' => 'required|string|max:255',
-            'description' => 'required|string|max:500',
+            'desciption' => 'required|string|max:500',
             'prix' => 'required|numeric|min:0',
             'temps_Preparation' => 'required|integer|min:1',
             'disponible' => 'required|boolean',

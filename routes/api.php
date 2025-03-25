@@ -22,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 
-    Route::middleware('auth:sanctum')->get('/user', function () {
+    Route::middleware('auth:sanctum')->group( function () {
         Route::get('/profile/{id}', [UserController::class, 'showProfile']);
-        Route::delete('/User/{id}', [UserController::class, 'destroy']);
+        Route::delete('/User/{id}', [UserController::class, 'deleteUser']);
         Route::put('/User/{id}/change-status', [UserController::class, 'changeStatus']);
         Route::put('/User/{id}/update-profile', [UserController::class, 'updateProfile']);
     });
@@ -67,7 +67,7 @@ Route::post('/login', [UserController::class, 'login']);
     Route::prefix('plats')->middleware('auth:sanctum')->group(function ()  {
         Route::post('/', [PlatController::class, 'store']);
         Route::get('/', [PlatController::class, 'index']);
-        Route::put(':/{id}', [PlatController::class, 'update']);
+        Route::put('/{id}', [PlatController::class, 'update']);
         Route::delete('/{id}', [PlatController::class, 'destroy']);
         Route::put('/{id}/disponibilite', [PlatController::class, 'changerDisponibilite']);
     });

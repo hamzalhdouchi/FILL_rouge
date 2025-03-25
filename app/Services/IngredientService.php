@@ -3,8 +3,9 @@
 namespace App\Services;
 
 use App\RepositoryInterfaces\IngredientRepositoryInterface;
+use App\Services\Interfaces\IngredientServiceInterface;
 
-class IngredientService
+class IngredientService implements IngredientServiceInterface
 {
     protected $ingredientRepository;
 
@@ -13,7 +14,7 @@ class IngredientService
         $this->ingredientRepository = $ingredientRepository;
     }
 
-    public function ajouterIngredient(array $data)
+    public function ajouterIngredient($data)
     {
         $ingredient = $this->ingredientRepository->ajouterIngredient($data);
         return [
@@ -27,7 +28,7 @@ class IngredientService
         return $this->ingredientRepository->afficherIngredient();
     }
 
-    public function modifierIngredient($id, array $data)
+    public function modifierIngredient($id, $data)
     {
         $ingredient = $this->ingredientRepository->modifierIngredient($id, $data);
         if ($ingredient) {

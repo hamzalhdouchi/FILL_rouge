@@ -6,12 +6,12 @@ use App\Repositories\CategorieRepository;
 use App\Repositories\IngredientRepository;
 use App\Repositories\PaiementRepository;
 use App\Repositories\PlatRepository;
+use App\Repositories\RestaurantRepository;
 use App\RepositoryInterfaces\CategorieRepositoryInterface;
 use App\RepositoryInterfaces\IngredientRepositoryInterface;
 use App\RepositoryInterfaces\MenuRepositoryInterface;
 use App\Repositories\MenuRepository;
-use App\Repositories\RestaurantRepository;
-use App\Repositories\RestaurantRepositoryInterface;
+use App\RepositoryInterfaces\RestaurantRepositoryInterface;
 use App\RepositoryInterfaces\PaiementRepositoryInterface;
 use App\RepositoryInterfaces\PlatRepositoryInterface;
 use App\RepositoryInterfaces\UserRepositoryInterface;
@@ -52,7 +52,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CategorieRepositoryInterface::class, CategorieRepository::class);
         $this->app->bind(CategorieServiceInterface::class, CategorieService::class);
 
-        $this->app->bind(IngredientRepositoryInterface::class, IngredientRepository::class);
+        $this->app->singleton(IngredientRepositoryInterface::class, function ($app) {
+            return new IngredientRepository();
+        });
         $this->app->bind(IngredientServiceInterface::class, IngredientService::class);
 
         $this->app->bind(PlatRepositoryInterface::class, PlatRepository::class);

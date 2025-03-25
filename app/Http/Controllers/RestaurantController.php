@@ -34,8 +34,7 @@ class RestaurantController extends Controller
     
         public function update(RestaurantUpdateRequest $request, $id)
         {
-            $request->validated();
-            $restaurant = $this->restaurantService->updateRestaurant($id, $request->all());
+            $restaurant = $this->restaurantService->updateRestaurant($request->all(),$id);
             return response()->json($restaurant);
         }
     

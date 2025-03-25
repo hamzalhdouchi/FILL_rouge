@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Restaurant;
+use App\Models\User;
+use App\RepositoryInterfaces\RestaurantRepositoryInterface;
 
 class RestaurantRepository implements RestaurantRepositoryInterface
 {
@@ -13,7 +15,7 @@ class RestaurantRepository implements RestaurantRepositoryInterface
 
     public function getById($id)
     {
-        return Restaurant::findOrFail($id); 
+        return Restaurant::with('user')->findOrFail($id); 
     }
 
     public function create( $data)
@@ -24,8 +26,11 @@ class RestaurantRepository implements RestaurantRepositoryInterface
     public function update( $data, $id)
     {
         $restaurant = Restaurant::findOrFail($id); 
+        if (!$restaurant) {
+            return response()->json(['message' => 'restaurant not found'],404);
+        }
         $restaurant->update($data);
-        return $restaurant; 
+        return response()->json(['message' => 'the modification is successfully','restaurant'=> $restaurant],200);
     }
 
     public function delete($id)

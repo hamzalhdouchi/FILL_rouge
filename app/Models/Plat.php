@@ -11,10 +11,11 @@ class Plat extends Model
 
     protected $fillable=[
         'image',
+        'desciption',
         'temps_Preparation',
         'prix',
-        'desciption',
         'nom_plat',
+        'categorie_id'
 
     ];
 

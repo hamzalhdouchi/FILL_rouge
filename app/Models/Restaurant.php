@@ -15,7 +15,7 @@ class Restaurant extends Model
 
     public function User()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_create_id');
     }
 
     public function Menu()

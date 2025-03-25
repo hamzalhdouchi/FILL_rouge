@@ -113,4 +113,17 @@ class UserService implements UserServiceInterface
             'user' => $user
         ];
     }
+
+    public function showProfile($id)
+    {
+        $user = $this->userRepository->find($id);
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'the profile is not found',
+            ],404);
+        }
+
+        return response()->json(['message' => 'profile is found successfully','user' => $user],200);
+    }
 }

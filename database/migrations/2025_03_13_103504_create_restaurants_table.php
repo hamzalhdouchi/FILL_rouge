@@ -19,7 +19,7 @@ return new class extends Migration
             $table->double('notation')->nullable();
             $table->enum('status', ['accepted', 'rejected'])->nullable();
             $table->string('zone_Livraison');
-            $table->foreignId('user_create_id')->constrained('users');
+            $table->foreignId('user_create_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
