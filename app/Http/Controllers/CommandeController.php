@@ -2,64 +2,60 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Commande;
+use App\Http\Requests\commandeStoreRequest;
+use App\Interfaces\CommandeServiceInterface;
 use Illuminate\Http\Request;
 
 class CommandeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $commandeService;
+
+    public function __construct(CommandeServiceInterface $commandeService)
     {
-        //
+        $this->commandeService = $commandeService;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(commandeStoreRequest $request)
     {
-        //
+        $data = $request->all();
+        $commande = $this->commandeService->passerCommande($data);
+        return $commande;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function annulerCommande($id)
     {
-        //
+        $annulerCommande = $this->commandeService->annulerCommande($id);
+        return $annulerCommande;
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Commande $commande)
+    public function evaluerService(Request $request, $id)
     {
-        //
+        $note = $request->note;
+        $evaluerservice = $this->commandeService->evaluerService($id, $note);
+        return $evaluerservice;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Commande $commande)
+    public function calculerTotal($id)
     {
-        //
+        $calculerTotal = $this->commandeService->calculerTotal($id);
+        return $calculerTotal;
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Commande $commande)
+    public function calculerSousTotal($id)
     {
-        //
+        $calculerSousTotal = $this->commandeService->calculerSousTotal($id);
+        return $calculerSousTotal;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Commande $commande)
+    public function changerStatut(Request $request, $id)
     {
-        //
+        $changeStetut = $this->commandeService->changerStatut($id, $request->statut);
+        return $changeStetut;
+    }
+
+    public function genererFacture($id)
+    {
+        $facture = $this->commandeService->genererFacture($id);
+        return $facture;
     }
 }

@@ -6,6 +6,7 @@ use App\RepositoryInterfaces\CommandeRepositoryInterface;
 use App\Interfaces\CommandeServiceInterface;
 use App\Models\Commande;
 use App\Notifications\PaymentFactureNotification;
+use Illuminate\Http\JsonResponse;
 
 class CommandeService implements CommandeServiceInterface
 {
@@ -16,44 +17,93 @@ class CommandeService implements CommandeServiceInterface
         $this->commandeRepository = $commandeRepository;
     }
 
-    public function passerCommande(array $data)
+    public function passerCommande(array $data): JsonResponse
     {
-        return $this->commandeRepository->create($data);
+        $commande = $this->commandeRepository->create($data);
+
+        return response()->json([
+            'message' => 'Commande passée avec succès',
+            'commande' => $commande
+        ], 201);
     }
 
-    public function annulerCommande($id)
+    public function annulerCommande($id): JsonResponse
     {
-        return $this->commandeRepository->changeStatus($id, 'annulee');
+        $commande = $this->commandeRepository->changeStatus($id, 'annulee');
+
+        return response()->json([
+            'message' => 'Commande annulée avec succès',
+            'commande' => $commande
+        ]);
     }
 
-    public function evaluerService($id, $note)
+    public function evaluerService($id, $note): JsonResponse
     {
         $commande = $this->commandeRepository->getById($id);
+        
+        if (!$commande) {
+            return response()->json(['message' => 'Commande non trouvée'], 404);
+        }
+
         $commande->evaluation = $note;
         $commande->save();
-        return $commande;
+
+        return response()->json([
+            'message' => 'Évaluation enregistrée avec succès',
+            'commande' => $commande
+        ]);
     }
 
-    public function calculerTotal($id)
+    public function calculerTotal($id): JsonResponse
     {
-        return $this->commandeRepository->calculateTotal($id);
+        $total = $this->commandeRepository->calculateTotal($id);
+
+        if ($total === null) {
+            return response()->json(['message' => 'Commande non trouvée'], 404);
+        }
+
+        return response()->json([
+            'commande_id' => $id,
+            'total' => $total
+        ]);
     }
 
-    public function calculerSousTotal($id)
+    public function calculerSousTotal($id): JsonResponse
     {
-        return $this->commandeRepository->calculateSubTotal($id);
+        $sousTotal = $this->commandeRepository->calculateSubTotal($id);
+
+        if ($sousTotal === null) {
+            return response()->json(['message' => 'Commande non trouvée'], 404);
+        }
+
+        return response()->json([
+            'commande_id' => $id,
+            'sous_total' => $sousTotal
+        ]);
     }
 
-    public function changerStatut($id, $statut)
+    public function changerStatut($id, $statut): JsonResponse
     {
-        return $this->commandeRepository->changeStatus($id, $statut);
+        $commande = $this->commandeRepository->changeStatus($id, $statut);
+
+        if (!$commande) {
+            return response()->json(['message' => 'Commande non trouvée'], 404);
+        }
+
+        return response()->json([
+            'message' => 'Statut mis à jour avec succès',
+            'commande' => $commande
+        ]);
     }
 
-    public function genererFacture($id)
+    public function genererFacture($id): JsonResponse
     {
         $commande = $this->commandeRepository->getById($id);
-        
-        
+
+        if (!$commande) {
+            return response()->json(['message' => 'Commande non trouvée'], 404);
+        }
+
         $client = $commande->client;
         $client->notify(new PaymentFactureNotification($commande));
 
