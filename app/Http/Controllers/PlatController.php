@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\plateUpdateRequest;
 use App\Http\Requests\PlatResquest;
 use App\Services\Interfaces\PlatServiceInterface;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class PlatController extends Controller
 
     public function store(PlatResquest $request)
     {
-        $response = $this->platService->ajouterPlat($request->validated());
+        $response = $this->platService->ajouterPlat($request);
         return response()->json($response);
     }
 
@@ -28,13 +29,10 @@ class PlatController extends Controller
         return response()->json($response);
     }
 
-    public function update(Request $request, $id)
+    public function update(plateUpdateRequest $request, $id)
     {
-        $validated = $request->validate([
-            'nom' => 'string|max:255',
-            'prix' => 'numeric',
-        ]);
-        $response = $this->platService->modifierPlat($id, $validated);
+        
+        $response = $this->platService->modifierPlat($id, $request);
         return response()->json($response);
     }
 
