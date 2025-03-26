@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MenuResquest;
 use App\Http\Requests\MenuUpdateRequest;
 use App\Services\Interfaces\MenuServiceInterface;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class MenuController extends Controller
 {
-    protected $menuService;
+    protected MenuServiceInterface $menuService;
 
     public function __construct(MenuServiceInterface $menuService)
     {
@@ -19,42 +19,30 @@ class MenuController extends Controller
     public function index($idRestaurant)
     {
         $menus = $this->menuService->getAllMenus($idRestaurant);
-        return $menus ? response()->json($menus) : response()->json(['message' => 'Restaurant non trouvé'], 404);
+        return $menus;
     }
 
     public function show($idRestaurant, $idMenu)
     {
         $menu = $this->menuService->getMenuById($idRestaurant, $idMenu);
-        return $menu ? response()->json($menu) : response()->json(['message' => 'Menu non trouvé'], 404);
+        return $menu;
     }
 
     public function store(MenuResquest $request, $idRestaurant)
     {
-        $data = $request->all();
-        $menu = $this->menuService->createMenu($idRestaurant, $data);
-        if (!$menu) {
-            return response()->json(['message' => 'Restaurant non trouvé'], 404);
-        }
-        return response()->json($menu, 201);
+        $menuStore = $this->menuService->createMenu($idRestaurant, $request);
+        return $menuStore;
     }
 
     public function update(MenuUpdateRequest $request, $idRestaurant, $idMenu)
     {
-        $menu = $request->all();
-        $menu = $this->menuService->updateMenu($idRestaurant, $idMenu, $menu);
-        if (!$menu) {
-            return response()->json(['message' => 'Menu non trouvé'], 404);
-        }
-        return  response()->json($menu);
+        $menuUpdate = $this->menuService->updateMenu($idRestaurant, $idMenu, $request);
+        return $menuUpdate;
     }
 
     public function destroy($idRestaurant, $idMenu)
     {
-        $menu = $this->menuService->deleteMenu($idRestaurant, $idMenu);
-        if ($menu) {
-            response()->json(['message' => 'Menu non trouvé'], 404);
-        }
-        return response()->json(['message' => 'Menu supprimé']);
-        
+        $menuDestroy = $this->menuService->deleteMenu($idRestaurant, $idMenu);
+        return $menuDestroy;
     }
 }

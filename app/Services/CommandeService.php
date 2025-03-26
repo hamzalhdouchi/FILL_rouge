@@ -17,10 +17,10 @@ class CommandeService implements CommandeServiceInterface
         $this->commandeRepository = $commandeRepository;
     }
 
-    public function passerCommande(array $data): JsonResponse
+    public function passerCommande($data): JsonResponse
     {
         $commande = $this->commandeRepository->create($data);
-
+        
         return response()->json([
             'message' => 'Commande passée avec succès',
             'commande' => $commande
@@ -96,14 +96,13 @@ class CommandeService implements CommandeServiceInterface
         ]);
     }
 
-    public function genererFacture($id): JsonResponse
+    public function genererFacture($id)
     {
         $commande = $this->commandeRepository->getById($id);
 
         if (!$commande) {
             return response()->json(['message' => 'Commande non trouvée'], 404);
         }
-
         $client = $commande->client;
         $client->notify(new PaymentFactureNotification($commande));
 
