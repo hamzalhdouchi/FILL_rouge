@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PaiementController;
@@ -78,5 +79,16 @@ Route::post('/login', [UserController::class, 'login']);
         Route::get('/error', [PaiementController::class, 'error']);
         Route::get('/all', [PaiementController::class, 'readAllPayments']);
     });
+    
+    Route::prefix('commandes')->group(function () {
+        Route::post('/', [CommandeController::class, 'store']); 
+        Route::put('/annuler/{id}', [CommandeController::class, 'annulerCommande']); 
+        Route::post('/evaluer/{id}', [CommandeController::class, 'evaluerService']); 
+        Route::get('/total/{id}', [CommandeController::class, 'calculerTotal']);
+        Route::get('/sous-total/{id}', [CommandeController::class, 'calculerSousTotal']);
+        Route::put('/statut/{id}', [CommandeController::class, 'changerStatut']); 
+        Route::get('/facture/{id}', [CommandeController::class, 'genererFacture']);
+    });
+    
 
 
