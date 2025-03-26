@@ -22,6 +22,12 @@ class CommandeController extends Controller
         return $commande;
     }
 
+    public function index()
+    {
+        $commandes = $this->commandeService->getCommandes();
+        return $commandes;
+    }
+
     public function annulerCommande($id)
     {
         $annulerCommande = $this->commandeService->annulerCommande($id);

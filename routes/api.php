@@ -82,6 +82,7 @@ Route::post('/login', [UserController::class, 'login']);
     
     Route::prefix('commandes')->group(function () {
         Route::post('/', [CommandeController::class, 'store']); 
+        Route::get('/', [CommandeController::class, 'index']); 
         Route::put('/{id}', [CommandeController::class, 'annulerCommande']); 
         Route::post('/evaluer/{id}', [CommandeController::class, 'evaluerService']); 
         Route::get('/total/{id}', [CommandeController::class, 'calculerTotal']);

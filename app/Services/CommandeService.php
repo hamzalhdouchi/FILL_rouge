@@ -37,6 +37,16 @@ class CommandeService implements CommandeServiceInterface
         ]);
     }
 
+    public function getCommandes()
+    {
+        $commandes = $this->commandeRepository->getAll();
+        if (!$commandes) {
+            return response()->json(['message'=> 'the commend is not found'],404);
+        }
+
+        return response()->json(['message'=> 'the commandes is found successfully','data' => $commandes],200);
+    }
+
     public function evaluerService($id, $note)
     {
         $commande = $this->commandeRepository->getById($id);

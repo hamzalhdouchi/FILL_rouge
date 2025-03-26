@@ -4,7 +4,7 @@ namespace App\Services\Interfaces;
 
 interface CommandeServiceInterface
 {
-    public function passerCommande(array $data);
+    public function passerCommande( $data);
     public function getCommandes();
     public function annulerCommande($id);
     public function evaluerService($id, $note);
