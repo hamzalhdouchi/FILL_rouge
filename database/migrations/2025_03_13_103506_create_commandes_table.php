@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->enum('statut', ['en_attente', 'en_cours', 'terminee', 'annulee'])->default('en_attente');
             $table->integer('quantite'); 
-            $table->text('instructions')->nullable(); 
+            $table->text('instructions')->nullable();
             $table->double('evaluation')->nullable();
-            $table->double('prixTotal', 8, 2);
+            $table->double('prixTotal', 8, 2)->nullable();
             $table->foreignId('cleint_id')->constrained('users');
             $table->foreignId('livreur_id')->constrained('users');
             $table->foreignId('restaurant_id')->constrained('restaurants');
