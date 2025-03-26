@@ -44,10 +44,8 @@ class PlatController extends Controller
 
     public function changerDisponibilite(Request $request, $id)
     {
-        $validated = $request->validate([
-            'disponible' => 'required|boolean',
-        ]);
-        $response = $this->platService->changerDisponibilite($id, $validated['disponible']);
+        
+        $response = $this->platService->changerDisponibilite($id, $request['disponible']);
         return response()->json($response);
     }
 }
