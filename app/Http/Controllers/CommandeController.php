@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\commandeStoreRequest;
-use App\Interfaces\CommandeServiceInterface;
+use App\Services\Interfaces\CommandeServiceInterface;
 use Illuminate\Http\Request;
 
 class CommandeController extends Controller

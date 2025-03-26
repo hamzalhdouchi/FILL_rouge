@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
-            $table->enum('statut', ['en_attente', 'en_cours', 'terminee', 'annulee']);
+            $table->enum('statut', ['en_attente', 'en_cours', 'terminee', 'annulee'])->default('en_attente');
             $table->integer('quantite'); 
             $table->text('instructions')->nullable(); 
             $table->double('evaluation')->nullable();

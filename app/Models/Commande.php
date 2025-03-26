@@ -14,6 +14,9 @@ class Commande extends Model
         'quantite',
         'instructions',
         'prixTotal',
+        'cleint_id',
+        'livreur_id',
+        'restaurant_id'
     ];
     public function plat()
     {

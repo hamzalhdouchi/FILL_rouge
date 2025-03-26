@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use App\RepositoryInterfaces\CommandeRepositoryInterface;
-use App\Interfaces\CommandeServiceInterface;
 use App\Models\Commande;
 use App\Notifications\PaymentFactureNotification;
+use App\Services\Interfaces\CommandeServiceInterface;
 use Illuminate\Http\JsonResponse;
 
 class CommandeService implements CommandeServiceInterface
@@ -17,7 +17,7 @@ class CommandeService implements CommandeServiceInterface
         $this->commandeRepository = $commandeRepository;
     }
 
-    public function passerCommande($data): JsonResponse
+    public function passerCommande($data)
     {
         $commande = $this->commandeRepository->create($data);
         
@@ -27,7 +27,7 @@ class CommandeService implements CommandeServiceInterface
         ], 201);
     }
 
-    public function annulerCommande($id): JsonResponse
+    public function annulerCommande($id)
     {
         $commande = $this->commandeRepository->changeStatus($id, 'annulee');
 
@@ -37,7 +37,7 @@ class CommandeService implements CommandeServiceInterface
         ]);
     }
 
-    public function evaluerService($id, $note): JsonResponse
+    public function evaluerService($id, $note)
     {
         $commande = $this->commandeRepository->getById($id);
         
@@ -54,7 +54,7 @@ class CommandeService implements CommandeServiceInterface
         ]);
     }
 
-    public function calculerTotal($id): JsonResponse
+    public function calculerTotal($id)
     {
         $total = $this->commandeRepository->calculateTotal($id);
 
@@ -68,7 +68,7 @@ class CommandeService implements CommandeServiceInterface
         ]);
     }
 
-    public function calculerSousTotal($id): JsonResponse
+    public function calculerSousTotal($id)
     {
         $sousTotal = $this->commandeRepository->calculateSubTotal($id);
 
@@ -82,7 +82,7 @@ class CommandeService implements CommandeServiceInterface
         ]);
     }
 
-    public function changerStatut($id, $statut): JsonResponse
+    public function changerStatut($id, $statut)
     {
         $commande = $this->commandeRepository->changeStatus($id, $statut);
 
@@ -90,10 +90,7 @@ class CommandeService implements CommandeServiceInterface
             return response()->json(['message' => 'Commande non trouvée'], 404);
         }
 
-        return response()->json([
-            'message' => 'Statut mis à jour avec succès',
-            'commande' => $commande
-        ]);
+        return response()->json(['message' => 'Statut mis à jour avec succès','commande' => $commande]);
     }
 
     public function genererFacture($id)

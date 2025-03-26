@@ -11,7 +11,7 @@ class commandeStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,6 @@ class commandeStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'statut' => 'required|in:en_attente,en_cours,terminee,annulee',
             'quantite' => 'required|integer|min:1',
             'instructions' => 'nullable|string|max:500',
             'evaluation' => 'nullable|numeric|min:1|max:5',

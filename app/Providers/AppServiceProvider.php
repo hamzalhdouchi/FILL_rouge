@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use App\Repositories\CategorieRepository;
+use App\Repositories\CommandeRepository;
 use App\Repositories\IngredientRepository;
 use App\Repositories\PaiementRepository;
 use App\Repositories\PlatRepository;
 use App\Repositories\RestaurantRepository;
 use App\RepositoryInterfaces\CategorieRepositoryInterface;
+use App\RepositoryInterfaces\CommandeRepositoryInterface;
 use App\RepositoryInterfaces\IngredientRepositoryInterface;
 use App\RepositoryInterfaces\MenuRepositoryInterface;
 use App\Repositories\MenuRepository;
@@ -17,8 +19,10 @@ use App\RepositoryInterfaces\PlatRepositoryInterface;
 use App\RepositoryInterfaces\UserRepositoryInterface;
 use App\Repositories\UserRepository;
 use App\Services\CategorieService;
+use App\Services\CommandeService;
 use App\Services\IngredientService;
 use App\Services\Interfaces\CategorieServiceInterface;
+use App\Services\Interfaces\CommandeServiceInterface;
 use App\Services\Interfaces\IngredientServiceInterface;
 use App\Services\Interfaces\MenuServiceInterface;
 use App\Services\Interfaces\PaiementServiceInterface;
@@ -60,6 +64,9 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(PaiementRepositoryInterface::class, PaiementRepository::class);
         $this->app->bind(PaiementServiceInterface::class, PaiementService::class);
+
+        $this->app->bind(CommandeRepositoryInterface::class,CommandeRepository::class);
+        $this->app->bind(CommandeServiceInterface::class,CommandeService::class);
         }
 
     public function boot(): void

@@ -28,7 +28,7 @@ Route::post('/login', [UserController::class, 'login']);
         Route::delete('/User/{id}', [UserController::class, 'deleteUser']);
         Route::put('/User/{id}/change-status', [UserController::class, 'changeStatus']);
         Route::put('/User/{id}/update-profile', [UserController::class, 'updateProfile']);
-    });
+    
 
     // Route::post('/forgot-password', [UserController::class, 'sendResetLink']);
     Route::post('/reset-password', [UserController::class, 'resetPassword']);
@@ -82,13 +82,13 @@ Route::post('/login', [UserController::class, 'login']);
     
     Route::prefix('commandes')->group(function () {
         Route::post('/', [CommandeController::class, 'store']); 
-        Route::put('/annuler/{id}', [CommandeController::class, 'annulerCommande']); 
+        Route::put('/{id}', [CommandeController::class, 'annulerCommande']); 
         Route::post('/evaluer/{id}', [CommandeController::class, 'evaluerService']); 
         Route::get('/total/{id}', [CommandeController::class, 'calculerTotal']);
         Route::get('/sous-total/{id}', [CommandeController::class, 'calculerSousTotal']);
         Route::put('/statut/{id}', [CommandeController::class, 'changerStatut']); 
         Route::get('/facture/{id}', [CommandeController::class, 'genererFacture']);
     });
-    
+});
 
 

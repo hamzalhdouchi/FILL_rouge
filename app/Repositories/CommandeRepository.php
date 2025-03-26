@@ -17,6 +17,12 @@ class CommandeRepository implements CommandeRepositoryInterface
         return Commande::findOrFail($id);
     }
 
+    public function getAll()
+    {
+        $commande = Commande::all();
+        return $commande;
+    }
+
     public function update($id, array $data)
     {
         $commande = Commande::findOrFail($id);
