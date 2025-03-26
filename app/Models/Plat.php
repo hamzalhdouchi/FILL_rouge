@@ -27,7 +27,7 @@ class Plat extends Model
 
     public function commande()
     {
-        return $this->belongsTo(Commande::class);
+        return $this->belongsToMany(Commande::class);
     }
 
     public function ingrediant()
