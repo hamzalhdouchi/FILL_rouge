@@ -29,8 +29,8 @@ class RestaurantRepository implements RestaurantRepositoryInterface
         if (!$restaurant) {
             return response()->json(['message' => 'restaurant not found'],404);
         }
-        $restaurant->update($data);
-        return response()->json(['message' => 'the modification is successfully','restaurant'=> $restaurant],200);
+        $reponse = $restaurant->update($data);
+        return $reponse;
     }
 
     public function delete($id)

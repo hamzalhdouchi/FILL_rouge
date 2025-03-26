@@ -17,30 +17,45 @@ class PlatService implements PlatServiceInterface
     public function ajouterPlat( $data)
     {
         $plat = $this->platRepository->ajouterPlat($data);
-        return $plat ? ['message' => 'Plat ajouté avec succès!', 'data' => $plat] : ['message' => 'Erreur lors de l ajout du plat'];
+        if (!$plat) {
+            return response()->json(['message' => 'Erreur lors de l ajout du plat'],500);
+        }
+        return response()->json(['message' => 'Plat ajouté avec succès!', 'data' => $plat] ,201);
     }
 
     public function affichePlats()
     {
         $plats = $this->platRepository->affichePlats();
-        return $plats ? ['message' => 'Plats récupérés avec succès!', 'data' => $plats] : ['message' => 'Aucun plat trouvé'];
+        if (!$plats) {
+            return response()->json(['message' => 'Aucun plat trouvé'],404);
+        }
+        return response()->json(['message' => 'Plats récupérés avec succès!', 'data' => $plats],200) ;
     }
 
     public function modifierPlat($id,  $data)
     {
         $plat = $this->platRepository->modifierPlat($id, $data);
-        return $plat ? ['message' => 'Plat modifié avec succès!', 'data' => $plat] : ['message' => 'Plat non trouvé'];
+        if (!$plat) {
+            return response()->json(['message' => 'Plat non trouvé'],404);
+        }
+        return response()->json(['message' => 'Plat modifié avec succès!', 'data' => $plat],201);
     }
 
     public function supprimerPlat($id)
     {
         $result = $this->platRepository->supprimerPlat($id);
-        return $result ? ['message' => 'Plat supprimé avec succès!'] : ['message' => 'Plat non trouvé'];
+        if (!$result) {
+            return response()->json(['message' => 'Plat non trouvé'],404);
+        }
+        return response()->json(['message' => 'Plat supprimé avec succès!'],200);
     }
 
     public function changerDisponibilite($id, $disponible)
     {
         $plat = $this->platRepository->changerDisponibilite($id, $disponible);
-        return $plat ? ['message' => 'Disponibilité mise à jour avec succès!', 'data' => $plat] : ['message' => 'Plat non trouvé'];
+        if (!$plat) {
+            return response()->json(['message' => 'Plat non trouvé'],404);
+        }
+        return response()->json(['message' => 'Disponibilité mise à jour avec succès!', 'data' => $plat],200);
     }
 }
