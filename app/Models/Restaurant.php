@@ -25,6 +25,6 @@ class Restaurant extends Model
 
     public function Table()
     {
-        return $this->hasMany(Table::class);
+        return $this->hasMany(Table::class,'restaurant_id');
     }
 }
