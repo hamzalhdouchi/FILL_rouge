@@ -12,7 +12,8 @@ class CommandeRepository implements CommandeRepositoryInterface
     {
         $commande = Commande::create($data);
 
-        $paltes = $data->plates;
+        
+        $paltes = $data['plate'];
         $commande->plat()->attach($paltes);
 
         $total_price = Plat::whereIn('id',$paltes)->sum('prix');

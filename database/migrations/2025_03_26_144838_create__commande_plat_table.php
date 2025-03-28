@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('_commande_plat', function (Blueprint $table) {
+        Schema::create('commande_plat', function (Blueprint $table) {
             $table->id();
             $table->foreignId('commande_id')->constrained('commandes');
-            $table->foreignId('plat_id')->constrained('plates');
+            $table->foreignId('plat_id')->constrained('plats');
             $table->timestamps();
         });
     }
@@ -27,3 +27,4 @@ return new class extends Migration
         Schema::dropIfExists('_commande_plat');
     }
 };
+
