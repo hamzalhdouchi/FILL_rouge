@@ -2,56 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Table;
+use App\Services\Interfaces\TableServiceInterface;
 use Illuminate\Http\Request;
 
 class TableController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $tableService;
+
+    public function __construct(TableServiceInterface $tableService)
     {
-        //
+        $this->tableService = $tableService;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(Request $request, $id_Restaurant)
     {
-        //
+        return $this->tableService->AjouterTable($id_Restaurant, $request->all());
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Table $table)
+    public function index($id_Restaurant)
     {
-        //
+        return $this->tableService->afficheriAllTables($id_Restaurant);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Table $table)
+    public function show($id_Restaurant, $idTable)
     {
-        //
+        return $this->tableService->afficherTable($id_Restaurant, $idTable);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Table $table)
+    public function update(Request $request, $id_Restaurant)
     {
-        //
+        return $this->tableService->ModifierTable($id_Restaurant, $request->all());
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Table $table)
+    public function destroy($id_Restaurant, $idTable)
     {
-        //
+        return $this->tableService->supprimerTable($id_Restaurant, $idTable);
+    }
+
+    public function availableTables($id_Restaurant)
+    {
+        return $this->tableService->ShowLesTableDisponibile($id_Restaurant);
     }
 }

@@ -22,4 +22,9 @@ class Restaurant extends Model
     {
         return $this->hasMany(Menu::class, 'restaurant_id');
     }
+
+    public function Table()
+    {
+        return $this->hasMany(Table::class);
+    }
 }
