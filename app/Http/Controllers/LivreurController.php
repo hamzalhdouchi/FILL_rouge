@@ -25,10 +25,7 @@ class LivreurController extends Controller
 
         $livreur = $this->livreurService->createLivreur($validated);
         
-        return response()->json([
-            'message' => 'Livreur ajouté avec succès !',
-            'data' => $livreur
-        ], 201);
+        return response()->json(['message' => 'Livreur ajouté avec succès !','data' => $livreur], 201);
     }
 
     public function show($id)
@@ -42,11 +39,7 @@ class LivreurController extends Controller
         $validated = $request->validateed();
 
         $livreur = $this->livreurService->updateLivreur($id, $validated);
-        
-        return response()->json([
-            'message' => 'Livreur mis à jour avec succès',
-            'data' => $livreur
-        ]);
+        return response()->json(['message' => 'Livreur mis à jour avec succès','data' => $livreur]);
     }
 
     public function destroy($id)
