@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\UserStoreResquest;
+use App\Models\Restaurant;
 use App\RepositoryInterfaces\UserRepositoryInterface;
 use App\Services\Interfaces\UserServiceInterface;
 use App\Models\User;
@@ -19,6 +20,12 @@ class UserService implements UserServiceInterface
     public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
+    }
+
+    public function gatAllUsers()
+    {
+        $Users = $this->userRepository->getAll();
+        return $Users;
     }
 
     public function createUser($validatedData): mixed
@@ -101,10 +108,9 @@ class UserService implements UserServiceInterface
      
 
         if (!$user || !Hash::check($data['password'], $user->password)) {
-           
-                return response()->json(['message'=>'ana hna'],500);
+            return abort(500, 'Invalid login attempt');;
         }
-
+    
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return [

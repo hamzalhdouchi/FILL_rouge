@@ -9,4 +9,5 @@ interface UserRepositoryInterface
     public function update($id,  $data);
     public function delete($id);
     public function findByEmail($email);
+    public function getAll();
 }

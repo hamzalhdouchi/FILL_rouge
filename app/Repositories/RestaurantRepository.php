@@ -20,7 +20,11 @@ class RestaurantRepository implements RestaurantRepositoryInterface
 
     public function create( $data)
     {
-        return Restaurant::create($data); 
+        if (isset($data['image'])) {
+            $path = $data['image']->store('restaurants', 'public');
+            $data['image'] = str_replace('public/', '', $path);
+        }
+        return Restaurant::create($data);
     }
 
     public function update( $data, $id)

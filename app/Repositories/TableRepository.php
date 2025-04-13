@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Controllers\QRcodeController;
 use App\Models\Restaurant;
 use App\Models\Table;
 use App\RepositoryInterfaces\TableReposetoryInterface;
@@ -11,7 +12,10 @@ class TableRepository implements TableReposetoryInterface
     public function AjouterTable($id_Restaurant, $data)
     {
         $data['restaurant_id'] = $id_Restaurant;
-        return Table::create($data);
+        $qrcode = QRcodeController::class;
+        $table = Table::create($data);
+        $generatit = $qrcode->generateQrCode();
+        return $table;
     }
 
     public function afficheriAllTables($id_Restaurant)

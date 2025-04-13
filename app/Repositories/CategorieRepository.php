@@ -9,7 +9,7 @@ class CategorieRepository implements CategorieRepositoryInterface
 {
     public function getAll()
     {
-        return Categorie::all();
+        return Categorie::with('plat')->get();
     }
 
     public function findById($id)
@@ -19,6 +19,10 @@ class CategorieRepository implements CategorieRepositoryInterface
 
     public function create( $data)
     {
+        if (isset($data['image'])) {
+            $path = $data['image']->store('categorie', 'public');
+            $data['image'] = str_replace('public/', '', $path);
+        }
         return Categorie::create($data);
     }
 

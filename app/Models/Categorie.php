@@ -12,6 +12,7 @@ class Categorie extends Model
     protected $fillable = [
         'mon_categorie',
         'description',
+        'image',
         'order'
     ];
 

@@ -14,6 +14,7 @@ class Table extends Model
         'qrCode',
         'capacite',
         'statut',
+        'restaurant_id'
     ];
 
     public function reservations()

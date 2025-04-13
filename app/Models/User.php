@@ -45,4 +45,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Restaurant::class);
     }
+
+    public function Role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

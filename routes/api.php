@@ -28,13 +28,15 @@ Route::post('/login', [UserController::class, 'login']);
         Route::delete('/User/{id}', [UserController::class, 'deleteUser']);
         Route::put('/User/{id}/change-status', [UserController::class, 'changeStatus']);
         Route::put('/User/{id}/update-profile', [UserController::class, 'updateProfile']);
+        Route::get('/User', [UserController::class, 'index']);
+
     
 
     // Route::post('/forgot-password', [UserController::class, 'sendResetLink']);
     Route::post('/reset-password', [UserController::class, 'resetPassword']);
 
     Route::prefix('restaurants/{restaurantId}/menus')->middleware('auth:sanctum')->group(function () {
-        Route::get('/', [MenuController::class, 'index']);
+        Route::get('/', [MenuController::class, 'index'])->name('show.menu');
         Route::get('{menuId}', [MenuController::class, 'show']);
         Route::post('/', [MenuController::class, 'store']);
         Route::put('{menuId}', [MenuController::class, 'update']);
@@ -49,7 +51,7 @@ Route::post('/login', [UserController::class, 'login']);
         Route::put('/{id}/accept', [RestaurantController::class, 'accept']);
         Route::put('/{id}/reject', [RestaurantController::class, 'reject']);
     });
-    Route::prefix('categories')->middleware('auth:sanctum')->group(function () {
+    Route::prefix('categories')->group(function () {
         Route::get('/', [CategorieController::class, 'index']);
         Route::post('/', [CategorieController::class, 'store']);
         Route::get('/{id}', [CategorieController::class, 'show']);

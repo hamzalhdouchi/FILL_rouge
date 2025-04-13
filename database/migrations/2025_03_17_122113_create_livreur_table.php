@@ -9,13 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        DB::statement("CREATE table livreur (
-            role_id BIGINT CHECK (role_id = 2)
-        ) INHERITS (users);");
-        DB::statement("ALTER TABLE livreur ADD PRIMARY KEY (id)");
-    }
+        public function up(): void
+        {
+            // Crée la table livreur avec héritage de users
+            DB::statement("
+                CREATE TABLE livreur (
+                    role_id BIGINT CHECK (role_id = 2),
+                    vehicule VARCHAR(255),
+                    zone VARCHAR(255)
+                ) INHERITS (users);
+            ");
+    
+            // Ajoute une clé primaire sur la colonne héritée 'id'
+            DB::statement("ALTER TABLE livreur ADD PRIMARY KEY (id)");
+        }
 
     /**
      * Reverse the migrations.

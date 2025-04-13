@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Table;
 use BaconQrCode\Encoder\QrCode;
+use DB;
 use Illuminate\Http\Request;
 
 class QRcodeController extends Controller
 {
-    public function generateQrCode($id)
+    public function generateQrCode($id,$id_restaurant)
     {
-        $tableUrl = route('home.show',$id);
-
+        $tableUrl = route('show.menu',$id,$id_restaurant);
+        dd($tableUrl);
         $qrCode = base64_encode(QrCode::format('png')->size(300)->generate($tableUrl));
         
         return [

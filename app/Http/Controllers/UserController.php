@@ -19,6 +19,12 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
+    public function index()
+    {
+        $restaurant = $this->userService->gatAllUsers();
+        return $restaurant;
+    }
+
     public function register(UserStoreResquest $request)
     {
         $validatedData = $request->validated();
