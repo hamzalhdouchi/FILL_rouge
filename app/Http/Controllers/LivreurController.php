@@ -62,14 +62,7 @@ class LivreurController extends Controller
             return response()->json(['message' => 'Livreur non trouvé'], 404);
         }
 
-        $validated = $request->validate([
-            'nom_utilisateur' => 'sometimes|string|max:255',
-            'prenom' => 'sometimes|string|max:255',
-            'email' => 'sometimes|email|unique:users,email,' . $id,
-            'password' => 'sometimes|string|min:6',
-            'vehicule' => 'sometimes|string',
-            'zone' => 'sometimes|string',
-        ]);
+        $validated = $request->validateed();
 
         if (isset($validated['password'])) {
             $validated['password'] = Hash::make($validated['password']);
