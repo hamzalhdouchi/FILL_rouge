@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Livreur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -22,22 +23,15 @@ class LivreurController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'nom_utilisateur' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6',
-            'vehicule' => 'required|string',
-            'zone' => 'required|string',
-        ]);
-
-        DB::statement("SELECT insert_livreur(?, ?, ?, ?, ?, ?)", [
-            $validated['nom_utilisateur'],
-            $validated['prenom'],
-            $validated['email'],
-            bcrypt($validated['password']),
-            $validated['vehicule'],
-            $validated['zone']
+        $validated = $request->validateed();
+        $livreur = Livreur::create([
+            'nom_utilisateur' => $validated['nom_utilisateur'],
+            'prenom'          => $validated['prenom'],
+            'email'           => $validated['email'],
+            'password'        => Hash::make($validated['password']),
+            'vehicule'        => $validated['vehicule'],
+            'zone'            => $validated['zone'],
+            'role_id'         => 2, 
         ]);
 
         return response()->json(['message' => 'Livreur ajouté avec succès !'], 201);
@@ -103,4 +97,3 @@ class LivreurController extends Controller
     }
 }
 
-}
