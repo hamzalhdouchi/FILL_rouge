@@ -1,92 +1,57 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\Livreur;
+use App\Services\Interfaces\LivreurServiceInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class LivreurController extends Controller
 {
-    /**
-     * Affiche la liste de tous les livreurs.
-     */
+    protected $livreurService;
+
+    public function __construct(LivreurServiceInterface $livreurService)
+    {
+        $this->livreurService = $livreurService;
+    }
+
     public function index()
     {
-        $livreurs = DB::table('livreur')->get();
+        $livreurs = $this->livreurService->getAllLivreurs();
         return response()->json($livreurs);
     }
 
-    /**
-     * Enregistre un nouveau livreur.
-     */
     public function store(Request $request)
     {
         $validated = $request->validateed();
-        $livreur = Livreur::create([
-            'nom_utilisateur' => $validated['nom_utilisateur'],
-            'prenom'          => $validated['prenom'],
-            'email'           => $validated['email'],
-            'password'        => Hash::make($validated['password']),
-            'vehicule'        => $validated['vehicule'],
-            'zone'            => $validated['zone'],
-            'role_id'         => 2, 
-        ]);
 
-        return response()->json(['message' => 'Livreur ajouté avec succès !'], 201);
+        $livreur = $this->livreurService->createLivreur($validated);
+        
+        return response()->json([
+            'message' => 'Livreur ajouté avec succès !',
+            'data' => $livreur
+        ], 201);
     }
 
-    /**
-     * Affiche un livreur par ID.
-     */
     public function show($id)
     {
-        $livreur = DB::table('livreur')->where('id', $id)->first();
-
-        if (!$livreur) {
-            return response()->json(['message' => 'Livreur non trouvé'], 404);
-        }
-
+        $livreur = $this->livreurService->getLivreurById($id);
         return response()->json($livreur);
     }
 
-    /**
-     * Met à jour les informations d’un livreur.
-     */
     public function update(Request $request, $id)
     {
-        $livreur = DB::table('livreur')->where('id', $id)->first();
-
-        if (!$livreur) {
-            return response()->json(['message' => 'Livreur non trouvé'], 404);
-        }
-
         $validated = $request->validateed();
 
-        if (isset($validated['password'])) {
-            $validated['password'] = Hash::make($validated['password']);
-        }
-
-        DB::table('livreur')->where('id', $id)->update($validated);
-
-        return response()->json(['message' => 'Livreur mis à jour avec succès']);
+        $livreur = $this->livreurService->updateLivreur($id, $validated);
+        
+        return response()->json([
+            'message' => 'Livreur mis à jour avec succès',
+            'data' => $livreur
+        ]);
     }
 
-    /**
-     * Supprime un livreur.
-     */
     public function destroy($id)
     {
-        $livreur = DB::table('livreur')->where('id', $id)->first();
-
-        if (!$livreur) {
-            return response()->json(['message' => 'Livreur non trouvé'], 404);
-        }
-
-        DB::table('livreur')->where('id', $id)->delete();
-
+        $this->livreurService->deleteLivreur($id);
         return response()->json(['message' => 'Livreur supprimé avec succès']);
     }
 }
-
