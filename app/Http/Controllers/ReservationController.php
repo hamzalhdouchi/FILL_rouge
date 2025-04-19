@@ -1,36 +1,25 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReservationResquest;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
-    // Liste de toutes les réservations
     public function index()
     {
         return response()->json(Reservation::all(), 200);
     }
 
-    // Ajouter une réservation
-    public function store(Request $request)
+    public function store(ReservationResquest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'phone' => 'required|string',
-            'date' => 'required|date',
-            'time' => 'required',
-            'guests' => 'required|integer|min:1',
-            'special_requests' => 'nullable|string',
-            'preorder_check' => 'boolean',
-        ]);
+        $validated = $request->validated();
 
         $reservation = Reservation::create($validated);
         return response()->json($reservation, 201);
     }
 
-    // Afficher une réservation spécifique
     public function show($id)
     {
         $reservation = Reservation::find($id);
@@ -42,7 +31,6 @@ class ReservationController extends Controller
         return response()->json($reservation, 200);
     }
 
-    // Mettre à jour une réservation
     public function update(Request $request, $id)
     {
         $reservation = Reservation::find($id);
