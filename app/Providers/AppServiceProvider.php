@@ -8,6 +8,7 @@ use App\Repositories\IngredientRepository;
 use App\Repositories\LivreurRepository;
 use App\Repositories\PaiementRepository;
 use App\Repositories\PlatRepository;
+use App\Repositories\ReservationRepository;
 use App\Repositories\RestaurantRepository;
 use App\RepositoryInterfaces\CategorieRepositoryInterface;
 use App\RepositoryInterfaces\CommandeRepositoryInterface;
@@ -15,6 +16,7 @@ use App\RepositoryInterfaces\IngredientRepositoryInterface;
 use App\RepositoryInterfaces\LivreurRepositoryInterface;
 use App\RepositoryInterfaces\MenuRepositoryInterface;
 use App\Repositories\MenuRepository;
+use App\RepositoryInterfaces\ReservationRepositoryInterface;
 use App\RepositoryInterfaces\RestaurantRepositoryInterface;
 use App\RepositoryInterfaces\PaiementRepositoryInterface;
 use App\RepositoryInterfaces\PlatRepositoryInterface;
@@ -30,12 +32,14 @@ use App\Services\Interfaces\LivreurServiceInterface;
 use App\Services\Interfaces\MenuServiceInterface;
 use App\Services\Interfaces\PaiementServiceInterface;
 use App\Services\Interfaces\PlatServiceInterface;
+use App\Services\Interfaces\ReservationServiceInterface;
 use App\Services\Interfaces\UserServiceInterface;
 use App\Services\Interfaces\RestaurantServiceInterface;
 use App\Services\LivreurService;
 use App\Services\MenuService;
 use App\Services\PaiementService;
 use App\Services\PlatService;
+use App\Services\ReservationService;
 use App\Services\RestaurantService;
 use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
@@ -74,7 +78,14 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(LivreurRepositoryInterface::class,LivreurRepository::class);
         $this->app->bind(LivreurServiceInterface::class,LivreurService::class);
+
+        $this->app->bind( ReservationRepositoryInterface::class,ReservationRepository::class);
+        $this->app->bind(ReservationServiceInterface::class,ReservationService::class);
+
+
         }
+
+
 
     public function boot(): void
     {
