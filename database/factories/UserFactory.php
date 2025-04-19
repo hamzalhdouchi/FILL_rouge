@@ -20,17 +20,21 @@ class UserFactory extends Factory
      * Define the model's default state.
      *
      * @return array<string, mixed>
-     */
-    public function definition(): array
-    {
-        return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ];
-    }
+     */public function definition(): array
+        {
+            return [
+                'nom_utilisateur' => fake()->lastName(),
+                'prenom' => fake()->firstName(),
+                'email' => fake()->unique()->safeEmail(),
+                'password' => static::$password ??= Hash::make('password'),
+                'telephone' => fake()->phoneNumber(),
+                'dateCreation' => now(),
+                'statut' => 'actif',
+                'role_id' => 2, 
+                'vehicule' => fake()->randomElement(['Voiture', 'Moto', 'Vélo', null]),
+                'zone' => fake()->city(),
+            ];
+        }
 
     /**
      * Indicate that the model's email address should be unverified.

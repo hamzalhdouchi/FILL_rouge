@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\livreurUpdateRequest;
+use App\Http\Requests\livrurStoreRequest;
 use App\Services\Interfaces\LivreurServiceInterface;
 use Illuminate\Http\Request;
 
@@ -19,10 +21,10 @@ class LivreurController extends Controller
         return response()->json($livreurs);
     }
 
-    public function store(Request $request)
+    public function store(livrurStoreRequest $request)
     {
-        $validated = $request->validateed();
-
+        
+        $validated = $request->validated();
         $livreur = $this->livreurService->createLivreur($validated);
         
         return response()->json(['message' => 'Livreur ajouté avec succès !','data' => $livreur], 201);
@@ -34,7 +36,7 @@ class LivreurController extends Controller
         return response()->json($livreur);
     }
 
-    public function update(Request $request, $id)
+    public function update(livreurUpdateRequest $request, $id)
     {
         $validated = $request->validateed();
 

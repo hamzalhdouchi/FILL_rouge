@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\LivreurController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\PlatController;
@@ -23,14 +24,20 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 
+Route::prefix('livreur')->group(function () {
+    Route::get('/', [LivreurController::class, 'index']);
+    Route::post('/', [LivreurController::class, 'store']);
+    Route::get('/{id}', [LivreurController::class, 'show']);
+    Route::put('/{id}', [LivreurController::class, 'update']);
+    Route::delete('/{id}', [LivreurController::class, 'destroy']);
+});
+
     Route::middleware('auth:sanctum')->group( function () {
         Route::get('/profile/{id}', [UserController::class, 'showProfile']);
         Route::delete('/User/{id}', [UserController::class, 'deleteUser']);
         Route::put('/User/{id}/change-status', [UserController::class, 'changeStatus']);
         Route::put('/User/{id}/update-profile', [UserController::class, 'updateProfile']);
         Route::get('/User', [UserController::class, 'index']);
-
-    
 
     // Route::post('/forgot-password', [UserController::class, 'sendResetLink']);
     Route::post('/reset-password', [UserController::class, 'resetPassword']);
@@ -41,15 +48,6 @@ Route::post('/login', [UserController::class, 'login']);
         Route::post('/', [MenuController::class, 'store']);
         Route::put('{menuId}', [MenuController::class, 'update']);
         Route::delete('{menuId}', [MenuController::class, 'destroy']);
-    });
-    Route::prefix('restaurants')->middleware('auth:sanctum')->group(function () {
-        Route::get('/', [RestaurantController::class, 'index']);
-        Route::get('/{id}', [RestaurantController::class, 'show']);
-        Route::post('/', [RestaurantController::class, 'store']);
-        Route::put('/{id}', [RestaurantController::class, 'update']);
-        Route::delete('/{id}', [RestaurantController::class, 'destroy']);
-        Route::put('/{id}/accept', [RestaurantController::class, 'accept']);
-        Route::put('/{id}/reject', [RestaurantController::class, 'reject']);
     });
     Route::prefix('categories')->group(function () {
         Route::get('/', [CategorieController::class, 'index']);
@@ -66,7 +64,7 @@ Route::post('/login', [UserController::class, 'login']);
         Route::delete('/{id}', [IngredientController::class, 'destroy']);
         Route::put('/{id}/stock', [IngredientController::class, 'mettreAJourStock']);
     });
-
+    
     Route::prefix('plats')->middleware('auth:sanctum')->group(function ()  {
         Route::post('/', [PlatController::class, 'store']);
         Route::get('/', [PlatController::class, 'index']);
@@ -74,7 +72,7 @@ Route::post('/login', [UserController::class, 'login']);
         Route::delete('/{id}', [PlatController::class, 'destroy']);
         Route::put('/{id}/disponibilite', [PlatController::class, 'changerDisponibilite']);
     });
-
+    
     Route::prefix('paiement')->group(function () {
         Route::post('/pay', [PaiementController::class, 'pay']);
         Route::get('/success', [PaiementController::class, 'success']);
@@ -94,4 +92,13 @@ Route::post('/login', [UserController::class, 'login']);
     });
 });
 
+Route::prefix('restaurants')->group(function () {
+    Route::get('/', [RestaurantController::class, 'index']);
+    Route::get('/{id}', [RestaurantController::class, 'show']);
+    Route::post('/', [RestaurantController::class, 'store']);
+    Route::put('/{id}', [RestaurantController::class, 'update']);
+    Route::delete('/{id}', [RestaurantController::class, 'destroy']);
+    Route::put('/{id}/accept', [RestaurantController::class, 'accept']);
+    Route::put('/{id}/reject', [RestaurantController::class, 'reject']);
+});
 

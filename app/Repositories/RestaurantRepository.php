@@ -10,7 +10,7 @@ class RestaurantRepository implements RestaurantRepositoryInterface
 {
     public function getAll()
     {
-        return Restaurant::all(); 
+        return Restaurant::paginate(9); 
     }
 
     public function getById($id)

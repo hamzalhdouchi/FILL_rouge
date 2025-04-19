@@ -28,6 +28,7 @@ class plateSeed extends Seeder
                 'categorie_id' => $faker->numberBetween(1,2),
                 'created_at' => now(),
                 'updated_at' => now(),
+                'menu_id'=> $faker->numberBetween(1,10)
             ]);
 
 

@@ -23,4 +23,9 @@ class Menu extends Model
     {
         return $this->belongsToMany(Categorie::class,'catehoriemenu','id_categorie','id_menu');
     }
+
+    public function Plate()
+    {
+        return $this->hasMany(Plat::class);
+    }
 }

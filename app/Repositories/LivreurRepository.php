@@ -1,20 +1,21 @@
 <?php
 namespace App\Repositories;
 
-use App\Repositories\Interfaces\LivreurRepositoryInterface;
 use App\Models\Livreur;
+use App\Models\User;
+use App\RepositoryInterfaces\LivreurRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
 
 class LivreurRepository implements LivreurRepositoryInterface
 {
     public function all()
     {
-        return Livreur::all();
+        return User::where('role_id', 2)->get();
     }
 
     public function find($id)
     {
-        return Livreur::findOrFail($id);
+        return User::findOrFail($id);
     }
 
     public function create(array $data)
@@ -22,7 +23,7 @@ class LivreurRepository implements LivreurRepositoryInterface
         $data['password'] = Hash::make($data['password']);
         $data['role_id'] = 2;
         
-        return Livreur::create($data);
+        return User::create($data);
     }
 
     public function update($id, array $data)

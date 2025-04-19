@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nom_Utilisateur');
+            $table->string('nom_utilisateur');
             $table->string('prenom');
             $table->string('email')->unique();
             $table->string('password');
@@ -21,6 +21,8 @@ return new class extends Migration
             $table->dateTime('dateCreation')->useCurrent();
             $table->enum('statut', ['actif', 'inactif'])->default('actif');
             $table->foreignId('role_id')->constrained('roles');
+            $table->string('vehicule')->nullable();
+            $table->string('zone')->nullable();
             $table->timestamps();
         });
     }

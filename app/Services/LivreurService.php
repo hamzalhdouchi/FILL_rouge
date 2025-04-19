@@ -1,7 +1,7 @@
 <?php
 namespace App\Services;
 
-use App\Repositories\Interfaces\LivreurRepositoryInterface;
+use App\RepositoryInterfaces\LivreurRepositoryInterface;
 use App\Services\Interfaces\LivreurServiceInterface;
 
 class LivreurService implements LivreurServiceInterface

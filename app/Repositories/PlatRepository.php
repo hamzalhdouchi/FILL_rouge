@@ -14,7 +14,7 @@ class PlatRepository implements PlatRepositoryInterface
 
     public function affichePlats()
     {
-        return Plat::all();
+        return Plat::with('categorie')->get();
     }
 
     public function modifierPlat($id,$data)

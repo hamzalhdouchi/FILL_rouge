@@ -1,5 +1,5 @@
 <?php
-namespace App\Repositories\Interfaces;
+namespace App\RepositoryInterfaces;
 
 interface LivreurRepositoryInterface
 {

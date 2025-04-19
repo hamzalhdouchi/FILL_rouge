@@ -22,7 +22,7 @@ class UserStoreResquest extends FormRequest
     public function rules()
     {
         return [
-            'nom_Utilisateur' => 'required|string|max:255',
+            'nom_utilisateur' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',

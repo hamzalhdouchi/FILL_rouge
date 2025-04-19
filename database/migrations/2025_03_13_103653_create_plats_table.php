@@ -20,6 +20,7 @@ return new class extends Migration
             $table->boolean('disponible')->default(1);
             $table->string('image');
             $table->foreignId('categorie_id')->constrained('categories');
+            $table->foreignId('menu_id')->constrained('menus');
             $table->timestamps();
         });
     }

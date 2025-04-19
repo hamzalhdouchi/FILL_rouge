@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Repositories\CategorieRepository;
 use App\Repositories\CommandeRepository;
 use App\Repositories\IngredientRepository;
-use App\Repositories\Interfaces\LivreurRepositoryInterface;
 use App\Repositories\LivreurRepository;
 use App\Repositories\PaiementRepository;
 use App\Repositories\PlatRepository;
@@ -13,6 +12,7 @@ use App\Repositories\RestaurantRepository;
 use App\RepositoryInterfaces\CategorieRepositoryInterface;
 use App\RepositoryInterfaces\CommandeRepositoryInterface;
 use App\RepositoryInterfaces\IngredientRepositoryInterface;
+use App\RepositoryInterfaces\LivreurRepositoryInterface;
 use App\RepositoryInterfaces\MenuRepositoryInterface;
 use App\Repositories\MenuRepository;
 use App\RepositoryInterfaces\RestaurantRepositoryInterface;
@@ -78,6 +78,6 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        //
+        
     }
 }

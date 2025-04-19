@@ -11,9 +11,13 @@ class MenuRepository implements MenuRepositoryInterface
     public function getAllMenus($restaurantId)
     {
         
-        $restaurant = Restaurant::find($restaurantId);
-        $restaurants = $restaurant->menu;
-        return $restaurants;
+        $restaurant = Restaurant::with('Menu.plate.categorie')->find($restaurantId);
+
+        if (!$restaurant) {
+            return response()->json(['message' => 'Restaurant non trouvé'], 404);
+        }
+    
+        return $restaurant;
     }
 
     public function getMenuById($restaurantId, $menuId)
