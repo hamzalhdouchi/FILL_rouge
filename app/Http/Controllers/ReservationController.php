@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReservationResquest;
+use App\Http\Requests\reservationUpdateRequest;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,7 @@ class ReservationController extends Controller
         return response()->json($reservation, 200);
     }
 
-    public function update(Request $request, $id)
+    public function update(reservationUpdateRequest $request, $id)
     {
         $reservation = Reservation::find($id);
 
@@ -39,16 +40,7 @@ class ReservationController extends Controller
             return response()->json(['message' => 'Réservation non trouvée'], 404);
         }
 
-        $validated = $request->validate([
-            'name' => 'sometimes|required|string|max:255',
-            'email' => 'sometimes|required|email',
-            'phone' => 'sometimes|required|string',
-            'date' => 'sometimes|required|date',
-            'time' => 'sometimes|required',
-            'guests' => 'sometimes|required|integer|min:1',
-            'special_requests' => 'nullable|string',
-            'preorder_check' => 'boolean',
-        ]);
+        $validated = $request->validated();
 
         $reservation->update($validated);
 
