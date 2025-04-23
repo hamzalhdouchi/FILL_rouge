@@ -2,53 +2,59 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\paymentRequest;
-use App\Services\Interfaces\PaiementServiceInterface;
+use App\Http\Requests\PaymentRequest;
+use App\Models\Paiement;
+use App\Services\PaiementService;
 use Illuminate\Http\Request;
 
 class PaiementController extends Controller
 {
     protected $paiementService;
 
-    public function __construct(PaiementServiceInterface $paiementService)
+    public function __construct(PaiementService $paiementService)
     {
         $this->paiementService = $paiementService;
     }
 
-    public function pay(paymentRequest $request)
+    public function pay(Request $request)
     {
+        
+        session([
+            'paypal_user_id' => $request->user_id,
+            'paypal_commande_id' => $request->commande_id,
+        ]);
     
-        $result = $this->paiementService->processPayment($request->amount, $request->commande_id);
-
+        $result = $this->paiementService->processPayment($request->amount, $request->user_id, $request->commande_id, $request->restaurant_id, $request->table_id);
         return response()->json($result, $result['success'] ? 200 : 400);
     }
 
     public function success(Request $request)
     {
-        if (!$request->has(['paymentId', 'PayerID', 'commande_id'])) {
-            return response()->json(['success' => false, 'message' => 'Paramètres manquants'], 400);
-        }
+        
+        $commandeId = $request->input("commande_id");
+        $payerId = $request->input("PayerID");
 
         $result = $this->paiementService->completePayment(
+            $payerId,
             $request->input('paymentId'),
-            $request->input('PayerID'),
-            $request->input('commande_id')
+            $commandeId,
+            $request->input('restaurant_id'),
+            $request->input('table_id'),
         );
-
-        return response()->json($result, $result['success'] ? 200 : 400);
+    
+        return $result;
     }
+    
 
-    public function error()
+    public function error(Request $request)
     {
-        return response()->json(['success' => false, 'message' => 'Paiement annulé'], 400);
+        return response()->json(['success' => false, 'message' => 'Le paiement a échoué.'], 400);
     }
 
-    public function readAllPayments()
+    public function allPayment()
     {
-        return response()->json([
-            'success' => true,
-            'payments' => $this->paiementService->getAllPayments()
-        ], 200);
+        $AllPayment = $this->paiementService->getAllPayments();
+        return response()->json(['message' => 'the payment is recepre avec success','data' => $AllPayment]);
     }
+
 }

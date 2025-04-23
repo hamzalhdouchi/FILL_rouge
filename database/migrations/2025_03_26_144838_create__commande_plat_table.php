@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('commande_id')->constrained('commandes');
             $table->foreignId('plat_id')->constrained('plats');
+            $table->text('notes')->nullable();
+            $table->integer('quantite');
             $table->timestamps();
         });
     }

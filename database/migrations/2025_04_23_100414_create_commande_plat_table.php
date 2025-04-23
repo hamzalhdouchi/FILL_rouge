@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tables', function (Blueprint $table) {
+        Schema::create('commande_plat', function (Blueprint $table) {
             $table->id();
-            $table->integer('numeroDeTable')->unique(); 
-            $table->text('qrCode')->nullable(); 
-            $table->integer('capacite'); 
-            $table->enum('statut', ['libre', 'occupee', 'reservee']); 
-            $table->foreignId('restaurant_id')->constrained('restaurants');
-            
             $table->timestamps();
         });
     }
@@ -28,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tables');
+        Schema::dropIfExists('commande_plat');
     }
 };

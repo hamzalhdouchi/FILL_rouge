@@ -30,6 +30,8 @@ class reservationUpdateRequest extends FormRequest
             'guests' => 'sometimes|required|integer|min:1',
             'special_requests' => 'nullable|string',
             'preorder_check' => 'boolean',
+            'restaurant_id' => 'sometimes',
+            'user_id' => 'sometimes'
         ];
     }
 }

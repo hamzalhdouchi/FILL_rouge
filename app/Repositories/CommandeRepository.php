@@ -8,28 +8,48 @@ use App\Models\Commande;
 
 class CommandeRepository implements CommandeRepositoryInterface
 {
-    public function create( $data)
+    public function create($data)
     {
         $commande = Commande::create($data);
-
-        
-        $paltes = $data['plate'];
-        $commande->plat()->attach($paltes);
-
-        $total_price = Plat::whereIn('id',$paltes)->sum('prix');
-
-        $commande->update(['prixTotal'=>$total_price]);
-        return response()->json(['message' => 'Commande created successfully', 'commande' => $commande]);
+    
+        $plats = $data['plats'];
+        $attachData = [];
+    
+        foreach ($plats as $plat) {
+            $attachData[$plat['plat_id']] = [
+                'quantite' => $plat['quantite'],
+                'notes' => $plat['notes'] ?? null,
+            ];
+        }
+    
+        $commande->plat()->attach($attachData);
+    
+        $total_price = 0;
+        foreach ($plats as $plat) {
+            $platModel = Plat::find($plat['plat_id']);
+            $total_price += $platModel->prix * $plat['quantite'];
+        }
+    
+        $commande->update(['prixTotal' => $total_price]);
+    
+        return response()->json([
+            'message' => 'Commande créée avec succès',
+            'commande' => $commande
+        ]);
     }
-
     public function getById($id)
     {
         return Commande::findOrFail($id);
     }
 
-    public function getAll()
+    public function getCommendById($restaurant_id, $table_id)
     {
-        $commande = Commande::all();
+        return Commande::where('restaurant_id', $restaurant_id)->where('table_number', $table_id)->with('plat')->get();
+    }
+
+    public function getAll($id)
+    {
+        $commande = Commande::where('restaurant_id', $id);
         return $commande;
     }
 

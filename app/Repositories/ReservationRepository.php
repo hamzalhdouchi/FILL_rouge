@@ -16,6 +16,12 @@ class ReservationRepository implements ReservationRepositoryInterface
         return Reservation::findOrFail($id);
     }
 
+    public function UserReservatuion($id)
+    {
+        $reservations = Reservation::where('user_id', $id)->get();
+        return $reservations;
+    }
+
     public function create($data)
     {
         return Reservation::create($data);
@@ -31,5 +37,13 @@ class ReservationRepository implements ReservationRepositoryInterface
     public function delete($id)
     {
         return Reservation::destroy($id);
+    }
+
+    public function updateStatus($id, $status)
+    {
+        $reservation = $this->find($id);
+        $reservation->status = $status;
+        $reservation->save();
+        return $reservation;
     }
 }

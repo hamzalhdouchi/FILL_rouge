@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
             $table->enum('statut', ['en_attente', 'en_cours', 'terminee', 'annulee'])->default('en_attente');
+            $table->enum('paymentStatus',['payer', 'en_coure']);
             $table->integer('quantite'); 
             $table->text('instructions')->nullable();
             $table->double('evaluation')->nullable();
             $table->double('prixTotal', 8, 2)->nullable();
-            $table->foreignId('cleint_id')->constrained('users');
-            $table->foreignId('livreur_id')->constrained('users');
+            $table->integer('table_number');
             $table->foreignId('restaurant_id')->constrained('restaurants');
             $table->timestamps();
         });

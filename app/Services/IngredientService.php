@@ -17,10 +17,7 @@ class IngredientService implements IngredientServiceInterface
     public function ajouterIngredient($data)
     {
         $ingredient = $this->ingredientRepository->ajouterIngredient($data);
-        return [
-            'message' => 'Ingrédient ajouté avec succès.',
-            'ingredient' => $ingredient
-        ];
+        return  $ingredient;
     }
 
     public function afficherIngredient()

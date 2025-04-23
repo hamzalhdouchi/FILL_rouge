@@ -21,6 +21,9 @@ return new class extends Migration
             $table->unsignedInteger('guests');
             $table->text('special_requests')->nullable();
             $table->boolean('preorder_check')->default(false);
+            $table->foreignId('restaurant_id')->constrained('restaurants')->onDelete('cascade');
+            $table->enum('status', ['En attente de confirmation', 'Confirmée', 'Annulée', 'Terminée'])->default('En attente de confirmation');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

@@ -3,61 +3,58 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ReservationResquest;
 use App\Http\Requests\reservationUpdateRequest;
-use App\Models\Reservation;
-use Illuminate\Http\Request;
+use App\Http\Requests\statusRequest;
+use App\Http\Requests\StoreReservationRequest;
+use App\Http\Requests\UpdateReservationRequest;
+use App\Services\Interfaces\ReservationServiceInterface;
 
 class ReservationController extends Controller
 {
-    public function index()
+    protected $reservationService;
+
+    public function __construct(ReservationServiceInterface $reservationService)
     {
-        return response()->json(Reservation::all(), 200);
+        $this->reservationService = $reservationService;
     }
 
-    public function store(ReservationResquest $request)
+    public function index()
     {
-        $validated = $request->validated();
-
-        $reservation = Reservation::create($validated);
-        return response()->json($reservation, 201);
+        return $this->reservationService->getAll();
     }
 
     public function show($id)
     {
-        $reservation = Reservation::find($id);
+        return $this->reservationService->getById($id);
+    }
 
-        if (!$reservation) {
-            return response()->json(['message' => 'Réservation non trouvée'], 404);
-        }
-
-        return response()->json($reservation, 200);
+    public function store(ReservationResquest $request)
+    {
+        return $this->reservationService->create($request->validated());
     }
 
     public function update(reservationUpdateRequest $request, $id)
     {
-        $reservation = Reservation::find($id);
-
-        if (!$reservation) {
-            return response()->json(['message' => 'Réservation non trouvée'], 404);
-        }
-
-        $validated = $request->validated();
-
-        $reservation->update($validated);
-
-        return response()->json($reservation, 200);
+        return $this->reservationService->update($id, $request->validated());
     }
 
-    // Supprimer une réservation
     public function destroy($id)
     {
-        $reservation = Reservation::find($id);
+        return $this->reservationService->delete($id);
+    }
 
-        if (!$reservation) {
-            return response()->json(['message' => 'Réservation non trouvée'], 404);
-        }
+    public function reservationUser($id)
+    {
+        return $this->reservationService->reservation($id);
+    }
 
-        $reservation->delete();
+    public function updateStatus(statusRequest $request, $id)
+    {
+        $request->validated();
+        $reservation = $this->reservationService->changeStatus($id, $request->status);
 
-        return response()->json(['message' => 'Réservation supprimée avec succès'], 200);
+        return response()->json([
+            'message' => 'Statut mis à jour avec succès.',
+            'data' => $reservation,
+        ]);
     }
 }

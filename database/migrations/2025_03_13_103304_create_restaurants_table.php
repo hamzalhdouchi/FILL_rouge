@@ -20,7 +20,6 @@ return new class extends Migration
             $table->enum('status', ['accepted', 'rejected','En Attent'])->default('En Attent');
             $table->string('image');
             $table->string('zone_Livraison');
-            $table->string('directeur');
             $table->timestamps();
         });
     }

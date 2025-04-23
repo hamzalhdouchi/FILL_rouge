@@ -15,8 +15,8 @@ class Plat extends Model
         'temps_Preparation',
         'prix',
         'nom_plat',
-        'categorie_id'
-
+        'categorie_id',
+        'menu_id',
     ];
 
 
@@ -32,7 +32,7 @@ class Plat extends Model
 
     public function ingrediant()
     {
-        return $this->hasMany(Ingredient::class);
+        return $this->belongsToMany(Ingredient::class,'ingredient_plate');
     }
 
     public function Menu()

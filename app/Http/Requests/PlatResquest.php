@@ -26,8 +26,8 @@ class PlatResquest extends FormRequest
             'desciption' => 'required|string|max:500',
             'prix' => 'required|numeric|min:0',
             'temps_Preparation' => 'required|integer|min:1',
-            'disponible' => 'required|boolean',
-            'image' => 'required|string|max:255',
+            // 'disponible' => 'required|boolean',
+            'image' => 'file|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'categorie_id' => 'required|exists:categories,id'
         ];
     }

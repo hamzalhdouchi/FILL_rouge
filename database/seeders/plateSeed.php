@@ -17,7 +17,7 @@ class plateSeed extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             DB::table('plats')->insert([
                 'nom_plat' => $faker->word,
                 'desciption' => $faker->sentence,
@@ -28,7 +28,7 @@ class plateSeed extends Seeder
                 'categorie_id' => $faker->numberBetween(1,2),
                 'created_at' => now(),
                 'updated_at' => now(),
-                'menu_id'=> $faker->numberBetween(1,10)
+                'menu_id'=> $faker->numberBetween(3,10)
             ]);
 
 

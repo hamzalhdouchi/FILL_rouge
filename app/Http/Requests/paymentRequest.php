@@ -23,7 +23,7 @@ class paymentRequest extends FormRequest
     {
         return [
             'amount' => 'required|numeric|min:0.1',
-            'commande_id' => 'required|integer'
+            'commande_id' => 'required|integer',
         ];
     }
 }

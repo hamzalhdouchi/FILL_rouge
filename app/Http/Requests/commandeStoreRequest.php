@@ -26,8 +26,7 @@ class commandeStoreRequest extends FormRequest
             'instructions' => 'nullable|string|max:500',
             'evaluation' => 'nullable|numeric|min:1|max:5',
             'prixTotal' => 'nullable|numeric|min:0',
-            'cleint_id' => 'required|exists:users,id',
-            'livreur_id' => 'required|exists:users,id',
+            'table_number' => 'nullable|integer|min:0',
             'restaurant_id' => 'required|exists:restaurants,id',
         ];
     }

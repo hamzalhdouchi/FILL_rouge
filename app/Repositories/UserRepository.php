@@ -14,7 +14,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function getAll()
     {
-        $users = User::with('Role')->get();
+        $users = User::with('Role')->paginate(6);
         return response()->json($users,200);
     }
 
@@ -39,5 +39,14 @@ class UserRepository implements UserRepositoryInterface
     public function findByEmail($email)
     {
         return User::where('email', $email)->first();
+    }
+
+    public function logout($request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return [
+            'message' => 'Déconnexion réussie.'
+        ];
     }
 }

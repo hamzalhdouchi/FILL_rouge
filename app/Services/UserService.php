@@ -132,4 +132,10 @@ class UserService implements UserServiceInterface
 
         return response()->json(['message' => 'profile is found successfully','user' => $user],200);
     }
+
+    public function logout($request)
+    {
+        return $this->userRepository->logout($request);
+    }
+
 }

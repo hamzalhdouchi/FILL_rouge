@@ -13,4 +13,6 @@ interface UserServiceInterface
     public function login($request);
     public function showProfile($id);
     public function gatAllUsers();
+    public function logout($request);
+
 }

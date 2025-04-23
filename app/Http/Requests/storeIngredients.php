@@ -22,10 +22,11 @@ class storeIngredients extends FormRequest
     public function rules(): array
     {
         return [
-            'nom_ingredient' => 'required|string|max:255',
-            'stock' => 'required|integer|min:0',
-            'unite_mesure' => 'required|string|max:50',
-            'plate_id' => 'required|exists:plats,id',
+            'ingredients' => 'required|array|min:1',
+        'ingredients.*.nom_ingredient' => 'required|string|max:255',
+        'ingredients.*.stock' => 'required|integer|min:0',
+        'ingredients.*.unite_mesure' => 'required|string|max:50',
+
         ];
     }
 }

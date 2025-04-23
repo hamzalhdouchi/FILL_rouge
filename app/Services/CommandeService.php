@@ -37,9 +37,9 @@ class CommandeService implements CommandeServiceInterface
         ]);
     }
 
-    public function getCommandes()
+    public function getCommandes($id)
     {
-        $commandes = $this->commandeRepository->getAll();
+        $commandes = $this->commandeRepository->getAll($id);
         if (!$commandes) {
             return response()->json(['message'=> 'the commend is not found'],404);
         }
@@ -62,6 +62,17 @@ class CommandeService implements CommandeServiceInterface
             'message' => 'Évaluation enregistrée avec succès',
             'commande' => $commande
         ]);
+    }
+
+    public function getCommendById($restaurant_id, $table_id)
+    {
+        
+        $commands = $this->commandeRepository->getCommendById($restaurant_id, $table_id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Commade récupérée avec succès.',
+            'data' => $commands
+        ], 200);
     }
 
     public function calculerTotal($id)

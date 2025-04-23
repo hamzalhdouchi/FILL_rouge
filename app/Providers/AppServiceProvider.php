@@ -10,6 +10,7 @@ use App\Repositories\PaiementRepository;
 use App\Repositories\PlatRepository;
 use App\Repositories\ReservationRepository;
 use App\Repositories\RestaurantRepository;
+use App\Repositories\TableRepository;
 use App\RepositoryInterfaces\CategorieRepositoryInterface;
 use App\RepositoryInterfaces\CommandeRepositoryInterface;
 use App\RepositoryInterfaces\IngredientRepositoryInterface;
@@ -20,6 +21,7 @@ use App\RepositoryInterfaces\ReservationRepositoryInterface;
 use App\RepositoryInterfaces\RestaurantRepositoryInterface;
 use App\RepositoryInterfaces\PaiementRepositoryInterface;
 use App\RepositoryInterfaces\PlatRepositoryInterface;
+use App\RepositoryInterfaces\TableReposetoryInterface;
 use App\RepositoryInterfaces\UserRepositoryInterface;
 use App\Repositories\UserRepository;
 use App\Services\CategorieService;
@@ -33,6 +35,7 @@ use App\Services\Interfaces\MenuServiceInterface;
 use App\Services\Interfaces\PaiementServiceInterface;
 use App\Services\Interfaces\PlatServiceInterface;
 use App\Services\Interfaces\ReservationServiceInterface;
+use App\Services\Interfaces\TableServiceInterface;
 use App\Services\Interfaces\UserServiceInterface;
 use App\Services\Interfaces\RestaurantServiceInterface;
 use App\Services\LivreurService;
@@ -41,6 +44,7 @@ use App\Services\PaiementService;
 use App\Services\PlatService;
 use App\Services\ReservationService;
 use App\Services\RestaurantService;
+use App\Services\TableService;
 use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
 
@@ -69,6 +73,9 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(PlatRepositoryInterface::class, PlatRepository::class);
         $this->app->bind(PlatServiceInterface::class, PlatService::class);
+
+        $this->app->bind(TableReposetoryInterface::class, TableRepository::class);
+        $this->app->bind(TableServiceInterface::class, TableService::class);
 
         $this->app->bind(PaiementRepositoryInterface::class, PaiementRepository::class);
         $this->app->bind(PaiementServiceInterface::class, PaiementService::class);

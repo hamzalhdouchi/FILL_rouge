@@ -22,9 +22,9 @@ class CommandeController extends Controller
         return $commande;
     }
 
-    public function index()
+    public function index($id)
     {
-        $commandes = $this->commandeService->getCommandes();
+        $commandes = $this->commandeService->getCommandes($id);
         return $commandes;
     }
 
@@ -62,6 +62,12 @@ class CommandeController extends Controller
     public function genererFacture($id)
     {
         $facture = $this->commandeService->genererFacture($id);
+        return $facture;
+    }
+
+    public function GetCommands($restaurant_id, $table_id)
+    {
+        $facture = $this->commandeService->getCommendById($restaurant_id, $table_id);
         return $facture;
     }
 }

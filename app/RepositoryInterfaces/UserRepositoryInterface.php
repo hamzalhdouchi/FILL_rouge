@@ -10,4 +10,6 @@ interface UserRepositoryInterface
     public function delete($id);
     public function findByEmail($email);
     public function getAll();
+    public function logout($request);
+
 }

@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tables', function (Blueprint $table) {
+        Schema::create('ingredient_plate', function (Blueprint $table) {
             $table->id();
-            $table->integer('numeroDeTable')->unique(); 
-            $table->text('qrCode')->nullable(); 
-            $table->integer('capacite'); 
-            $table->enum('statut', ['libre', 'occupee', 'reservee']); 
-            $table->foreignId('restaurant_id')->constrained('restaurants');
-            
+            $table->foreignId('plate_id')->constrained('plats')->onDelete('cascade');
+            $table->foreignId('ingredient_id')->constrained('ingredients')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tables');
+        Schema::dropIfExists('plate_ingredient');
     }
 };

@@ -8,4 +8,8 @@ interface ReservationServiceInterface
     public function create(array $data);
     public function update($id, array $data);
     public function delete($id);
+    public function reservation($id);
+
+    public function changeStatus($id, $status);
+
 }

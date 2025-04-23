@@ -9,8 +9,17 @@ class IngredientRepository implements IngredientRepositoryInterface
 {
     public function ajouterIngredient( $data)
     {
-        $ingredient = Ingredient::create($data);
-        return $ingredient;
+        foreach ($data->ingredients as $ingredient) {
+            foreach ($data['ingredients'] as $ingredient) {  // Utilisation de crochets pour un tableau
+                Ingredient::create([
+                    'nom_ingredient' => $ingredient['nom_ingredient'],
+                    'stock' => $ingredient['stock'],
+                    'unite_mesure' => $ingredient['unite_mesure'],
+                ]);
+            }
+            
+        }
+        response()->json(['message' => 'Ingrédients enregistrés avec succès !'], 201);
     }
 
     public function afficherIngredient()

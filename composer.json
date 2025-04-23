@@ -10,8 +10,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "league/omnipay": "^3.2",
-        "omnipay/stripe": "^3.2",
+        "omnipay/paypal": "*",
         "simplesoftwareio/simple-qrcode": "^4.2"
     },
     "require-dev": {

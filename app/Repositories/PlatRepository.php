@@ -7,10 +7,28 @@ use App\RepositoryInterfaces\PlatRepositoryInterface;
 
 class PlatRepository implements PlatRepositoryInterface
 {
-    public function ajouterPlat( $data)
+    public function ajouterPlat($data)
     {
-        return Plat::create($data);
+        if (isset($data['image'])) {
+            $path = $data['image']->store('Plate', 'public');
+            $data['image'] = str_replace('public/', '', $path);
+        }
+        $plat = Plat::create([
+            'nom_plat' => $data['nom_plat'],
+            'desciption' => $data['desciption'],
+            'prix' => $data['prix'],
+            'categorie_id' => $data['categorie_id'],
+            'temps_Preparation' => $data['temps_Preparation'],
+            'image' => $data['image'],
+            'menu_id' => $data['menu_id'],
+        ]);
+    
+        $plat->ingrediant()->attach($data['ingredients']); ;           
+        
+    
+        return $plat;
     }
+    
 
     public function affichePlats()
     {

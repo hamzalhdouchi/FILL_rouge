@@ -34,6 +34,7 @@ class ReservationService implements ReservationServiceInterface
         ], 200);
     }
 
+
     public function create(array $data)
     {
         $reservation = $this->reservationRepository->create($data);
@@ -62,4 +63,27 @@ class ReservationService implements ReservationServiceInterface
             'message' => 'Réservation supprimée avec succès.'
         ], 200);
     }
+
+    public function reservation($id)
+    {
+        $reservation = $this->reservationRepository->UserReservatuion($id);
+        if ($reservation == null) {
+            return response()->json(['message'=> 'we dont have reservation',$reservation], 404);
+        }
+        
+
+        return response()->json(['message'=> 'the reservation is recepered','data' => $reservation],200);
+    }
+
+    public function changeStatus($id, $status)
+    {
+        $allowedStatuses = ['En attente de confirmation', 'Confirmée', 'Annulée', 'Terminée'];
+
+        if (!in_array($status, $allowedStatuses)) {
+            throw new \InvalidArgumentException("Statut invalide.");
+        }
+        return $this->reservationRepository->updateStatus($id, $status);
+
+    }
+
 }

@@ -72,4 +72,10 @@ class UserController extends Controller
         $response = $this->userService->resetPassword($request);
         return $response;
     }
+
+    public function logout(Request $request)
+    {
+        $result = $this->userService->logout($request);
+        return response()->json($result);
+    }
 }

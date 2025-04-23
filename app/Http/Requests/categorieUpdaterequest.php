@@ -25,7 +25,6 @@ class categorieUpdaterequest extends FormRequest
         [
             'mon_categorie' => 'sometimes|string|max:255',
             'description' => 'sometimes|string|max:1000',
-            'order' => 'sometimes|integer',
         ];
     }
 }

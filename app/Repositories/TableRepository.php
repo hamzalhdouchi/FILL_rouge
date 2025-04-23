@@ -12,11 +12,13 @@ class TableRepository implements TableReposetoryInterface
     public function AjouterTable($id_Restaurant, $data)
     {
         $data['restaurant_id'] = $id_Restaurant;
-        $qrcode = QRcodeController::class;
-        $table = Table::create($data);
-        $generatit = $qrcode->generateQrCode();
-        return $table;
+        $qrcodeController = new QRcodeController();
+        $generateQr = $qrcodeController->generateQrCode($data['numeroDeTable'], $id_Restaurant);
+        $data['qrCode'] = $generateQr['qrcode'];
+        Table::create($data);
+        return $generateQr;
     }
+
 
     public function afficheriAllTables($id_Restaurant)
     {

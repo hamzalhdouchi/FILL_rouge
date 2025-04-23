@@ -18,11 +18,18 @@ class Reservation extends Model
         'guests',
         'special_requests',
         'preorder_check',
+        'restaurant_id',
+        'user_id'
     ];
 
 
     public function table()
     {
         return $this->belongsTo(Table::class, 'idTable');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
