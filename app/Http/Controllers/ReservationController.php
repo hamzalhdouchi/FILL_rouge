@@ -17,10 +17,11 @@ class ReservationController extends Controller
         $this->reservationService = $reservationService;
     }
 
-    public function index()
+    public function index($id_Restaurant)
     {
-        return $this->reservationService->getAll();
+        return $this->reservationService->getAll($id_Restaurant);
     }
+  
 
     public function show($id)
     {
@@ -37,9 +38,9 @@ class ReservationController extends Controller
         return $this->reservationService->update($id, $request->validated());
     }
 
-    public function destroy($id)
+    public function destroy($id, $id_Restaurant)
     {
-        return $this->reservationService->delete($id);
+        return $this->reservationService->delete($id, $id_Restaurant);
     }
 
     public function reservationUser($id)

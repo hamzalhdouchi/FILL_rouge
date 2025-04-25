@@ -29,9 +29,9 @@ class TableController extends Controller
         return $this->tableService->afficherTable($id_Restaurant, $idTable);
     }
 
-    public function update(Request $request, $id_Restaurant)
+    public function update(Request $request, $id_Restaurant, $idTable)
     {
-        return $this->tableService->ModifierTable($id_Restaurant, $request->all());
+        return $this->tableService->ModifierTable($id_Restaurant, $request->all(), $idTable);
     }
 
     public function destroy($id_Restaurant, $idTable)

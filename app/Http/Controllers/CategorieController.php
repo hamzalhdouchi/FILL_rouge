@@ -42,16 +42,15 @@ class CategorieController extends Controller
         return response()->json($category);
     }
 
-    public function update(CategorieUpdateRequest $request, Categorie $category)
+    public function update(CategorieUpdateRequest $request,  $id)
     {
-
-        $this->categorieService->updateCategory($category, $request);
+        $this->categorieService->updateCategory($id, $request->validated());
         
         return response()->json([
             'message' => 'Catégorie mise à jour avec succès',
-            'category' => $category
         ]);
     }
+    
 
     public function destroy(Categorie $category)
     {

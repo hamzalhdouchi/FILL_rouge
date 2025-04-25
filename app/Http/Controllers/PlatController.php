@@ -23,9 +23,9 @@ class PlatController extends Controller
         return response()->json($response);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $response = $this->platService->affichePlats();
+        $response = $this->platService->affichePlats($request['menu_id']);
         return response()->json($response);
     }
 

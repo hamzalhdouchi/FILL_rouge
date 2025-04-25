@@ -41,6 +41,10 @@ class CommandeRepository implements CommandeRepositoryInterface
     {
         return Commande::findOrFail($id);
     }
+    public function getAllByRestaurantId($id)
+    {
+        return Commande::where('restaurant_id',$id)->get();
+    }
 
     public function getCommendById($restaurant_id, $table_id)
     {
@@ -95,4 +99,11 @@ class CommandeRepository implements CommandeRepositoryInterface
         $total = $commande->quantite * ($commande->prixTotal * 0.9);
         return $total;
     }
+
+    public function delet($id)
+    {
+        $commande = Commande::findOrFail($id);
+        $commande->delete();
+    }
+
 }

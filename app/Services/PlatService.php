@@ -23,9 +23,9 @@ class PlatService implements PlatServiceInterface
         return response()->json(['message' => 'Plat ajouté avec succès!', 'data' => $plat] ,201);
     }
 
-    public function affichePlats()
+    public function affichePlats($id)
     {
-        $plats = $this->platRepository->affichePlats();
+        $plats = $this->platRepository->affichePlats($id);
         if (!$plats) {
             return response()->json(['message' => 'Aucun plat trouvé'],404);
         }

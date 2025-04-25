@@ -126,4 +126,24 @@ class CommandeService implements CommandeServiceInterface
 
         return response()->json(['message' => 'Facture générée et envoyée avec succès !']);
     }
+
+    public function getAllCommandes($id)
+    {
+        $commandes = $this->commandeRepository->getAllByRestaurantId($id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Liste des commandes récupérée avec succès.',
+            'data' => $commandes
+        ], 200);
+    }
+
+    public function deleteCommande($id)
+    {
+        
+        $delet = $this->commandeRepository->delete($id);
+        
+        return response()->json([
+            'message' => 'Commande supprimée avec succès',
+        ]);
+    }
 }

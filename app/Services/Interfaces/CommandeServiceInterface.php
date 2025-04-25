@@ -14,5 +14,9 @@ interface CommandeServiceInterface
     public function genererFacture($id);
 
     public function getCommendById($restaurant_id, $table_id);
+    public function getAllCommandes($restaurant_id);
+    
+    public function deleteCommande($id);
+
 
 }

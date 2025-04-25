@@ -19,7 +19,7 @@ class IngredientController extends Controller
 
     public function store(storeIngredients $request)
     {
-        $data = $request->all();
+        $data = $request->ingredients;
         $ingredient = $this->ingredientservice->ajouterIngredient($data);
         return $ingredient;
     }

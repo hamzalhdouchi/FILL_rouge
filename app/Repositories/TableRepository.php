@@ -17,6 +17,7 @@ class TableRepository implements TableReposetoryInterface
         $data['qrCode'] = $generateQr['qrcode'];
         Table::create($data);
         return $generateQr;
+
     }
 
 
@@ -30,11 +31,13 @@ class TableRepository implements TableReposetoryInterface
         return Table::where('restaurant_id', $id_Restaurant)->where('id', $idTable)->first();
     }
 
-    public function ModifierTable($id_Restaurant, $data)
+    public function ModifierTable($id_Restaurant, $data, $idTable)
     {
-        $table = Table::where('restaurant_id', $id_Restaurant)->where('id', $data['id'])->first();
+
+        $table = Table::where('restaurant_id', $id_Restaurant)->where('id', $idTable)->first();
         if ($table) {
-            $table->update($data);
+            $table['statut'] = $data['statut'];
+            $table->save();
             return $table;
         }
         return null;

@@ -6,9 +6,9 @@ use App\RepositoryInterfaces\ReservationRepositoryInterface;
 
 class ReservationRepository implements ReservationRepositoryInterface
 {
-    public function all()
+    public function all($id_Restaurant)
     {
-        return Reservation::all();
+        return Reservation::where('restaurant_id', $id_Restaurant)->get();
     }
 
     public function find($id)
@@ -34,15 +34,16 @@ class ReservationRepository implements ReservationRepositoryInterface
         return $reservation;
     }
 
-    public function delete($id)
+    public function delete($id, $id_Restaurant)
     {
-        return Reservation::destroy($id);
+        $reservation = Reservation::where('id', $id)->where('restaurant_id', $id_Restaurant)->firstOrFail();
+        return $reservation->delete();
     }
 
     public function updateStatus($id, $status)
     {
         $reservation = $this->find($id);
-        $reservation->status = $status;
+        $reservation['status'] = $status;
         $reservation->save();
         return $reservation;
     }

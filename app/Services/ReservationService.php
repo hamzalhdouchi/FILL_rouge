@@ -14,15 +14,16 @@ class ReservationService implements ReservationServiceInterface
         $this->reservationRepository = $reservationRepository;
     }
 
-    public function getAll()
+    public function getAll($id_Restaurant)
     {
-        $reservations = $this->reservationRepository->all();
+        $reservations = $this->reservationRepository->all($id_Restaurant);
         return response()->json([
             'success' => true,
             'message' => 'Liste des réservations récupérée avec succès.',
             'data' => $reservations
         ], 200);
     }
+    
 
     public function getById($id)
     {
@@ -55,9 +56,9 @@ class ReservationService implements ReservationServiceInterface
         ], 200);
     }
 
-    public function delete($id)
+    public function delete($id, $id_Restaurant)
     {
-        $this->reservationRepository->delete($id);
+        $this->reservationRepository->delete($id, $id_Restaurant);
         return response()->json([
             'success' => true,
             'message' => 'Réservation supprimée avec succès.'

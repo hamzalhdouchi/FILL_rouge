@@ -13,4 +13,7 @@ interface CommandeRepositoryInterface
     public function calculateTotal($id);
     public function calculateSubTotal($id);
     public function getCommendById($restaurant_id, $table_id);
+    public function getAllByRestaurantId($restaurant_id);
+    public function delet($id);
+
 }

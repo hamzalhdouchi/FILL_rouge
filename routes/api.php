@@ -53,13 +53,13 @@ Route::prefix('livreur')->group(function () {
     
 });
 
-Route::prefix('plats')->group(function ()  {
-    Route::post('/', [PlatController::class, 'store']);
-    Route::get('/', [PlatController::class, 'index']);
-    Route::put('/{id}', [PlatController::class, 'update']);
-    Route::delete('/{id}', [PlatController::class, 'destroy']);
-    Route::put('/{id}/disponibilite', [PlatController::class, 'changerDisponibilite']);
-});
+    Route::prefix('plats')->group(function ()  {
+        Route::post('/', [PlatController::class, 'store']);
+        Route::get('/', [PlatController::class, 'index']);
+        Route::put('/{id}', [PlatController::class, 'update']);
+        Route::delete('/{id}', [PlatController::class, 'destroy']);
+        Route::put('/{id}/disponibilite', [PlatController::class, 'changerDisponibilite']);
+    });
 
     Route::prefix('ingredients')->group(function ()  {
         Route::post('/', [IngredientController::class, 'store']);
@@ -77,7 +77,8 @@ Route::prefix('payment')->group(function () {
 });
 Route::prefix('commandes')->group(function () {
     Route::post('/', [CommandeController::class, 'store']); 
-    Route::get('/{id}', [CommandeController::class, 'index']); 
+    // Route::get('/{id}', [CommandeController::class, 'index']); 
+    Route::get('/restaurant/{restaurant_id}', [CommandeController::class, 'getAllByRestaurantId']);
     Route::put('/{id}', [CommandeController::class, 'annulerCommande']); 
     Route::post('/evaluer/{id}', [CommandeController::class, 'evaluerService']); 
     Route::get('/total/{id}', [CommandeController::class, 'calculerTotal']);
@@ -85,6 +86,7 @@ Route::prefix('commandes')->group(function () {
     Route::put('/statut/{id}', [CommandeController::class, 'changerStatut']); 
     Route::get('/facture/{id}', [CommandeController::class, 'genererFacture']);
     Route::get('/restaurant/{restaurant_id}/table/{table_id}', [CommandeController::class, 'GetCommands']);
+    Route::delete('/{id}', [CommandeController::class, 'deleteCommande']);
 });
 Route::prefix('restaurants')->group(function () {
     Route::get('/', [RestaurantController::class, 'index']);
@@ -96,16 +98,16 @@ Route::prefix('restaurants')->group(function () {
     Route::put('/{id}/reject', [RestaurantController::class, 'reject']);
 });
 
-Route::prefix('reservations')->name('reservations.')->group(function () {
-    Route::get('/', [ReservationController::class, 'index']);
-    Route::get('{id}', [ReservationController::class, 'show']);
-    Route::get('/user/{id}', [ReservationController::class, 'reservationUser']);
-    Route::post('/', [ReservationController::class, 'store']);
-    Route::put('{id}', [ReservationController::class, 'update']);
-    Route::delete('{id}', [ReservationController::class, 'destroy']);
-    Route::put('/{id}/status', [ReservationController::class, 'updateStatus']);
-    
-});
+    Route::prefix('reservations/')->name('reservations.')->group(function () {
+        Route::put('{id}/status', [ReservationController::class, 'updateStatus']);
+        Route::get('/{id_Restaurant}', [ReservationController::class, 'index']);
+        Route::get('{id}', [ReservationController::class, 'show']);
+        Route::get('/user/{id}', [ReservationController::class, 'reservationUser']);
+        Route::post('/', [ReservationController::class, 'store']);
+        Route::put('{id}', [ReservationController::class, 'update']);
+        Route::delete('{id}/restaurant/{id_restaurant}', [ReservationController::class, 'destroy']);
+        
+    });
 
     Route::prefix('restaurants/{restaurantId}/menus')->group(function () {
         Route::get('/', [MenuController::class, 'index'])->name('show.menu');
@@ -115,11 +117,11 @@ Route::prefix('reservations')->name('reservations.')->group(function () {
         Route::delete('{menuId}', [MenuController::class, 'destroy']);
     });
 
-    Route::prefix('categories')->group(function () {
+    Route::prefix( 'categories')->group(function () {
         Route::get('/', [CategorieController::class, 'index']);
         Route::post('/', [CategorieController::class, 'store']);
         Route::get('/{id}', [CategorieController::class, 'show']);
-        Route::put('/{category}', [CategorieController::class, 'update']);
+        Route::put('/{id}', [CategorieController::class, 'update']);
         Route::delete('/{category}', [CategorieController::class, 'destroy']);
     });
 
@@ -127,7 +129,7 @@ Route::prefix('reservations')->name('reservations.')->group(function () {
         Route::post('/tables', [TableController::class, 'store']);
         Route::get('/tables', [TableController::class, 'index']);
         Route::get('/tables/{idTable}', [TableController::class, 'show']);
-        Route::put('/tables', [TableController::class, 'update']);
+        Route::put('/tables/{idTable}', [TableController::class, 'update']);
         Route::delete('/tables/{idTable}', [TableController::class, 'destroy']);
         Route::get('/tables-disponibles', [TableController::class, 'availableTables']);
     });

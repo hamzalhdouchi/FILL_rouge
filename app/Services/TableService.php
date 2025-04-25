@@ -35,10 +35,10 @@ class TableService implements TableServiceInterface
         return response()->json( ['message'=> 'Table trouve successfully','data'=> $tables],200);
     }
 
-    public function ModifierTable($id_Restaurant, $data)
+    public function ModifierTable($id_Restaurant, $data, $idTable)
     {
 
-        $updateTable = $this->tableRepository->ModifierTable($id_Restaurant, $data);
+        $updateTable = $this->tableRepository->ModifierTable($id_Restaurant, $data, $idTable);
         if (!$updateTable) {
             return response()->json(['success' => false, 'error' => 'Table non trouvée'], 404);
         }

@@ -30,20 +30,35 @@ class PlatRepository implements PlatRepositoryInterface
     }
     
 
-    public function affichePlats()
+    public function affichePlats($id)
     {
-        return Plat::with('categorie')->get();
+        return Plat::where('menu_id',$id)->with('categorie')->paginate(10);
     }
 
-    public function modifierPlat($id,$data)
+    public function modifierPlat($id, $data)
     {
         $plat = Plat::find($id);
-        if ($plat) {
-            $plat->update($data);
-            return $plat;
+    
+        if (!$plat) {
+            return null;
         }
-        return null;
+    
+        if (isset($data['image']) && $data['image'] ) {
+            $path = $data['image']->store('Plate', 'public');
+            $data['image'] = str_replace('public/', '', $path);
+        } else {
+            unset($data['image']);
+        }
+    
+        $plat->update();
+    
+        if (isset($data['ingredients'])) {
+            $plat->ingrediant()->sync($data['ingredients']);
+        }
+    
+        return $plat;
     }
+    
 
     public function supprimerPlat($id)
     {

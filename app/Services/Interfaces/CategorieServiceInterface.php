@@ -9,6 +9,6 @@ interface CategorieServiceInterface
     public function getAllCategories();
     public function getCategoryById($id);
     public function createCategory( $data);
-    public function updateCategory(Categorie $category,  $data);
+    public function updateCategory( $id,  $data);
     public function deleteCategory(Categorie $category);
 }

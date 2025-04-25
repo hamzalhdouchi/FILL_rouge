@@ -70,4 +70,19 @@ class CommandeController extends Controller
         $facture = $this->commandeService->getCommendById($restaurant_id, $table_id);
         return $facture;
     }
-}
+
+    public function getAllByRestaurantId($restaurant_id)
+    {
+        $commandes = $this->commandeService->getAllCommandes($restaurant_id);
+        return $commandes;
+    }
+
+    public function deleteCommande($id)
+    {
+        
+            $comment = $this->commandeService->deleteCommande($id);
+            return $comment;
+        
+        }
+    }
+

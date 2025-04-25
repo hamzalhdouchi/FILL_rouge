@@ -11,7 +11,7 @@ class plateUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,8 +22,12 @@ class plateUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nom' => 'string|max:255',
-            'prix' => 'numeric',
+            'nom_plat' => 'sometimes|required|string|max:255',
+            'desciption' => 'sometimes|required|string|max:500',
+            'prix' => 'sometimes|required|numeric|min:0',
+            'temps_Preparation' => 'sometimes|required|integer|min:1',
+            // 'disponible' => 'sometimes|required|boolean',
+            'image' => 'sometimes|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 }
