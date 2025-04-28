@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Repositories\StatistiqueRepositoryInterface;
+use App\RepositoryInterfaces\StatistiqueRepositoryInterface;
 
 class StatistiqueService implements StatistiqueServiceInterface
 {

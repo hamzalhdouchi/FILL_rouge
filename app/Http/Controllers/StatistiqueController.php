@@ -2,76 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\StatistiqueServiceInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class StatistiqueController extends Controller
 {
+    protected $statistiqueService;
+
+    public function __construct(StatistiqueServiceInterface $statistiqueService)
+    {
+        $this->statistiqueService = $statistiqueService;
+    }
+
     public function totalUsers()
     {
-        $total = DB::table('users')->count();
-
         return response()->json([
-            'total_users' => $total,
+            'total_users' => $this->statistiqueService->totalUsers()
         ]);
     }
 
     public function newUsersToday()
     {
-        $today = Carbon::today();
-
-        $newToday = DB::table('users')
-            ->whereDate('dateCreation', $today)
-            ->count();
-
         return response()->json([
-            'new_users_today' => $newToday,
+            'new_users_today' => $this->statistiqueService->newUsersToday()
         ]);
     }
-
-
 
     public function totalAcceptedRestaurants()
     {
-        $accepted = DB::table('restaurants')
-            ->where('status', 'accepted')
-            ->count();
-
         return response()->json([
-            'total_accepted_restaurants' => $accepted,
+            'total_accepted_restaurants' => $this->statistiqueService->totalAcceptedRestaurants()
         ]);
     }
 
-    // 🔵 Nombre total de restaurants refusés
     public function totalRejectedRestaurants()
     {
-        $rejected = DB::table('restaurants')
-            ->where('status', 'rejected')
-            ->count();
-
         return response()->json([
-            'total_rejected_restaurants' => $rejected,
+            'total_rejected_restaurants' => $this->statistiqueService->totalRejectedRestaurants()
         ]);
     }
 
     public function totalReservations()
-{
-    $total = DB::table('reservations')->count();
+    {
+        return response()->json([
+            'total_reservations' => $this->statistiqueService->totalReservations()
+        ]);
+    }
 
-    return response()->json([
-        'total_reservations' => $total,
-    ]);
-
-}
-
-public function totalPrixCommandes()
-{
-    $totalPrix = DB::table('commandes')->sum('prixTotal');
-
-    return response()->json([
-        'total_prix_commandes' => $totalPrix,
-    ]);
-}
-
+    public function totalPrixCommandes()
+    {
+        return response()->json([
+            'total_prix_commandes' => $this->statistiqueService->totalPrixCommandes()
+        ]);
+    }
 }
