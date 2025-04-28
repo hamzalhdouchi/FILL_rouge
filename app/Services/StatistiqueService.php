@@ -3,7 +3,8 @@
 namespace App\Services;
 
 use App\RepositoryInterfaces\StatistiqueRepositoryInterface;
-
+use App\Services\Interfaces\StatistiqueServiceInterface;
+use Carbon\Carbon;
 class StatistiqueService implements StatistiqueServiceInterface
 {
     protected $repository;
@@ -33,13 +34,25 @@ class StatistiqueService implements StatistiqueServiceInterface
         return $this->repository->getTotalRejectedRestaurants();
     }
 
-    public function totalReservations()
+    public function totalReservations($id)
     {
-        return $this->repository->getTotalReservations();
+        return $this->repository->getTotalReservations($id);
     }
 
-    public function totalPrixCommandes()
+    public function totalPrixCommandes($id)
     {
-        return $this->repository->getTotalPrixCommandes();
+        return $this->repository->getTotalPrixCommandes($id);
+    }
+
+    
+    public function totalPlat($id)
+    {
+        return $this->repository->getTotalPlats($id);
+    }
+
+    public function totalCommande($id): int
+    {
+        return $this->repository->getTotalCommandes($id);
     }
 }
+

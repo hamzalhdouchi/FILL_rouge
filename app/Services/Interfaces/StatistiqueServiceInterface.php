@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Interfaces;
 
 interface StatistiqueServiceInterface
 {
@@ -8,6 +8,9 @@ interface StatistiqueServiceInterface
     public function newUsersToday();
     public function totalAcceptedRestaurants();
     public function totalRejectedRestaurants();
-    public function totalReservations();
-    public function totalPrixCommandes();
+    public function totalReservations($id);
+    public function totalPrixCommandes($id);
+    public function totalPlat($id);
+    public function totalCommande($id);
+
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\StatistiqueServiceInterface;
+use App\Services\Interfaces\StatistiqueServiceInterface;
 use Illuminate\Http\Request;
 
 class StatistiqueController extends Controller
@@ -42,17 +42,36 @@ class StatistiqueController extends Controller
         ]);
     }
 
-    public function totalReservations()
+    public function totalReservations($id)
     {
         return response()->json([
-            'total_reservations' => $this->statistiqueService->totalReservations()
+            'total_reservations' => $this->statistiqueService->totalReservations($id)
         ]);
     }
 
-    public function totalPrixCommandes()
+    public function totalPrixCommandes($id)
     {
         return response()->json([
-            'total_prix_commandes' => $this->statistiqueService->totalPrixCommandes()
+            'total_prix_commandes' => $this->statistiqueService->totalPrixCommandes($id)
         ]);
     }
+
+    public function totalPlat($id)
+    {
+        $total = $this->statistiqueService->totalPlat($id);
+
+        return response()->json([
+            'total' => $total
+        ]);
+    }
+
+    public function totalCommande($id)
+    {
+        $total = $this->statistiqueService->totalCommande($id);
+
+        return response()->json([
+            'total' => $total
+        ]);
+    }
+
 }

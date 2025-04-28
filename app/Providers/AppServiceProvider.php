@@ -10,6 +10,7 @@ use App\Repositories\PaiementRepository;
 use App\Repositories\PlatRepository;
 use App\Repositories\ReservationRepository;
 use App\Repositories\RestaurantRepository;
+use App\Repositories\StatistiqueRepository;
 use App\Repositories\TableRepository;
 use App\RepositoryInterfaces\CategorieRepositoryInterface;
 use App\RepositoryInterfaces\CommandeRepositoryInterface;
@@ -21,6 +22,7 @@ use App\RepositoryInterfaces\ReservationRepositoryInterface;
 use App\RepositoryInterfaces\RestaurantRepositoryInterface;
 use App\RepositoryInterfaces\PaiementRepositoryInterface;
 use App\RepositoryInterfaces\PlatRepositoryInterface;
+use App\RepositoryInterfaces\StatistiqueRepositoryInterface;
 use App\RepositoryInterfaces\TableReposetoryInterface;
 use App\RepositoryInterfaces\UserRepositoryInterface;
 use App\Repositories\UserRepository;
@@ -44,6 +46,8 @@ use App\Services\PaiementService;
 use App\Services\PlatService;
 use App\Services\ReservationService;
 use App\Services\RestaurantService;
+use App\Services\StatistiqueService;
+use App\Services\StatistiqueServiceInterface;
 use App\Services\TableService;
 use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
@@ -89,7 +93,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind( ReservationRepositoryInterface::class,ReservationRepository::class);
         $this->app->bind(ReservationServiceInterface::class,ReservationService::class);
 
-
+        $this->app->bind(\App\Services\Interfaces\StatistiqueServiceInterface::class, StatistiqueService::class);
+        $this->app->bind(StatistiqueRepositoryInterface::class, StatistiqueRepository::class);
         }
 
 

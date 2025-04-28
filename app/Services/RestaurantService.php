@@ -27,6 +27,17 @@ class RestaurantService implements RestaurantServiceInterface
         return response()->json(['message' => 'Liste des restaurants récupérée avec succès.','data' => $restaurants], 200);
     }
 
+    public function getAllRes()
+    {
+        $restaurants = $this->restaurantRepository->getAllAccepted();
+
+        if (!$restaurants || $restaurants->isEmpty()) {
+            return response()->json(['message' => 'Aucun restaurant trouvé.'], 404);
+        }
+
+        return response()->json(['message' => 'Liste des restaurants récupérée avec succès.','data' => $restaurants], 200);
+    }
+
     public function getRestaurantById($id)
     {
         $restaurant = $this->restaurantRepository->getById($id);

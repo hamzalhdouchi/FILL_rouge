@@ -10,4 +10,5 @@ interface RestaurantRepositoryInterface
     public function update( $data, $id);
     public function delete($id); 
     public function getReById($id);
+    public function getAllAccepted();
 }

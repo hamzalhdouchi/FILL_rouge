@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Paiement;
+use App\Models\Reservation;
+use App\Models\Restaurant;
 use App\RepositoryInterfaces\PaiementRepositoryInterface;
 use App\Services\Interfaces\PaiementServiceInterface;
 use Omnipay\Omnipay;
@@ -69,8 +71,9 @@ class PaiementService implements PaiementServiceInterface
 
         $payment = $this->paiementRepository->create($paymentData);
 
-        if (Auth::check()) {
-            Auth::user()->notify(new PaymentFactureNotification($payment));
+        $restaurant = Restaurant::with('user')->find($restaurant_id);
+        if($restaurant->user){
+            $restaurant->user->notify(new PaymentFactureNotification($payment));
         }
         if ($table_id == null) {
             $url =  "http://localhost:3000/Livraisons/{$restaurant_id}"; 

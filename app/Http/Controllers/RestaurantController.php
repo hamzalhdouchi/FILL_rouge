@@ -19,6 +19,11 @@ class RestaurantController extends Controller
         {
             return response()->json($this->restaurantService->getAllRestaurants());
         }
+
+        public function indexAccepted()
+        {
+            return response()->json($this->restaurantService->getAllRes());
+        }
     
         public function show($id)
         {

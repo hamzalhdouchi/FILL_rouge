@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\Models\Commande;
+use App\Models\Plat;
 use App\RepositoryInterfaces\StatistiqueRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -35,13 +37,25 @@ class StatistiqueRepository implements StatistiqueRepositoryInterface
             ->count();
     }
 
-    public function getTotalReservations()
+    public function getTotalReservations($id)
     {
-        return DB::table('reservations')->count();
+        return DB::table('reservations')->where('restaurant_id',$id)->count();
     }
 
-    public function getTotalPrixCommandes()
+    public function getTotalPrixCommandes($id)
     {
-        return DB::table('commandes')->sum('prixTotal');
+        return DB::table('commandes')->where('restaurant_id', $id)->sum('prixTotal');
     }
+
+    public function getTotalPlats($id)
+    {
+        return Plat::where('menu_id', $id)->count();
+    }
+
+    public function getTotalCommandes($id)
+    {
+        return Commande::where('restaurant_id', $id)->count();
+    }
+
+
 }

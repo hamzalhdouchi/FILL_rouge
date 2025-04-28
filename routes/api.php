@@ -9,6 +9,7 @@ use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\PlatController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\StatistiqueController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -91,6 +92,7 @@ Route::prefix('commandes')->group(function () {
 });
 Route::prefix('restaurants')->group(function () {
     Route::get('/', [RestaurantController::class, 'index']);
+    Route::get('/accepted', [RestaurantController::class, 'indexAccepted']);
     Route::get('/{id}', [RestaurantController::class, 'show']);
     Route::post('/', [RestaurantController::class, 'store']);
     Route::put('/{id}', [RestaurantController::class, 'update']);
@@ -133,3 +135,17 @@ Route::prefix('restaurants')->group(function () {
         Route::delete('/tables/{idTable}', [TableController::class, 'destroy']);
         Route::get('/tables-disponibles', [TableController::class, 'availableTables']);
     });
+
+
+    Route::prefix('statistiques')->group(function () {
+        Route::get('/total-users', [StatistiqueController::class, 'totalUsers']);
+        Route::get('/new-users-today', [StatistiqueController::class, 'newUsersToday']);
+        Route::get('/total-accepted-restaurants', [StatistiqueController::class, 'totalAcceptedRestaurants']);
+        Route::get('/total-rejected-restaurants', [StatistiqueController::class, 'totalRejectedRestaurants']);
+        Route::get('/total-reservations/{id}', [StatistiqueController::class, 'totalReservations']);
+        Route::get('/total-prix-commandes/{id}', [StatistiqueController::class, 'totalPrixCommandes']);
+        Route::get('/total-plat/{id}', [StatistiqueController::class, 'totalPlat']);
+        Route::get('/commandes/{id}', [StatistiqueController::class, 'totalCommande']);
+
+    });
+

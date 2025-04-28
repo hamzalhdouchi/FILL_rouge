@@ -10,8 +10,13 @@ class RestaurantRepository implements RestaurantRepositoryInterface
 {
     public function getAll()
     {
-        $status = 'accepted';
-        return Restaurant::where('status', $status)->paginate(9); 
+        
+        return Restaurant::paginate(9); 
+    }
+    public function getAllAccepted()
+    {
+        $statut = "accepted";
+        return Restaurant::where('status', $statut)->paginate(9); 
     }
 
     public function getById($id)
