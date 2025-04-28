@@ -15,5 +15,6 @@ interface CommandeRepositoryInterface
     public function getCommendById($restaurant_id, $table_id);
     public function getAllByRestaurantId($restaurant_id);
     public function delet($id);
+    public function changeAction($id, $data);
 
 }

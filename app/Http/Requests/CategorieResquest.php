@@ -25,6 +25,7 @@ class CategorieResquest extends FormRequest
         return [
             'mon_categorie' => 'required|string|max:255',
             'description' => 'required|string|max:1000',
+            'menu_id' => 'required|exists:menus,id',
         ];
     }
 

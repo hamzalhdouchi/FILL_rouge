@@ -146,4 +146,30 @@ class CommandeService implements CommandeServiceInterface
             'message' => 'Commande supprimée avec succès',
         ]);
     }
+
+    public function All()
+    {
+        $commande = Commande::all();
+        if (!$commande) {
+            return response()->json(['message' => 'Commande non trouvée'], 404);
+        }
+
+        return response()->json([
+            'message' => 'Commande récupérée avec succès',
+            'commande' => $commande
+        ]);
+    }
+
+    public function changeAction($id_commande, $data)
+    {
+        $commande = $this->commandeRepository->changeAction($id_commande, $data);
+        if (!$commande) {
+            return response()->json(['message' => 'Commande non trouvée'], 404);
+        }
+
+        return response()->json([
+            'message' => 'Action changée avec succès',
+            'commande' => $commande
+        ]);
+    }
 }

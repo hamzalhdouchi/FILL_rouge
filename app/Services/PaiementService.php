@@ -72,7 +72,11 @@ class PaiementService implements PaiementServiceInterface
         if (Auth::check()) {
             Auth::user()->notify(new PaymentFactureNotification($payment));
         }
-        $url =  "http://localhost:3000/commandes/{$restaurant_id}/table/{$table_id}";
+        if ($table_id == null) {
+            $url =  "http://localhost:3000/Livraisons/{$restaurant_id}"; 
+        }else {
+            $url =  "http://localhost:3000/commandes/{$restaurant_id}/table/{$table_id}";
+        }
         
         return redirect()->to($url)->with('success', 'Paiement réussi');
     }

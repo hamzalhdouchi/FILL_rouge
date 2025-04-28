@@ -11,9 +11,10 @@ class ReservationRepository implements ReservationRepositoryInterface
         return Reservation::where('restaurant_id', $id_Restaurant)->get();
     }
 
-    public function find($id)
+    public function find()
     {
-        return Reservation::findOrFail($id);
+        $status = 'livraison';
+        return Reservation::where('CommandStatus', $status)->get();
     }
 
     public function UserReservatuion($id)
@@ -40,9 +41,13 @@ class ReservationRepository implements ReservationRepositoryInterface
         return $reservation->delete();
     }
 
+    public function findById($id)
+    {
+        return Reservation::findOrFail($id);
+    } 
     public function updateStatus($id, $status)
     {
-        $reservation = $this->find($id);
+        $reservation = $this->findById($id);
         $reservation['status'] = $status;
         $reservation->save();
         return $reservation;

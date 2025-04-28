@@ -6,7 +6,7 @@ use App\Models\Categorie;
 
 interface CategorieRepositoryInterface
 {
-    public function getAll();
+    public function getAll($id);
     public function findById($id);
     public function create( $data);
     public function update( $id,  $data);

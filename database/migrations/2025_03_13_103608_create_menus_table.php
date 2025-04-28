@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); 
             $table->string('name_Menu');
             $table->boolean('isActif')->default(true);
-            $table->foreignId('restaurant_id')->constrained('restaurants');
+            $table->foreignId('restaurant_id')->constrained('restaurants')->onDelete('cascade');
             $table->timestamps();
         });
     }

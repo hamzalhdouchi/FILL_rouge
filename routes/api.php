@@ -39,19 +39,19 @@ Route::prefix('livreur')->group(function () {
 });
 
     Route::middleware('auth:sanctum')->group( function () {
-        Route::get('/profile/{id}', [UserController::class, 'showProfile']);
-        Route::delete('/User/{id}', [UserController::class, 'deleteUser']);
-        Route::put('/User/{id}/change-status', [UserController::class, 'changeStatus']);
-        Route::put('/User/{id}/update-profile', [UserController::class, 'updateProfile']);
-        Route::get('/User', [UserController::class, 'index']);
-
-    // Route::post('/forgot-password', [UserController::class, 'sendResetLink']);
-    Route::post('/reset-password', [UserController::class, 'resetPassword']);
-
-    
-    
-    
-});
+        
+        // Route::post('/forgot-password', [UserController::class, 'sendResetLink']);
+        Route::post('/reset-password', [UserController::class, 'resetPassword']);
+        
+        
+        
+        
+    });
+    Route::get('/profile/{id}', [UserController::class, 'showProfile']);
+    Route::delete('/User/{id}', [UserController::class, 'destroy']);
+    Route::put('/User/{id}/change-status', [UserController::class, 'changeStatus']);
+    Route::put('/User/{id}/update-profile', [UserController::class, 'updateProfile']);
+    Route::get('/User', [UserController::class, 'index']);
 
     Route::prefix('plats')->group(function ()  {
         Route::post('/', [PlatController::class, 'store']);
@@ -77,7 +77,7 @@ Route::prefix('payment')->group(function () {
 });
 Route::prefix('commandes')->group(function () {
     Route::post('/', [CommandeController::class, 'store']); 
-    // Route::get('/{id}', [CommandeController::class, 'index']); 
+    Route::get('/', [CommandeController::class, 'show']); 
     Route::get('/restaurant/{restaurant_id}', [CommandeController::class, 'getAllByRestaurantId']);
     Route::put('/{id}', [CommandeController::class, 'annulerCommande']); 
     Route::post('/evaluer/{id}', [CommandeController::class, 'evaluerService']); 
@@ -87,6 +87,7 @@ Route::prefix('commandes')->group(function () {
     Route::get('/facture/{id}', [CommandeController::class, 'genererFacture']);
     Route::get('/restaurant/{restaurant_id}/table/{table_id}', [CommandeController::class, 'GetCommands']);
     Route::delete('/{id}', [CommandeController::class, 'deleteCommande']);
+    Route::delete('/{id}/change_action', [CommandeController::class, 'deleteCommande']);
 });
 Route::prefix('restaurants')->group(function () {
     Route::get('/', [RestaurantController::class, 'index']);
@@ -98,14 +99,14 @@ Route::prefix('restaurants')->group(function () {
     Route::put('/{id}/reject', [RestaurantController::class, 'reject']);
 });
 
-    Route::prefix('reservations/')->name('reservations.')->group(function () {
-        Route::put('{id}/status', [ReservationController::class, 'updateStatus']);
+    Route::prefix('reservations')->name('reservations.')->group(function () {
+        Route::put('/{id}/status', [ReservationController::class, 'updateStatus']);
         Route::get('/{id_Restaurant}', [ReservationController::class, 'index']);
-        Route::get('{id}', [ReservationController::class, 'show']);
+        Route::get('/', [ReservationController::class, 'show']);
         Route::get('/user/{id}', [ReservationController::class, 'reservationUser']);
         Route::post('/', [ReservationController::class, 'store']);
-        Route::put('{id}', [ReservationController::class, 'update']);
-        Route::delete('{id}/restaurant/{id_restaurant}', [ReservationController::class, 'destroy']);
+        Route::put('/{id}', [ReservationController::class, 'update']);
+        Route::delete('/{id}/restaurant/{id_restaurant}', [ReservationController::class, 'destroy']);
         
     });
 
@@ -118,9 +119,8 @@ Route::prefix('restaurants')->group(function () {
     });
 
     Route::prefix( 'categories')->group(function () {
-        Route::get('/', [CategorieController::class, 'index']);
+        Route::get('/{id}', [CategorieController::class, 'index']);
         Route::post('/', [CategorieController::class, 'store']);
-        Route::get('/{id}', [CategorieController::class, 'show']);
         Route::put('/{id}', [CategorieController::class, 'update']);
         Route::delete('/{category}', [CategorieController::class, 'destroy']);
     });

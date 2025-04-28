@@ -10,12 +10,12 @@ class Restaurant extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nom_Restaurant', 'adresse', 'telephone', 'notation', 'statut', 'zone_Livraison', 'directeur','image'
+        'nom_Restaurant', 'adresse', 'telephone', 'notation', 'statut', 'zone_Livraison','image', 'user_created_id'
     ];
 
     public function User()
     {
-        return $this->belongsTo(User::class, 'user_create_id');
+        return $this->belongsTo(User::class, 'user_created_id');
     }
 
     public function Menu()

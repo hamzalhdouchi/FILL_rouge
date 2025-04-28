@@ -28,6 +28,12 @@ class CommandeController extends Controller
         return $commandes;
     }
 
+    public function show()
+    {
+        $commande = $this->commandeService->All();
+        return $commande;
+    }
+
     public function annulerCommande($id)
     {
         $annulerCommande = $this->commandeService->annulerCommande($id);
@@ -84,5 +90,15 @@ class CommandeController extends Controller
             return $comment;
         
         }
+
+    public function changeAction($id_commande, Request $request)
+    {
+
+        $commandes = $this->commandeService->changeAction($id_commande, $request);
+        return response()->json([
+            'message' => 'Les commandes sont récupérées avec succès',
+        ], 200);
     }
+
+}
 

@@ -15,9 +15,9 @@ class CategorieService implements CategorieServiceInterface
         $this->categorieRepository = $categorieRepository;
     }
 
-    public function getAllCategories()
+    public function getAllCategories($id)
     {
-        return $this->categorieRepository->getAll();
+        return $this->categorieRepository->getAll($id);
     }
 
     public function getCategoryById($id)

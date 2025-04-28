@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum('status', ['accepted', 'rejected','En Attent'])->default('En Attent');
             $table->string('image');
             $table->string('zone_Livraison');
+            $table->foreignId( 'user_created_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

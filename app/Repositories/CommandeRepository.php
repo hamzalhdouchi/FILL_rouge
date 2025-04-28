@@ -65,7 +65,7 @@ class CommandeRepository implements CommandeRepositoryInterface
     
         $commande->plats()->sync($plats);
 
-        $totalPrice = Plat::whereIn('id', $plats)->sum('price');
+        $totalPrice = Plat::whereIn('id', $plats->id)->sum('price');
 
         $commande->update(['total_price' => $totalPrice]);
     
@@ -105,5 +105,11 @@ class CommandeRepository implements CommandeRepositoryInterface
         $commande = Commande::findOrFail($id);
         $commande->delete();
     }
-
+    public function changeAction($id, $data)
+    {
+        $commande = Commande::findOrFail($id);
+        $commande->action = !$data['action'];
+        $commande->save();
+        return $commande;
+    }
 }

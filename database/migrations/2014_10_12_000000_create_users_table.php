@@ -10,21 +10,21 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up()
-    {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('nom_utilisateur');
-            $table->string('prenom');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->string('telephone')->nullable();
-            $table->dateTime('dateCreation')->useCurrent();
-            $table->enum('statut', ['actif', 'inactif'])->default('actif');
-            $table->foreignId('role_id')->constrained('roles');
-            $table->string('vehicule')->nullable();
-            $table->string('zone')->nullable();
-            $table->timestamps();
-        });
+        {
+            Schema::create('users', function (Blueprint $table) {
+                $table->id();
+                $table->string('nom_utilisateur');
+                $table->string('prenom');
+                $table->string('email')->unique();
+                $table->string('password');
+                $table->string('telephone')->nullable();
+                $table->dateTime('dateCreation')->useCurrent();
+                $table->enum('statut', ['actif', 'inactif'])->default('actif');
+                $table->foreignId('role_id')->constrained('roles');
+                $table->string('vehicule')->nullable();
+                $table->string('zone')->nullable();
+                $table->timestamps();
+            });
     }
 
     /**

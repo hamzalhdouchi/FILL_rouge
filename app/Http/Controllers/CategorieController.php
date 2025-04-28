@@ -16,9 +16,9 @@ class CategorieController extends Controller
         $this->categorieService = $categorieService;
     }
 
-    public function index()
+    public function index($id)
     {
-        $categories = $this->categorieService->getAllCategories();
+        $categories = $this->categorieService->getAllCategories($id);
         return response()->json($categories);
     }
 

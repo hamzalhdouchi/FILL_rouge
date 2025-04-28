@@ -24,6 +24,7 @@ class RestaurantFactory extends Factory
             'status' => fake()->randomElement(['accepted', 'rejected', 'En Attent']),
             'image' => 'restaurants/' . fake()->image(storage_path('app/public/restaurants'), 640, 480, 'food', false),
             'zone_Livraison' => fake()->city(),
+            'user_created_id' => \App\Models\User::factory()->create()->id,
         ];
     }
 }

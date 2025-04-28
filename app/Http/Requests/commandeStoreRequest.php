@@ -28,6 +28,6 @@ class commandeStoreRequest extends FormRequest
             'prixTotal' => 'nullable|numeric|min:0',
             'table_number' => 'nullable|integer|min:0',
             'restaurant_id' => 'required|exists:restaurants,id',
-        ];
+            ];
     }
 }

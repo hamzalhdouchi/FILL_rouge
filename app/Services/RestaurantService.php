@@ -73,7 +73,7 @@ class RestaurantService implements RestaurantServiceInterface
 
     public function acceptRestaurant($id)
     {
-        $restaurant = $this->restaurantRepository->getById($id);
+        $restaurant = $this->restaurantRepository->getReById($id);
 
         if (!$restaurant) {
             return response()->json(['message' => 'Restaurant introuvable.'], 404);
@@ -81,7 +81,6 @@ class RestaurantService implements RestaurantServiceInterface
 
         $restaurant->status = 'accepted';
         $restaurant->save();
-
         if ($restaurant->user) {
             $restaurant->user->notify(new RestaurantStatusNotification($restaurant, 'accepté'));
         }
@@ -91,15 +90,13 @@ class RestaurantService implements RestaurantServiceInterface
 
     public function rejectRestaurant($id)
     {
-        $restaurant = $this->restaurantRepository->getById($id);
-
+        $restaurant = $this->restaurantRepository->getReById($id);
         if (!$restaurant) {
             return response()->json(['message' => 'Restaurant introuvable.'], 404);
         }
 
         $restaurant->status = 'rejected';
         $restaurant->save();
-
         if ($restaurant->user) {
             $restaurant->user->notify(new RestaurantStatusNotification($restaurant, 'refusé'));
         }

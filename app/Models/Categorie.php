@@ -12,13 +12,12 @@ class Categorie extends Model
     protected $fillable = [
         'mon_categorie',
         'description',
-        'image',
-        'order'
+        'menu_id'
     ];
 
     public function menu()
     {
-        return $this->belongsToMany(Menu::class,'categoriemenu','id_menu','id_categorie');
+        return $this->belongsTo(Menu::class,'categoriemenu','id_menu','id_categorie');
     }
 
     public function plat()

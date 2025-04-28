@@ -25,9 +25,9 @@ class ReservationService implements ReservationServiceInterface
     }
     
 
-    public function getById($id)
+    public function getById()
     {
-        $reservation = $this->reservationRepository->find($id);
+        $reservation = $this->reservationRepository->find();
         return response()->json([
             'success' => true,
             'message' => 'Réservation récupérée avec succès.',

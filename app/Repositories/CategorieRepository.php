@@ -7,9 +7,9 @@ use App\RepositoryInterfaces\CategorieRepositoryInterface;
 
 class CategorieRepository implements CategorieRepositoryInterface
 {
-    public function getAll()
+    public function getAll($id)
     {
-        return Categorie::with('plat')->get();
+        return Categorie::with('plat')->where('menu_id', $id)->get();
     }
 
     public function findById($id)

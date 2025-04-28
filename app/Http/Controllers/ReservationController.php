@@ -23,9 +23,9 @@ class ReservationController extends Controller
     }
   
 
-    public function show($id)
+    public function show()
     {
-        return $this->reservationService->getById($id);
+        return $this->reservationService->getById();
     }
 
     public function store(ReservationResquest $request)

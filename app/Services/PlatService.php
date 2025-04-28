@@ -32,7 +32,7 @@ class PlatService implements PlatServiceInterface
         return response()->json(['message' => 'Plats récupérés avec succès!', 'data' => $plats],200) ;
     }
 
-    public function modifierPlat($id,  $data)
+    public function modifierPlat($id,array  $data)
     {
         $plat = $this->platRepository->modifierPlat($id, $data);
         if (!$plat) {

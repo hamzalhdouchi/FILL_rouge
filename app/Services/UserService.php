@@ -36,17 +36,22 @@ class UserService implements UserServiceInterface
     public function updateProfile($request, $id)
     {
         $user = $this->userRepository->find($id);
-
-        if ($request->has('last_password') && !Hash::check($request->last_password, $user->password)) {
-            return response()->json(['message' => 'The current password is incorrect.'], 400);
+    
+        if ($request->has('last_password') && !Hash::check($request['last_password'], $user->password)) {
+            return response()->json(['message' => 'The current password is incorrect.'], 404);
         }
 
         if ($request->has('new_password')) {
-            if (Hash::check($request->new_password, $user->password)) {
-                return response()->json(['message' => 'New password cannot be the same as the current password.'], 400);
+            if (Hash::check($request['new_password'], $user->password)) {
+                return response()->json(['message' => 'New password cannot be the same as the current password.'], 404);
             }
-            $user->password = Hash::make($request->new_password);
+            
+            $user->password = Hash::make($request['new_password']);
         }
+        $user->nom_utilisateur = $request['nom_utilisateur'];
+        $user->prenom = $request['prenom'];
+        $user->email = $request['email'];
+        $user->telephone = $request['telephone'];
 
         $user->save();
 
@@ -99,24 +104,25 @@ class UserService implements UserServiceInterface
         return response()->json(['message' => 'Password has been reset successfully.']);
     }
 
+
     public function login($data)
     {
-
-    
-        
         $user = $this->userRepository->findByEmail($data['email']);
-     
-
+        
         if (!$user || !Hash::check($data['password'], $user->password)) {
-            return abort(500, 'Invalid login attempt');;
+            return abort(500, 'Invalid login attempt');
         }
-    
+        
+        $user_id = $user->id;
+        $restaurant = Restaurant::with('menu')->where('user_created_id', $user_id)->first(); // Utilisation de first() pour récupérer un seul restaurant
+        
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return [
             'message' => 'Login successful',
-             'token' => $token,
-            'user' => $user
+            'token' => $token,
+            'user' => $user,
+            'restaurant' => $restaurant
         ];
     }
 

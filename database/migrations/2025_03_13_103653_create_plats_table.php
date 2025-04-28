@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('temps_Preparation');
             $table->boolean('disponible')->default(1);
             $table->string('image');
-            $table->foreignId('categorie_id')->constrained('categories');
-            $table->foreignId('menu_id')->constrained('menus');
+            $table->foreignId('categorie_id')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('menu_id')->constrained('menus')->onDelete('cascade');
             $table->timestamps();
         });
     }

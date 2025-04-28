@@ -19,7 +19,7 @@ class Reservation extends Model
         'special_requests',
         'preorder_check',
         'restaurant_id',
-        'user_id'
+        'user_id',
     ];
 
 

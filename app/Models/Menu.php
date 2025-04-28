@@ -21,7 +21,7 @@ class Menu extends Model
 
     public function categorie()
     {
-        return $this->belongsToMany(Categorie::class,'catehoriemenu','id_categorie','id_menu');
+        return $this->belongsTo(Categorie::class,'catehoriemenu','id_categorie','id_menu');
     }
 
     public function Plate()

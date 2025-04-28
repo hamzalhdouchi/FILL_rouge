@@ -18,5 +18,9 @@ interface CommandeServiceInterface
     
     public function deleteCommande($id);
 
+    public function All();
+
+    public function changeAction($id,$data);
+
 
 }

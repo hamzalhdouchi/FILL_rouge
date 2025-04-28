@@ -22,8 +22,13 @@ class platupdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nom' => 'string|max:255',
-            'prix' => 'numeric',
+            'nom_plat' => 'sometimes|string|max:255',
+            'desciption' => 'sometimes|string',
+            'prix' => 'sometimes|numeric',
+            'categorie_id' => 'sometimes|exists:categories,id',
+            'temps_Preparation' => 'sometimes|string|max:255',
+            'menu_id' => 'sometimes|exists:menus,id',
+            'image' => 'sometimes|image|max:2048',
         ];
     }
 }
