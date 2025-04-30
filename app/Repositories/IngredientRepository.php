@@ -14,14 +14,15 @@ class IngredientRepository implements IngredientRepositoryInterface
                 'nom_ingredient' => $ingredient['nom_ingredient'],
                 'stock' => $ingredient['stock'],
                 'unite_mesure' => $ingredient['unite_mesure'],
+                'restaurants_id' => $ingredient['restaurants_id']
             ]);
         }
         return response()->json(['message' => 'Ingrédients enregistrés avec succès !'], 201);
 }
 
-    public function afficherIngredient()
+    public function afficherIngredient($id)
     {
-        return Ingredient::all();
+        return Ingredient::where('restaurants_id', $id)->get();
     }
 
     public function modifierIngredient($id,  $data)

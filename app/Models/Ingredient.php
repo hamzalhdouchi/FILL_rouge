@@ -13,11 +13,17 @@ class Ingredient extends Model
         'nom_ingredient',  
         'stock',
         'unite_mesure',
-        'plate_id'
+        'plate_id',
+        'restaurants_id'
     ];
 
         public function plate()
         {
             return $this->belongsToMany(Plat::class, 'ingredient_plate');
+        }
+
+        public function restaurants()
+        {
+            return $this->belongsTo(Restaurant::class);
         }
 }

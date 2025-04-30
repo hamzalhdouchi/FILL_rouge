@@ -31,7 +31,6 @@ class PlatController extends Controller
 
     public function update(plateUpdateRequest $request, $id)
     {
-        dd($request);
         $plate = $request->validated();
         $response = $this->platService->modifierPlat($id, $plate);
         return response()->json($response);

@@ -32,3 +32,4 @@ class platupdateRequest extends FormRequest
         ];
     }
 }
+

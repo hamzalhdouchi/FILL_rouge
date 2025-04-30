@@ -57,14 +57,14 @@ Route::prefix('livreur')->group(function () {
     Route::prefix('plats')->group(function ()  {
         Route::post('/', [PlatController::class, 'store']);
         Route::get('/', [PlatController::class, 'index']);
-        Route::put('/{id}', [PlatController::class, 'update']);
+        Route::post('/{id}', [PlatController::class, 'update']);
         Route::delete('/{id}', [PlatController::class, 'destroy']);
         Route::put('/{id}/disponibilite', [PlatController::class, 'changerDisponibilite']);
     });
 
     Route::prefix('ingredients')->group(function ()  {
         Route::post('/', [IngredientController::class, 'store']);
-        Route::get('/', [IngredientController::class, 'index']);
+        Route::get('/{id}/res', [IngredientController::class, 'index']);
         Route::get('/{id}', [IngredientController::class, 'verifierDisponibilite']);
         Route::put('/{id}', [IngredientController::class, 'update']);
         Route::delete('/{id}', [IngredientController::class, 'destroy']);
@@ -88,7 +88,8 @@ Route::prefix('commandes')->group(function () {
     Route::get('/facture/{id}', [CommandeController::class, 'genererFacture']);
     Route::get('/restaurant/{restaurant_id}/table/{table_id}', [CommandeController::class, 'GetCommands']);
     Route::delete('/{id}', [CommandeController::class, 'deleteCommande']);
-    Route::delete('/{id}/change_action', [CommandeController::class, 'deleteCommande']);
+    Route::put('/{id}/change_action', [CommandeController::class, 'deleteCommande']);
+    Route::put('/{id}/assign-livreur', [CommandeController::class, 'assignLivreur']);
 });
 Route::prefix('restaurants')->group(function () {
     Route::get('/', [RestaurantController::class, 'index']);

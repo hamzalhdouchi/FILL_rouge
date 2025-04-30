@@ -24,9 +24,9 @@ class IngredientController extends Controller
         return $ingredient;
     }
 
-    public function index()
+    public function index($id)
     {
-        $ingredient = $this->ingredientservice->afficherIngredient();
+        $ingredient = $this->ingredientservice->afficherIngredient($id);
         return $ingredient;
     }
 

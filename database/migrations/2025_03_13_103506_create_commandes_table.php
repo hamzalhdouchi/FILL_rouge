@@ -22,7 +22,7 @@ return new class extends Migration
             $table->double('evaluation')->nullable();
             $table->double('prixTotal', 8, 2)->nullable();
             $table->integer('table_number')->nullable();
-            $table->foreignId('restaurant_id')->constrained('restaurants');
+            $table->foreignId('restaurant_id')->constrained('restaurants')->onDelete('cascade');
             $table->foreignId('livreur_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });

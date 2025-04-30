@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('qrCode')->nullable(); 
             $table->integer('capacite'); 
             $table->enum('statut', ['libre', 'occupee', 'reservee']); 
-            $table->foreignId('restaurant_id')->constrained('restaurants');
+            $table->foreignId('restaurant_id')->constrained('restaurants')->onDelete('cascade');
             
             $table->timestamps();
         });

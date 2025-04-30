@@ -172,4 +172,8 @@ class CommandeService implements CommandeServiceInterface
             'commande' => $commande
         ]);
     }
+    public function assignLivreur($data, $id)
+    {
+        return $this->commandeRepository->assignLivreur($data, $id);
+    }
 }

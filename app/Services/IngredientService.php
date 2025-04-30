@@ -20,9 +20,9 @@ class IngredientService implements IngredientServiceInterface
         return  $ingredient;
     }
 
-    public function afficherIngredient()
+    public function afficherIngredient($id)
     {
-        return $this->ingredientRepository->afficherIngredient();
+        return $this->ingredientRepository->afficherIngredient($id);
     }
 
     public function modifierIngredient($id, $data)

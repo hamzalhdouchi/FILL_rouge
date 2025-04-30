@@ -72,6 +72,15 @@ class CommandeRepository implements CommandeRepositoryInterface
         return response()->json(['message' => 'Commande updated successfully', 'commande' => $commande]);
     }
 
+    public function assignLivreur($data,  $id)
+    {
+        $commande = Commande::findOrFail($id);
+        $commande->livreur_id = $data;
+        $commande->save();
+
+        return $commande;
+    }
+
     public function delete($id)
     {
         $commande = Commande::findOrFail($id);

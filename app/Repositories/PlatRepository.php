@@ -38,11 +38,9 @@ class PlatRepository implements PlatRepositoryInterface
         return Plat::where('menu_id',$id)->with('categorie')->paginate(10);
     }
 
-    public function modifierPlat($id, array $data)
+    public function modifierPlat($id,  $data)
     {
-        dd($data);
         $plat = Plat::find($id);
-
         if (!$plat) {
             return null;
         }

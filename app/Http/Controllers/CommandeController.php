@@ -100,5 +100,16 @@ class CommandeController extends Controller
         ], 200);
     }
 
+    public function assignLivreur(Request $request, $id)
+{
+    $livreur_id = $request['livreur_id'];
+
+    $commande = $this->commandeService->assignLivreur($livreur_id, $id);id: 
+
+    return response()->json([
+        'message' => 'Livreur assigné avec succès',
+        'commande' => $commande
+    ]);
+}
 }
 
