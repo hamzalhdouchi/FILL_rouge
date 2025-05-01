@@ -164,7 +164,12 @@ const CommandDash = () => {
   );
 };
 
-export default CommandDash;
-};
+const Footer = () => (
+    <footer className="bg-white border-t border-wood-200 py-4 px-6 text-center text-wood-600 text-sm">
+      <p>© 2025 Serve Quick. Tous droits réservés.</p>
+    </footer>
+  );
+  
+  export default Footer;};
 
 export default DashboardRestaurant;
