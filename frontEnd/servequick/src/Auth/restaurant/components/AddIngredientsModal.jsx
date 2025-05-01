@@ -116,6 +116,12 @@ const AddIngredientsModal = ({ closeModal, fetchdata }) => {
     }
   }, [formState.ingredients, validateForm, closeModal]);
   
+  const hasError = (field, index) => {
+    const isTouched = formState.touched[`${field}-${index}`];
+    const value = formState.ingredients[index][field];
+    return isTouched && validateField(field, value, index);
+  };
+  
 
   return (
     
