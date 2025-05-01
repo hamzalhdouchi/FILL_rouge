@@ -128,4 +128,10 @@ const Login = ({ isLoading, setIsLoading }) => {
                     }, 1200);
                   }
                 }
-          
+            } catch (err) {
+                console.error("Erreur de connexion :", err);
+                Swal.fire({
+                  icon: "error",
+                  title: "Erreur de connexion",
+                  text: err.response?.data?.message || "Email ou mot de passe incorrect",
+                });
