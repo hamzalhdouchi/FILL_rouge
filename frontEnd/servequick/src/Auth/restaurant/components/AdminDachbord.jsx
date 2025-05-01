@@ -80,4 +80,9 @@ const BonAppetitDashboard = () => {
               )}
             </div>
           </header>
-    
+          <main className="p-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <StatCard icon={<FaChartLine />} title="Commandes totales" value={stats?.total_orders || 0} />
+          <StatCard icon={<FaShoppingCart />} title="Commandes livrées" value={stats?.delivered_orders || 0} />
+          <StatCard icon={<FaStore />} title="Clients uniques" value={stats?.unique_clients || 0} />
+        </div>
