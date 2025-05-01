@@ -142,4 +142,25 @@ const TABLE_STATUSES = [
               </div>
             </div>
           )}
+          <div>
+            <label htmlFor="numeroDeTable" className="block text-sm font-medium text-gray-700 mb-1">
+              Numéro de Table *
+            </label>
+            <input
+              type="number"
+              id="numeroDeTable"
+              name="numeroDeTable"
+              value={formState.numeroDeTable}
+              onChange={handleChange}
+              disabled={formState.isLoading || isEditMode}
+              className={`...`}
+              aria-invalid={!!hasError('numeroDeTable')}
+              aria-describedby={hasError('numeroDeTable') ? 'error-numeroDeTable' : undefined}
+            />
+            {hasError('numeroDeTable') && (
+              <p id="error-numeroDeTable" className="mt-1 text-sm text-red-600">
+                {hasError('numeroDeTable')}
+              </p>
+            )}
+          </div>
 
