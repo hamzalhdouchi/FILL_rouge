@@ -120,5 +120,46 @@ const StatCard = ({ title, value, icon, color, trend }) => (
           return matchSearch && matchStatut;
         });
       }, [commandes, search, filtreStatut]);
+      const handleChangeStatut = async () => {
+        try {
+          await axios.put(`http://localhost:8000/api/commandes/statut/${selectedCommande.id}`, {
+            statut: newStatut,
+          });
+          Swal.fire("Succès", "Le statut a été mis à jour", "success");
+          setShowStatusModal(false);
+          fetchCommandes();
+        } catch (error) {
+          console.error(error);
+          Swal.fire("Erreur", "Une erreur est survenue", "error");
+        }
+      };
+    
+      const handleDeleteCommande = async (id) => {
+        const result = await Swal.fire({
+          title: "Êtes-vous sûr ?",
+          text: "Cette action est irréversible",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Supprimer",
+          cancelButtonText: "Annuler",
+        });
+    
+        if (result.isConfirmed) {
+          try {
+            await axios.delete(`http://localhost:8000/api/commandes/${id}`);
+            Swal.fire("Succès", "La commande a été supprimée", "success");
+            fetchCommandes();
+          } catch (error) {
+            console.error(error);
+            Swal.fire("Erreur", "Une erreur est survenue", "error");
+          }
+        }
+      };
+    
+      const openStatusModal = (commande) => {
+        setSelectedCommande(commande);
+        setNewStatut(commande.statut);
+        setShowStatusModal(true);
+      };
     
 );
