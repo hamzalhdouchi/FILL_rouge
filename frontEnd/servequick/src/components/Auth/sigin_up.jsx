@@ -29,6 +29,10 @@ const Register = () => {
   <option value="livreur">Livreur</option>
 </select>
 
+{formData.role === "restaurateur" && (
+  <textarea name="description" placeholder="Description du restaurant" />
+)}
+
       </div>
     </div>
   );
