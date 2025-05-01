@@ -39,4 +39,17 @@ export default function CreatePlatModal({ closeModal, selectedPlat, fetchPlats }
       setForm(prev => ({ ...prev, [name]: value }));
     }
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    Object.entries(form).forEach(([key, value]) => {
+      if (key === 'ingredients') {
+        value.forEach(id => formData.append('ingredients[]', id));
+      } else {
+        formData.append(key, value);
+      }
+    });
+
+    setIsLoading(true);
 
