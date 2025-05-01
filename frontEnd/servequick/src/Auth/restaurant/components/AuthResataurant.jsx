@@ -31,3 +31,47 @@ const AuthPage = () => {
             </div>
           </div>
         </div>
+
+        <div className="flex-1 flex flex-col justify-center items-center p-6 md:p-12">
+          <div className="w-full max-w-md">
+            <div className="flex justify-center mb-8">
+              <div className="w-28 h-28 rounded-full bg-gradient-to-br from-wood-500 to-wood-700 flex items-center justify-center shadow-lg shadow-wood-200">
+                <i className="bx bx-restaurant text-5xl text-white"></i>
+              </div>
+            </div>
+            
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold tracking-tight text-wood-900">Welcome back</h2>
+              <p className="mt-2 text-wood-700">
+                Sign in to your account or create a new one
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-2xl shadow-xl shadow-wood-100 p-8 mb-8 border border-wood-200">
+              <div className="w-full mb-8">
+                <div className="grid w-full grid-cols-2 gap-4">
+                  <button
+                    onClick={() => setActiveTab("login")}
+                    className={`py-2.5 px-4 font-medium rounded-lg ${
+                      activeTab === "login" ? "bg-wood-600 text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }`}
+                  >
+                    Login
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("signup")}
+                    className={`py-2.5 px-4 font-medium rounded-lg ${
+                      activeTab === "signup" ? "bg-wood-600 text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }`}
+                  >
+                    Sign Up
+                  </button>
+                </div>
+              </div>
+
+              {activeTab === "login" ? (
+                <Login isLoading={isLoading} setIsLoading={setIsLoading} />
+              ) : (
+                <Register isLoading={isLoading} setIsLoading={setIsLoading} />
+              )}
+            </div>
