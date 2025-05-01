@@ -135,3 +135,7 @@ const Login = ({ isLoading, setIsLoading }) => {
                   title: "Erreur de connexion",
                   text: err.response?.data?.message || "Email ou mot de passe incorrect",
                 });
+            } finally {
+                setIsLoading(false);
+              }
+            };
