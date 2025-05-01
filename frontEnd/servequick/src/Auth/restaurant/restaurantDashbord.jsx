@@ -95,8 +95,31 @@ const DashboardRestaurant = () => {
         </>
       );
     };
+    // Dans le main content
+<section className="mb-8">
+  <h3 className="text-xl font-bold text-wood-800 mb-4">Aperçu</h3>
+  
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    {/* Carte Commandes */}
+    <div className="bg-white rounded-xl shadow-md p-6 border border-wood-100">
+      <div className="flex items-center justify-between mb-4">
+        <h4 className="font-medium text-wood-700">Commandes Totales</h4>
+        <div className="w-12 h-12 rounded-full bg-olive-100 flex items-center justify-center">
+          <i className='bx bxs-receipt text-2xl text-olive-600'></i>
+        </div>
+      </div>
+      <p className="text-3xl font-bold text-wood-900 mb-1">1,248</p>
+      <div className="flex items-center text-sm">
+        <span className="text-green-500 flex items-center">
+          <i className='bx bx-up-arrow-alt'></i> 15.3%
+        </span>
+        <span className="text-wood-500 ml-2">Depuis le mois dernier</span>
+      </div>
+    </div>
     
-    export default MobileSidebar;
+    {/* 3 autres cartes similaires */}
+  </div>
+</section>
   );
 };
 
