@@ -15,6 +15,21 @@ const ReservationsPage = () => {
             setUser(JSON.parse(storedUser));
         }
     }, []);
+    const fetchReservations = () => {
+        axios.get(`/api/reservations?userId=${user.id}`)
+            .then(response => {
+                setReservations(response.data);
+            })
+            .catch(error => {
+                console.error('Erreur de récupération des réservations:', error);
+            });
+    };
+    
+    useEffect(() => {
+        if (user) {
+            fetchReservations();
+        }
+    }, [user, activeTab]);
     
     return (
         <div>
