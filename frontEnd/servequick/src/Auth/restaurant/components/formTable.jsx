@@ -76,3 +76,15 @@ const TABLE_STATUSES = [
             idTable: initialData.id
           })
         : await axios.post(`http://localhost:8000/api/restaurants/${restaurant_id}/tables`, tableData);
+        await Swal.fire({
+            title: "Succès!",
+            text: response.data.message || 
+                 (isEditMode ? "Table mise à jour" : "Table créée") + " avec succès",
+            icon: "success",
+            timer: 2000,
+            showConfirmButton: false
+          });
+    
+          fetchTables();
+          closeModal();
+    
