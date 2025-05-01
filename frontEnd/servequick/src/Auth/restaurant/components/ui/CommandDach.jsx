@@ -99,5 +99,14 @@ const StatCard = ({ title, value, icon, color, trend }) => (
           console.error("Erreur lors de la récupération des statistiques:", error);
         }
       }, [restaurant.id]);
+      useEffect(() => {
+        const token = sessionStorage.getItem('token');
+        if (token) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        }
+    
+        fetchCommandes();
+        fetchStats();
+      }, [fetchCommandes, fetchStats]);
     
 );
