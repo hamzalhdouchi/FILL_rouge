@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const navigate = useNavigate();
+import axios from "axios";
+
 const Register = () => {
     const [formData, setFormData] = useState({
         name: "",
@@ -18,6 +20,38 @@ const Register = () => {
     const handleChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+          const form = new FormData();
+          Object.keys(formData).forEach((key) => {
+            if (formData[key]) form.append(key, formData[key]);
+          });
+          await axios.post("/api/register", form);
+          Swal.fire("Succès", "Inscription réussie !", "success");
+          setFormData({
+            name: "",
+            email: "",
+            password: "",
+            password_confirmation: "",
+            phone: "",
+            address: "",
+            role: "user",
+            description: "",
+            file: null,
+          });
+          navigate("/login");
+        } catch (error) {
+          if (error.response?.status === 422) {
+            setErrors(error.response.data.errors);
+          } else {
+            Swal.fire("Erreur", "Une erreur est survenue.", "error");
+          }
+        } finally {
+          setLoading(false);
+        }
+      };
     <button type="submit">S'inscrire</button>
     const handleFileChange = (e) => {
       setFormData({ ...formData, file: e.target.files[0] });
