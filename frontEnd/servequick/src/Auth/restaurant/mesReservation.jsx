@@ -129,7 +129,19 @@ return (
             ))}
         </div>
     </div>
-);
+);const Modal = ({ isOpen, onClose, onSubmit, reservation }) => {
+    if (!isOpen) return null;
+
+    return (
+        <div>
+            <div>
+                {/* Formulaire de modification */}
+                <button onClick={() => onSubmit(reservation)}>Modifier</button>
+            </div>
+        </div>
+    );
+};
+
 
 );
 
