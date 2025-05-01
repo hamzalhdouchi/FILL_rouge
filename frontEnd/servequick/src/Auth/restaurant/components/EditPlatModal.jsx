@@ -87,3 +87,17 @@ const EditPlatModal = ({ open, onClose, plat, onUpdate, idPlate, ingredients }) 
       setIsLoading(false);
     }
   };
+  return (
+    open && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div className="bg-white rounded-xl shadow-2xl max-w-xl w-full mx-4 overflow-y-auto max-h-[90vh]">
+          <div className="bg-wood-700 text-white py-4 px-6 sticky top-0">
+            <div className="flex justify-between items-center">
+              <h3 className="text-xl font-bold font-serif">{plat ? 'Modifier le plat' : 'Créer un plat'}</h3>
+              <button onClick={onClose} className="text-white hover:text-wood-200 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
