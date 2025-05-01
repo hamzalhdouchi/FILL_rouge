@@ -38,3 +38,10 @@ const Login = ({ isLoading, setIsLoading }) => {
         const { token, user, message } = response.data;
         const role = user.role_id;
         const user_id = user.id;
+
+        if (role === 2) {
+            const restaurant = response.data.restaurant;
+            const menu = response.data.restaurant.menu;
+            sessionStorage.setItem("menu", JSON.stringify(menu));
+            sessionStorage.setItem("restaurant",JSON.stringify(restaurant));
+          }
