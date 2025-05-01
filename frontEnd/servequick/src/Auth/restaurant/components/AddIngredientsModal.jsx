@@ -49,6 +49,13 @@ const AddIngredientsModal = ({ closeModal, fetchdata }) => {
       ingredients: prev.ingredients.filter((_, i) => i !== index)
     }));
   }, []);
+  const validateField = (field, value, index) => {
+    if (!value.trim()) return 'Ce champ est requis';
+    if (field === 'stock' && isNaN(value)) return 'Doit être un nombre valide';
+    if (field === 'stock' && parseFloat(value) < 0) return 'Doit être positif';
+    return null;
+  };
+  
   
 
   return (
