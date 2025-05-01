@@ -78,4 +78,29 @@ const Login = ({ isLoading, setIsLoading }) => {
                 title: "Erreur de connexion",
                 text: "Votre restaurant est en attente de validation",
               });
-            }
+            } } else if (role === 1) {
+                if (user.statut === 'actif') {
+                  Swal.fire({
+                    icon: "success",
+                    title: message,
+                    text: "Bienvenue sur votre tableau de bord",
+                    timer: 2000,
+                    showConfirmButton: false,
+                  });
+                  const redirectUrl = sessionStorage.getItem("redirect_url");
+                  if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                    sessionStorage.removeItem("redirect_url");
+                  } else {
+                    setTimeout(() => {
+                      window.location.href = '/home';
+                    }, 2500);
+                  }
+      
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title: "Erreur de connexion",
+                    text: "Votre compte est désactivé",
+                  });
+                }
