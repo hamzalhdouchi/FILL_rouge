@@ -15,3 +15,8 @@ const TABLE_STATUSES = [
     error: null,
     touched: {}
   });
+  useEffect(() => {
+    if (formState.error) {
+      setFormState(prev => ({ ...prev, error: null }));
+    }
+  }, [formState.numeroDeTable, formState.capacite, formState.statut]);
