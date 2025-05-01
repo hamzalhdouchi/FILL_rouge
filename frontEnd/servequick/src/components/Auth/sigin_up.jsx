@@ -16,7 +16,9 @@ const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        {/* Form content goes here */}
+      <input type="text" name="name" placeholder="Nom" />
+<input type="email" name="email" placeholder="Email" />
+<input type="password" name="password" placeholder="Mot de passe" />
       </div>
     </div>
   );
