@@ -163,4 +163,26 @@ const TABLE_STATUSES = [
               </p>
             )}
           </div>
+          <div>
+            <label htmlFor="capacite" className="block text-sm font-medium text-gray-700 mb-1">
+              Capacité (personnes) *
+            </label>
+            <input
+              type="number"
+              id="capacite"
+              name="capacite"
+              min="1"
+              value={formState.capacite}
+              onChange={handleChange}
+              disabled={formState.isLoading}
+              className={`...`}
+              aria-invalid={!!hasError('capacite')}
+              aria-describedby={hasError('capacite') ? 'error-capacite' : undefined}
+            />
+            {hasError('capacite') && (
+              <p id="error-capacite" className="mt-1 text-sm text-red-600">
+                {hasError('capacite')}
+              </p>
+            )}
+          </div>
 
