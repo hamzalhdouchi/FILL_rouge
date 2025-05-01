@@ -74,4 +74,17 @@ export default function CreatePlatModal({ closeModal, selectedPlat, fetchPlats }
   
         closeModal();
         fetchPlats();
+
+    } catch (error) {
+        setError(error.response?.data?.message || error.message);
+        Swal.fire({
+          title: "Erreur",
+          text: error.response?.data?.message || "Une erreur est survenue.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
   
