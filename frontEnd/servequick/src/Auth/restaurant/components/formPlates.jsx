@@ -7,3 +7,8 @@ export default function CreatePlatModal({ closeModal, selectedPlat, fetchPlats }
   const [ingredients, setIngredients] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const menu = JSON.parse(sessionStorage.getItem('menu'));
+  const menu_id = menu[0].id;
+
+  const restaurants = JSON.parse(sessionStorage.getItem('restaurant'));
+  const res_id = restaurants.id;
