@@ -3,3 +3,15 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const Login = ({ isLoading, setIsLoading }) => {
+
+    const message = sessionStorage.getItem("message") ;
+  if(message){
+    Swal.fire({
+      icon: "error",
+      title: message,
+      text: "Veuillez vous connecter à votre compte",
+      timer: 2000,
+      showConfirmButton: false,
+    });
+    sessionStorage.removeItem("message");
+  }
