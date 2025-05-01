@@ -120,6 +120,29 @@ const DashboardRestaurant = () => {
     {/* 3 autres cartes similaires */}
   </div>
 </section>
+const Header = () => (
+    <header className="bg-white shadow-md border-b border-wood-200 sticky top-0 z-10">
+      <div className="flex justify-between items-center px-6 py-4">
+        <div className="flex items-center space-x-3">
+          <h2 className="text-xl font-bold text-wood-800">Tableau de Bord</h2>
+        </div>
+        
+        <div className="flex items-center space-x-4">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Rechercher..."
+              className="pl-10 pr-4 py-2 rounded-lg border border-wood-200 focus:outline-none focus:ring-2 focus:ring-wood-500"
+            />
+            <i className='bx bx-search absolute left-3 top-2.5 text-wood-400'></i>
+          </div>
+          
+          {/* Notifications et profil */}
+        </div>
+      </div>
+    </header>
+  );
+  
   );
 };
 
