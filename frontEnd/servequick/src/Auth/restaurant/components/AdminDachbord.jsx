@@ -47,4 +47,17 @@ const BonAppetitDashboard = () => {
           console.error("Erreur lors de la récupération des statistiques :", error);
         }
       };
+      const prepareChartData = (monthlyOrders) => {
+        const months = Object.keys(monthlyOrders);
+        const orders = Object.values(monthlyOrders);
+    
+        const chartOptions = {
+          chart: { id: "orders-chart" },
+          xaxis: { categories: months },
+        };
+    
+        const chartSeries = [{ name: "Commandes", data: orders }];
+    
+        setChartData({ series: chartSeries, options: chartOptions });
+      };
     
