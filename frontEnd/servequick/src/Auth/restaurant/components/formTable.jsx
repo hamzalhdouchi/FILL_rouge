@@ -50,3 +50,23 @@ const TABLE_STATUSES = [
     setFormState(prev => ({ ...prev, touched: newTouched }));
     return errors.length === 0 ? true : errors.join('\n');
   }, [formState.numeroDeTable, formState.capacite, formState.statut]);
+  const handleSubmit = useCallback(async (e) => {
+    e.preventDefault();
+    
+    const validationResult = validateForm();
+    if (validationResult !== true) {
+      setFormState(prev => ({ ...prev, error: validationResult }));
+      return;
+    }
+
+    try {
+      setFormState(prev => ({ ...prev, isLoading: true, error: null }));
+      
+      const restaurant = JSON.parse(sessionStorage.getItem('restaurant'));
+      const restaurant_id = restaurant.id;
+      const tableData = {
+        numeroDeTable: formState.numeroDeTable,
+        capacite: Number(formState.capacite),
+        statut: formState.statut,
+        restaurant_id
+      };
