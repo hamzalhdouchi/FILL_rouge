@@ -55,6 +55,21 @@ const AddIngredientsModal = ({ closeModal, fetchdata }) => {
     if (field === 'stock' && parseFloat(value) < 0) return 'Doit être positif';
     return null;
   };
+  const validateForm = useCallback(() => {
+    const errors = [];
+    const newTouched = {};
+  
+    formState.ingredients.forEach((ing, index) => {
+      ['nom_ingredient', 'stock', 'unite_mesure'].forEach(field => {
+        newTouched[`${field}-${index}`] = true;
+        const error = validateField(field, ing[field], index);
+        if (error) errors.push(`Ingrédient #${index + 1}: ${error}`);
+      });
+    });
+  
+    setFormState(prev => ({ ...prev, touched: newTouched }));
+    return errors.length === 0 ? true : errors.join('\n');
+  }, [formState.ingredients]);
   
   
 
