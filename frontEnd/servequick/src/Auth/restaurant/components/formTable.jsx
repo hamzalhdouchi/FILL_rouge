@@ -70,3 +70,9 @@ const TABLE_STATUSES = [
         statut: formState.statut,
         restaurant_id
       };
+      const response = isEditMode 
+        ? await axios.put(`http://localhost:8000/api/restaurants/${restaurant_id}/tables`, {
+            ...tableData,
+            idTable: initialData.id
+          })
+        : await axios.post(`http://localhost:8000/api/restaurants/${restaurant_id}/tables`, tableData);
