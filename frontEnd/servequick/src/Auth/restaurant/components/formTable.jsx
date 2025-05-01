@@ -127,4 +127,19 @@ const TABLE_STATUSES = [
             </button>
           </div>
         </div>
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          {formState.error && (
+            <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-4">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <svg className="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="..." clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm text-red-700 whitespace-pre-line">{formState.error}</p>
+                </div>
+              </div>
+            </div>
+          )}
 
