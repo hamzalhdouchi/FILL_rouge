@@ -13,7 +13,17 @@ const BonAppetitCategories = () => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   }
   
-  // ... (other code)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+// Dans le JSX
+<button 
+  id="mobile-menu-button" 
+  className="md:hidden text-wood-800"
+  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+>
+  <i className='bx bx-menu text-2xl'></i>
+</button>
+
 };
 
 export default BonAppetitCategories;
