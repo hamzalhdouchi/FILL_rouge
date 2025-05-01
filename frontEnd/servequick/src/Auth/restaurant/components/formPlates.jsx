@@ -107,4 +107,32 @@ export default function CreatePlatModal({ closeModal, selectedPlat, fetchPlats }
                   {error}
                 </div>
               )}
-    
+              <input ... />
+          <textarea ... />
+          <select ... />
+          {/* autres champs */}
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={`w-full py-3 px-4 bg-gradient-to-r from-wood-600 to-wood-700 text-white font-medium rounded-lg transition-all ${
+              isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:from-wood-700 hover:to-wood-800'
+            }`}
+          >
+            {isLoading ? (
+              <span className="flex items-center justify-center">
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                </svg>
+                Chargement...
+              </span>
+            ) : (
+              selectedPlat ? 'Modifier le plat' : 'Créer le plat'
+            )}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
