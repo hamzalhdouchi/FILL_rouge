@@ -18,3 +18,9 @@ export default function Contact() {
     e.preventDefault()
     console.log("Contact form submitted:", formData)
   }
+  return (
+    <section id="contact" className="py-16 bg-white">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl md:text-4xl font-serif font-bold text-center mb-12">Contactez-nous</h2>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
