@@ -99,3 +99,15 @@ const AuthPage = () => {
                 <i className="bx bxl-facebook text-xl mr-2 text-blue-600"></i> Facebook
               </button>
             </div>
+
+            <div className="mt-8 text-center text-wood-500 text-sm">
+              <p>© 2025 Serve Quick. All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AuthPage;
