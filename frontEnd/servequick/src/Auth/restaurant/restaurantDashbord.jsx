@@ -144,6 +144,27 @@ const Header = () => (
   );
   
   );
+  // CommandDash.js
+import React from 'react';
+
+const CommandDash = () => {
+  return (
+    <section id="commandes" className="mb-8">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-xl font-bold text-wood-800">Gestion des Commandes</h3>
+        <button className="bg-wood-600 hover:bg-wood-700 text-white px-4 py-2 rounded-lg flex items-center">
+          <i className='bx bx-plus mr-2'></i> Nouvelle Commande
+        </button>
+      </div>
+      
+      <div className="bg-white rounded-xl shadow-md border border-wood-100 overflow-hidden">
+        {/* Contenu des commandes */}
+      </div>
+    </section>
+  );
+};
+
+export default CommandDash;
 };
 
 export default DashboardRestaurant;
