@@ -56,7 +56,48 @@ const scrollToTop = () => {
   useEffect(() => {
     fetchCategorie();
   }, []);
-  
+  <section 
+  className="py-12 bg-wood-800 text-white" 
+  style={{ backgroundImage: "url('https://www.bestrestaurantsmaroc.com/public/images/image_rs/_head_format/cc1afa81868c6c2465eb1c51a1540769_527_head.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
+>
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center">
+      <h1 className="text-4xl font-bold mb-4">Nos Catégories</h1>
+      <div className="w-20 h-1 bg-wood-400 mx-auto mb-6"></div>
+      <p className="text-wood-200 max-w-2xl mx-auto">Découvrez notre sélection de plats français authentiques, préparés avec passion et des ingrédients frais de saison.</p>
+    </div>
+  </div>
+</section>
+<section className="py-16 bg-wood-50">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    {categories.map((category) => (
+      <div key={category.id} className="mb-16">
+        <div className={`flex flex-col ${category.reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center bg-white rounded-xl shadow-lg overflow-hidden`}>
+          <div className="md:w-1/3 h-64 md:h-auto">
+            <img src={category.image} alt={category.mon_categorie} className="w-full h-full object-cover" />
+          </div>
+          <div className="md:w-2/3 p-8">
+            <h2 className="text-3xl font-bold text-wood-800 mb-4 category-title">{category.mon_categorie}</h2>
+            <div className="w-20 h-1 bg-wood-500 mb-6"></div>
+            <p className="text-wood-700 mb-6">{category.description}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              {category.plat.map((plat) => (
+                <div className="flex items-center">
+                  <i className=" bx-Vins text-wood-600 mr-2"></i>
+                  <span className="text-wood-800">{plat.nom_plat}</span>
+                </div>
+              ))}
+            </div>
+            <a href="#" className="inline-block bg-wood-600 hover:bg-wood-700 text-white px-6 py-3 rounded-lg transition-colors btn-text">Voir les {category.mon_categorie}</a>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<Footer />
+
 };
 
 export default BonAppetitCategories;
