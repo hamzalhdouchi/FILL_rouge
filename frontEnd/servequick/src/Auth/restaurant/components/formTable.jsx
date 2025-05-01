@@ -7,4 +7,11 @@ const TABLE_STATUSES = [
     { value: 'occupee', label: 'Occupée' },
     { value: 'reservee', label: 'Réservée' },
   ];
-  
+  const [formState, setFormState] = useState({
+    numeroDeTable: initialData?.numeroDeTable || '',
+    capacite: initialData?.capacite || 2,
+    statut: initialData?.statut || 'libre',
+    isLoading: false,
+    error: null,
+    touched: {}
+  });
