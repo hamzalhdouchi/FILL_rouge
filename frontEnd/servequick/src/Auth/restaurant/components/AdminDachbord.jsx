@@ -38,4 +38,13 @@ const BonAppetitDashboard = () => {
         sessionStorage.removeItem("user");
         navigate("/login");
       };
+      const fetchStats = async (restaurantId) => {
+        try {
+          const response = await axios.get(`${BASE_URL}/restaurant-stats/${restaurantId}`);
+          setStats(response.data);
+          prepareChartData(response.data.monthly_orders);
+        } catch (error) {
+          console.error("Erreur lors de la récupération des statistiques :", error);
+        }
+      };
     
