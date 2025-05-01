@@ -101,3 +101,10 @@ const EditPlatModal = ({ open, onClose, plat, onUpdate, idPlate, ingredients }) 
               </button>
             </div>
           </div>
+          <form onSubmit={handleSubmit} className="p-6 space-y-4">
+            {error && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                {error}
+              </div>
+            )}
+
