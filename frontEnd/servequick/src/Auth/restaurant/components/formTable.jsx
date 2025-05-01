@@ -185,4 +185,30 @@ const TABLE_STATUSES = [
               </p>
             )}
           </div>
+          <div>
+            <label htmlFor="statut" className="block text-sm font-medium text-gray-700 mb-1">
+              Statut *
+            </label>
+            <select
+              id="statut"
+              name="statut"
+              value={formState.statut}
+              onChange={handleChange}
+              disabled={formState.isLoading}
+              className={`...`}
+              aria-invalid={!!hasError('statut')}
+              aria-describedby={hasError('statut') ? 'error-statut' : undefined}
+            >
+              {TABLE_STATUSES.map(status => (
+                <option key={status.value} value={status.value}>
+                  {status.label}
+                </option>
+              ))}
+            </select>
+            {hasError('statut') && (
+              <p id="error-statut" className="mt-1 text-sm text-red-600">
+                {hasError('statut')}
+              </p>
+            )}
+          </div>
 
