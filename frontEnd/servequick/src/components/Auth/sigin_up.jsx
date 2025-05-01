@@ -59,7 +59,8 @@ const Register = () => {
       setFormData({ ...formData, file: e.target.files[0] });
     };
     
-    
+    {errors.name && <p className="text-red-500 text-sm">{errors.name[0]}</p>}
+
     const handleRoleChange = (e) => {
       const role = e.target.value;
       setFormData({ ...formData, role });
