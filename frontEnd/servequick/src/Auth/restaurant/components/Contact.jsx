@@ -50,3 +50,20 @@ export default function Contact() {
               </button>
             </form>
           </div>
+          <div className="flex flex-col justify-center">
+            <div className="mb-8">
+              <h3 className="text-2xl font-serif font-bold mb-4">Informations de Contact</h3>
+              <p className="text-wood-700 mb-6">
+                N'hésitez pas à nous contacter pour toute question ou suggestion. Notre équipe est à votre disposition
+                pour vous aider.
+              </p>
+
+              <div className="flex items-start mb-4">
+                <Mail className="h-6 w-6 text-wood-700 mr-3 mt-1" />
+                <span className="text-wood-700">contact@gourmettable.fr</span>
+              </div>
+
+              <div className="flex items-start mb-4">
+                <Phone className="h-6 w-6 text-wood-700 mr-3 mt-1" />
+                <span className="text-wood-700">01 23 45 67 89</span>
+              </div>
