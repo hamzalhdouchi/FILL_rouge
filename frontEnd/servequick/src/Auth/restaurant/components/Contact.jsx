@@ -67,3 +67,28 @@ export default function Contact() {
                 <Phone className="h-6 w-6 text-wood-700 mr-3 mt-1" />
                 <span className="text-wood-700">01 23 45 67 89</span>
               </div>
+              <div className="flex items-start">
+                <MapPin className="h-6 w-6 text-wood-700 mr-3 mt-1" />
+                <span className="text-wood-700">
+                  123 Avenue de la Gastronomie
+                  <br />
+                  75001 Paris, France
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-serif font-bold mb-4">Suivez-nous</h3>
+              <div className="flex space-x-4">
+                <a href="#" className="bg-wood-500 hover:bg-wood-600 text-white h-10 w-10 rounded-full flex items-center justify-center transition duration-300">
+                  <Facebook className="h-5 w-5" />
+                </a>
+                <a href="#" className="bg-wood-500 hover:bg-wood-600 text-white h-10 w-10 rounded-full flex items-center justify-center transition duration-300">
+                  <Instagram className="h-5 w-5" />
+                </a>
+                <a href="#" className="bg-wood-500 hover:bg-wood-600 text-white h-10 w-10 rounded-full flex items-center justify-center transition duration-300">
+                  <Twitter className="h-5 w-5" />
+                </a>
+              </div>
+            </div>
+          </div>
