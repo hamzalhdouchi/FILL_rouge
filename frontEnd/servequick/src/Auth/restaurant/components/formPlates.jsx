@@ -22,3 +22,9 @@ export default function CreatePlatModal({ closeModal, selectedPlat, fetchPlats }
     ingredients: selectedPlat ? selectedPlat.ingredients : [],
     menu_id: parseInt(menu_id),
   });
+
+  useEffect(() => {
+    axios.get(`http://localhost:8000/api/categories/${menu_id}`).then(res => setCategories(res.data));
+    axios.get(`http://localhost:8000/api/ingredients/${res_id}/res`).then(res => setIngredients(res.data));
+  }, []);
+
