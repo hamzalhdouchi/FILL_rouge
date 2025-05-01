@@ -86,3 +86,21 @@ const BonAppetitDashboard = () => {
           <StatCard icon={<FaShoppingCart />} title="Commandes livrées" value={stats?.delivered_orders || 0} />
           <StatCard icon={<FaStore />} title="Clients uniques" value={stats?.unique_clients || 0} />
         </div>
+
+        <div className="mt-8">
+          <h2 className="text-xl font-semibold mb-4">Commandes mensuelles</h2>
+          <Chart options={chartData.options} series={chartData.series} type="line" height={350} />
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <DashboardLink icon={<MdRestaurantMenu />} title="Gérer les plats" to="/restaurant/menu" />
+          <DashboardLink icon={<FaShoppingCart />} title="Voir les commandes" to="/restaurant/orders" />
+          <DashboardLink icon={<IoMdStats />} title="Voir les statistiques" to="/restaurant/stats" />
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default BonAppetitDashboard;
+
