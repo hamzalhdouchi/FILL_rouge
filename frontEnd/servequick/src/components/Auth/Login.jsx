@@ -20,3 +20,9 @@ const Login = ({ isLoading, setIsLoading }) => {
     email: "",
     password: "",
   });
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
