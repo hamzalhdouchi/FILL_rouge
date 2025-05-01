@@ -208,3 +208,5 @@ const Login = ({ isLoading, setIsLoading }) => {
                 </form>
               );
             };
+
+            export default Login;
