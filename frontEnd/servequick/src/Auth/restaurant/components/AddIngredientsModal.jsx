@@ -220,6 +220,15 @@ const AddIngredientsModal = ({ closeModal, fetchdata }) => {
     </button>
   )}
 </div>
+<div className="flex justify-end mt-4">
+  <button
+    type="submit"
+    disabled={formState.isLoading}
+    className="px-6 py-2 text-white bg-wood-700 hover:bg-wood-800 focus:ring-4 focus:ring-wood-500 focus:outline-none rounded-lg"
+  >
+    {formState.isLoading ? 'Chargement...' : 'Ajouter les ingrédients'}
+  </button>
+</div>
 
 
   return (
