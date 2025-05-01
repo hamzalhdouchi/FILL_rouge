@@ -14,4 +14,11 @@ const BonAppetitDashboard = () => {
     const [stats, setStats] = useState(null);
     const [chartData, setChartData] = useState({ series: [], options: {} });
     const dropdownRef = useRef(null);
-  
+    useEffect(() => {
+        const userData = JSON.parse(sessionStorage.getItem("user"));
+        if (userData) {
+          setUser(userData);
+          fetchStats(userData.id);
+        }
+      }, []);
+    
