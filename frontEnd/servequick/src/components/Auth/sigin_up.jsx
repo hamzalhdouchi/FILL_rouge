@@ -15,6 +15,8 @@ const Register = () => {
         description: "",
         file: null,
     });
+    const [errors, setErrors] = useState({});
+
     const [loading, setLoading] = useState(false);
     
     const handleChange = (e) => {
