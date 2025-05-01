@@ -138,6 +138,11 @@ const handleChange = (e) => {
       </button>
     </div>
   </form>
+  {errors.username && <p className="text-red-500 text-sm">{errors.username[0]}</p>}
+  {errors.first_name && <p className="text-red-500 text-sm">{errors.first_name[0]}</p>}
+  {errors.email && <p className="text-red-500 text-sm">{errors.email[0]}</p>}
+  {errors.phone && <p className="text-red-500 text-sm">{errors.phone[0]}</p>}
+  {errors.password && <p className="text-red-500 text-sm">{errors.password[0]}</p>}
   
 };
 
