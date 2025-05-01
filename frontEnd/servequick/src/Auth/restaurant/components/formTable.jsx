@@ -104,4 +104,7 @@ const TABLE_STATUSES = [
             setFormState(prev => ({ ...prev, isLoading: false }));
           }
         }, [formState, restaurantId, isEditMode, initialData, validateForm, closeModal, fetchTables]);
-      
+        const hasError = (field) => {
+            return formState.touched[field] && validateField(field, formState[field]);
+          };
+        
