@@ -27,4 +27,16 @@ export default function CreatePlatModal({ closeModal, selectedPlat, fetchPlats }
     axios.get(`http://localhost:8000/api/categories/${menu_id}`).then(res => setCategories(res.data));
     axios.get(`http://localhost:8000/api/ingredients/${res_id}/res`).then(res => setIngredients(res.data));
   }, []);
+  const handleChange = (e) => {
+    const { name, value, type, files } = e.target;
+
+    if (name === 'image') {
+      setForm(prev => ({ ...prev, image: files[0] }));
+    } else if (name === 'ingredients') {
+      const selected = Array.from(e.target.selectedOptions, opt => opt.value);
+      setForm(prev => ({ ...prev, ingredients: selected }));
+    } else {
+      setForm(prev => ({ ...prev, [name]: value }));
+    }
+  };
 
