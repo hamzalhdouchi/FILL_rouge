@@ -51,6 +51,10 @@ const ReservationsPage = () => {
             }
         });
     };
+    const handleModify = (reservation) => {
+        setSelectedReservation(reservation);
+        setModalOpen(true);
+    };
     
     return (
         <div>
