@@ -45,6 +45,12 @@ const handleFileChange = (e) => {
   setFormData({ ...formData, file: e.target.files[0] });
 };
 
+
+const handleRoleChange = (e) => {
+  const role = e.target.value;
+  setFormData({ ...formData, role });
+};
+
       </div>
     </div>
   );
