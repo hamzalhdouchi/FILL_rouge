@@ -142,7 +142,64 @@ const AddIngredientsModal = ({ closeModal, fetchdata }) => {
       </div>
     </div>
   );
-  
+  <form onSubmit={handleFormSubmit} className="p-6 space-y-4 overflow-y-auto max-h-[calc(100vh-200px)]">
+  {formState.ingredients.map((ingredient, index) => (
+    <fieldset key={index} className="grid grid-cols-12 gap-4 items-end border-b border-gray-200 pb-4 mb-4 last:border-0">
+      <div className="col-span-4">
+        <label htmlFor={`nom_ingredient-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Nom *</label>
+        <input
+          type="text"
+          id={`nom_ingredient-${index}`}
+          name="nom_ingredient"
+          value={ingredient.nom_ingredient}
+          onChange={(e) => handleChange(index, e)}
+          disabled={formState.isLoading}
+          className={`w-full px-3 py-2 border rounded-lg focus:ring-wood-500 focus:border-wood-500 ${
+            hasError('nom_ingredient', index) ? 'border-red-500' : 'border-gray-300'
+          } disabled:bg-gray-100`}
+          aria-invalid={!!hasError('nom_ingredient', index)}
+        />
+      </div>
+      
+      <div className="col-span-3">
+        <label htmlFor={`stock-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Stock *</label>
+        <input
+          type="number"
+          id={`stock-${index}`}
+          name="stock"
+          min="0"
+          step="0.01"
+          value={ingredient.stock}
+          onChange={(e) => handleChange(index, e)}
+          disabled={formState.isLoading}
+          className={`w-full px-3 py-2 border rounded-lg focus:ring-wood-500 focus:border-wood-500 ${
+            hasError('stock', index) ? 'border-red-500' : 'border-gray-300'
+          } disabled:bg-gray-100`}
+        />
+      </div>
+
+      <div className="col-span-3">
+        <label htmlFor={`unite_mesure-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Unité *</label>
+        <select
+          id={`unite_mesure-${index}`}
+          name="unite_mesure"
+          value={ingredient.unite_mesure}
+          onChange={(e) => handleChange(index, e)}
+          disabled={formState.isLoading}
+          className={`w-full px-3 py-2 border rounded-lg focus:ring-wood-500 focus:border-wood-500 ${
+            hasError('unite_mesure', index) ? 'border-red-500' : 'border-gray-300'
+          } disabled:bg-gray-100`}
+        >
+          <option value="">Sélectionner</option>
+          {UNITS.map(unit => (
+            <option key={unit.value} value={unit.value}>{unit.label}</option>
+          ))}
+        </select>
+      </div>
+    </fieldset>
+  ))}
+</form>
+
 
   return (
     
