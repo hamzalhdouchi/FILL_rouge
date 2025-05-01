@@ -22,8 +22,40 @@ const AddIngredientsModal = ({ closeModal, fetchdata }) => {
     touched: {}
   });
 
+  const handleChange = useCallback((index, e) => {
+    const { name, value } = e.target;
+    setFormState(prev => {
+      const updatedIngredients = [...prev.ingredients];
+      updatedIngredients[index] = { ...updatedIngredients[index], [name]: value };
+      
+      return {
+        ...prev,
+        ingredients: updatedIngredients,
+        touched: { ...prev.touched, [`${name}-${index}`]: true }
+      };
+    });
+  }, []);
+  
+  const addIngredientField = useCallback(() => {
+    setFormState(prev => ({
+      ...prev,
+      ingredients: [...prev.ingredients, { nom_ingredient: '', stock: '', unite_mesure: '', restaurants_id: res_id }]
+    }));
+  }, []);
+  
+  const removeIngredientField = useCallback((index) => {
+    setFormState(prev => ({
+      ...prev,
+      ingredients: prev.ingredients.filter((_, i) => i !== index)
+    }));
+  }, []);
+  
+
   return (
-    <div>...</div>
+    
+    <div>..
+        
+        .</div>
   );
 };
 
