@@ -75,3 +75,27 @@ const AuthPage = () => {
                 <Register isLoading={isLoading} setIsLoading={setIsLoading} />
               )}
             </div>
+
+            <div className="relative mb-8">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-wood-200"></span>
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-wood-50 px-4 text-wood-500 font-medium">Or continue with</span>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <button
+                type="button"
+                className="flex items-center justify-center py-3 px-4 border border-wood-200 rounded-lg font-medium text-wood-700 hover:bg-wood-50 transition-colors shadow-sm"
+              >
+                <i className="bx bxl-google text-xl mr-2"></i> Google
+              </button>
+              <button
+                type="button"
+                className="flex items-center justify-center py-3 px-4 border border-wood-200 rounded-lg font-medium text-wood-700 hover:bg-wood-50 transition-colors shadow-sm"
+              >
+                <i className="bx bxl-facebook text-xl mr-2 text-blue-600"></i> Facebook
+              </button>
+            </div>
