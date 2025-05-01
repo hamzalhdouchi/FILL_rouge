@@ -60,4 +60,24 @@ const BonAppetitDashboard = () => {
     
         setChartData({ series: chartSeries, options: chartOptions });
       };
+      return (
+        <div className="min-h-screen bg-gray-100">
+          <header className="bg-wood-800 text-white shadow-md py-4 px-6 flex justify-between items-center">
+            <h1 className="text-2xl font-bold">Tableau de bord</h1>
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="focus:outline-none"
+              >
+                {user?.name}
+              </button>
+              {menuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50">
+                  <button onClick={handleLogout} className="block px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-left">
+                    Déconnexion
+                  </button>
+                </div>
+              )}
+            </div>
+          </header>
     
