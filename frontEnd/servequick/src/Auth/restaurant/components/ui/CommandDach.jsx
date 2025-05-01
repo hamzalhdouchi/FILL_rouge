@@ -44,4 +44,25 @@ const StatCard = ({ title, value, icon, color, trend }) => (
       <span className="text-wood-500 ml-2">Depuis le mois dernier</span>
     </div>
   </div>
+  const CommandDash = () => {
+    const [commandes, setCommandes] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState("");
+    const [filtreStatut, setFiltreStatut] = useState("");
+    const [showStatusModal, setShowStatusModal] = useState(false);
+    const [selectedCommande, setSelectedCommande] = useState(null);
+    const [newStatut, setNewStatut] = useState("");
+    const [stats, setStats] = useState({
+      totalPrixCommandes: 0,
+      totalCommandes: 0,
+      totalReservations: 0,
+      totalPlats: 0
+    });
+    const [showProfile, setShowProfile] = useState(false);
+    const [user, setUser] = useState(null);
+  
+    const restaurant = useMemo(() => {
+      return JSON.parse(sessionStorage.getItem('restaurant')) || {};
+    }, []);
+  
 );
