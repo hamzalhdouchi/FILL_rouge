@@ -55,6 +55,22 @@ const ReservationsPage = () => {
         setSelectedReservation(reservation);
         setModalOpen(true);
     };
+    const handleReservationSubmit = (modifiedReservation) => {
+        if (modifiedReservation.date < new Date()) {
+            SweetAlert.fire('Erreur!', 'La date de la réservation doit être dans le futur.', 'error');
+            return;
+        }
+    
+        axios.put(`/api/reservations/${modifiedReservation.id}`, modifiedReservation)
+            .then(() => {
+                setModalOpen(false);
+                fetchReservations();
+                SweetAlert.fire('Modifiée!', 'Votre réservation a été modifiée.', 'success');
+            })
+            .catch(error => {
+                SweetAlert.fire('Erreur!', 'Impossible de modifier la réservation.', 'error');
+            });
+    };
     
     return (
         <div>
