@@ -64,5 +64,40 @@ const StatCard = ({ title, value, icon, color, trend }) => (
     const restaurant = useMemo(() => {
       return JSON.parse(sessionStorage.getItem('restaurant')) || {};
     }, []);
-  
+    const fetchCommandes = useCallback(async () => {
+        setLoading(true);
+        try {
+          const response = await axios.get(`http://localhost:8000/api/commandes/restaurant/${restaurant.id}`);
+          setCommandes(response.data.data);
+        } catch (error) {
+          console.error("Erreur lors du chargement des commandes :", error);
+          Swal.fire("Erreur", "Impossible de charger les commandes", "error");
+        } finally {
+          setLoading(false);
+        }
+      }, [restaurant.id]);
+    
+      const fetchStats = useCallback(async () => {
+        try {
+          const menu = JSON.parse(sessionStorage.getItem('menu')) || [];
+          const menu_id = menu[0]?.id;
+    
+          const [totPxRes, totCRes, totRes, totPlat] = await Promise.all([
+            axios.get(`http://localhost:8000/api/statistiques/total-prix-commandes/${restaurant.id}`),
+            axios.get(`http://localhost:8000/api/statistiques/commandes/${restaurant.id}`),
+            axios.get(`http://localhost:8000/api/statistiques/total-reservations/${restaurant.id}`),
+            menu_id ? axios.get(`http://localhost:8000/api/statistiques/total-plat/${menu_id}`) : { data: 0 }
+          ]);
+    
+          setStats({
+            totalPrixCommandes: totPxRes.data.total_prix_commandes,
+            totalCommandes: totCRes.data.total,
+            totalReservations: totRes.data.total_reservations,
+            totalPlats: totPlat.data.total
+          });
+        } catch (error) {
+          console.error("Erreur lors de la récupération des statistiques:", error);
+        }
+      }, [restaurant.id]);
+    
 );
