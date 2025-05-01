@@ -34,4 +34,8 @@ const BonAppetitDashboard = () => {
           document.removeEventListener("mousedown", handleClickOutside);
         };
       }, []);
+      const handleLogout = () => {
+        sessionStorage.removeItem("user");
+        navigate("/login");
+      };
     
