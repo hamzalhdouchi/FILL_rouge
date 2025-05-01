@@ -45,3 +45,7 @@ const Login = ({ isLoading, setIsLoading }) => {
             sessionStorage.setItem("menu", JSON.stringify(menu));
             sessionStorage.setItem("restaurant",JSON.stringify(restaurant));
           }
+
+          sessionStorage.setItem("token", token);
+          sessionStorage.setItem("role", role);
+          sessionStorage.setItem("user", JSON.stringify(user));
