@@ -15,3 +15,8 @@ const Login = ({ isLoading, setIsLoading }) => {
     });
     sessionStorage.removeItem("message");
   }
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
