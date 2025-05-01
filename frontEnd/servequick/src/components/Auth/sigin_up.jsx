@@ -1,17 +1,32 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+const navigate = useNavigate();
 const Register = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
-    phone: "",
-    address: "",
-    role: "user",
-    description: "",
-    file: null,
-  });
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
+        phone: "",
+        address: "",
+        role: "user",
+        description: "",
+        file: null,
+    });
+    
+    const handleChange = (e) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+    <button type="submit">S'inscrire</button>
+    const handleFileChange = (e) => {
+      setFormData({ ...formData, file: e.target.files[0] });
+    };
+    
+    
+    const handleRoleChange = (e) => {
+      const role = e.target.value;
+      setFormData({ ...formData, role });
+    };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -37,19 +52,6 @@ const Register = () => {
   <input type="file" name="file" />
 )}
 
-const handleChange = (e) => {
-  setFormData({ ...formData, [e.target.name]: e.target.value });
-};
-<button type="submit">S'inscrire</button>
-const handleFileChange = (e) => {
-  setFormData({ ...formData, file: e.target.files[0] });
-};
-
-
-const handleRoleChange = (e) => {
-  const role = e.target.value;
-  setFormData({ ...formData, role });
-};
 
       </div>
     </div>
