@@ -71,6 +71,50 @@ const AddIngredientsModal = ({ closeModal, fetchdata }) => {
     return errors.length === 0 ? true : errors.join('\n');
   }, [formState.ingredients]);
   
+  const handleFormSubmit = useCallback(async (e) => {
+    e.preventDefault();
+    
+    const validationResult = validateForm();
+    if (validationResult !== true) {
+      setFormState(prev => ({ ...prev, error: validationResult }));
+      return;
+    }
+  
+    try {
+      setFormState(prev => ({ ...prev, isLoading: true, error: null }));
+  
+      const response = await axios.post('http://localhost:8000/api/ingredients', 
+        { ingredients: formState.ingredients },
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+  
+      if (response.status === 201) {
+        await Swal.fire({
+          title: "Succès!",
+          text: response.data.message || "Ingrédients ajoutés avec succès",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+  
+        closeModal();
+        fetchdata();
+      }
+    } catch (error) {
+      console.error('Erreur:', error);
+      const errorMessage = error.response?.data?.message || 
+      error.response?.data?.errors?.join('\n') || 
+      "Erreur lors de l'enregistrement";
+  
+      await Swal.fire({
+        title: "Erreur",
+        text: errorMessage,
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    } finally {
+      setFormState(prev => ({ ...prev, isLoading: false }));
+    }
+  }, [formState.ingredients, validateForm, closeModal]);
   
 
   return (
