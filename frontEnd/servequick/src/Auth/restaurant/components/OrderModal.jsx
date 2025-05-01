@@ -29,6 +29,49 @@ const OrderModal = ({
         </div>
       </div>
     </div>
+    <div className="mb-6">
+    <label htmlFor="plateQuantity" className="block text-sm font-medium text-wood-800 mb-2">Quantité</label>
+    <div className="flex items-center">
+      <button 
+        type="button" 
+        onClick={() => handleQuantityChange(-1)}
+        className="w-10 h-10 rounded-full bg-wood-100 text-wood-700 flex items-center justify-center hover:bg-wood-200 transition-colors"
+      >
+        -
+      </button>
+      <input 
+        type="number" 
+        id="plateQuantity" 
+        name="quantity" 
+        value={plateModalState.quantity}
+        onChange={handleplateModalChange}
+        min="1" 
+        max="10" 
+        className="w-12 text-center mx-2 border border-wood-200 rounded-lg py-1 focus:outline-none focus:ring-2 focus:ring-wood-500"
+      />
+      <button 
+        type="button" 
+        onClick={() => handleQuantityChange(1)}
+        className="w-10 h-10 rounded-full bg-wood-100 text-wood-700 flex items-center justify-center hover:bg-wood-200 transition-colors"
+      >
+        +
+      </button>
+    </div>
+  </div>
+  
+  <div className="mb-6">
+    <label htmlFor="plateNotes" className="block text-sm font-medium text-wood-800 mb-2">Notes spéciales</label>
+    <textarea 
+      id="plateNotes" 
+      name="notes" 
+      value={plateModalState.notes}
+      onChange={handleplateModalChange}
+      rows="2" 
+      placeholder="Ex: sans gluten, sans lactose, etc." 
+      className="w-full px-4 py-2 border border-wood-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-wood-500 focus:border-transparent"
+    ></textarea>
+  </div>
+  
   );
 };
 
