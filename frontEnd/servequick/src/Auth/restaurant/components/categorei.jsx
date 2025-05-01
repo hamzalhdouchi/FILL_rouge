@@ -44,6 +44,19 @@ const scrollToTop = () => {
     });
   };
   
+  const fetchCategorie = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8000/api/categories`);
+      setCaegories(response.data);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des catégories :", error);
+    }
+  };
+  
+  useEffect(() => {
+    fetchCategorie();
+  }, []);
+  
 };
 
 export default BonAppetitCategories;
