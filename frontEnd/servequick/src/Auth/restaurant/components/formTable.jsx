@@ -115,5 +115,16 @@ const TABLE_STATUSES = [
                     <h2 className="text-xl font-bold">
                       {isEditMode ? 'Modifier la Table' : 'Ajouter une Table'}
                     </h2>
+                    <button 
+              onClick={closeModal} 
+              className="text-white hover:text-wood-200 transition-colors focus:outline-none"
+              disabled={formState.isLoading}
+              aria-label="Fermer la modal"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
 
-        
