@@ -36,3 +36,17 @@ const TABLE_STATUSES = [
     }
     return null;
   };
+  const validateForm = useCallback(() => {
+    const errors = [];
+    const newTouched = { ...formState.touched };
+
+    ['numeroDeTable', 'capacite', 'statut'].forEach(field => {
+      newTouched[field] = true;
+      const error = validateField(field, formState[field]);
+      if (error) errors.push(`${field === 'numeroDeTable' ? 'Numéro de table' : 
+                            field === 'capacite' ? 'Capacité' : 'Statut'}: ${error}`);
+    });
+
+    setFormState(prev => ({ ...prev, touched: newTouched }));
+    return errors.length === 0 ? true : errors.join('\n');
+  }, [formState.numeroDeTable, formState.capacite, formState.statut]);
