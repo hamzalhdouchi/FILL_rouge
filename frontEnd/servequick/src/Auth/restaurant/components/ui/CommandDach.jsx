@@ -108,5 +108,17 @@ const StatCard = ({ title, value, icon, color, trend }) => (
         fetchCommandes();
         fetchStats();
       }, [fetchCommandes, fetchStats]);
+      const filteredCommandes = useMemo(() => {
+        return commandes.filter((cmd) => {
+          const matchSearch =
+            cmd.id.toString().includes(search) ||
+            (cmd.instructions?.toLowerCase().includes(search.toLowerCase())) ||
+            (cmd.table_number?.toString().includes(search));
+    
+          const matchStatut = !filtreStatut || cmd.statut === filtreStatut;
+    
+          return matchSearch && matchStatut;
+        });
+      }, [commandes, search, filtreStatut]);
     
 );
