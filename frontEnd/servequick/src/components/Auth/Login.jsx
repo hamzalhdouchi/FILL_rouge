@@ -103,4 +103,29 @@ const Login = ({ isLoading, setIsLoading }) => {
                     title: "Erreur de connexion",
                     text: "Votre compte est désactivé",
                   });
+                }} else if (role === 4) {
+                    Swal.fire({
+                      icon: "success",
+                      title: message,
+                      text: "Bienvenue sur votre tableau de bord",
+                      timer: 1000,
+                      showConfirmButton: false,
+                    });
+                    setTimeout(() => {
+                      window.location.href = "/dashboard";
+                    }, 1200);
+          
+                  } else if(role === 3){
+                    Swal.fire({
+                      icon: "success",
+                      title: message,
+                      text: "Bienvenue sur votre tableau de bord",
+                      timer: 1000,
+                      showConfirmButton: false,
+                    });
+                    setTimeout(() => {
+                      window.location.href = "/Livreur";
+                    }, 1200);
+                  }
                 }
+          
