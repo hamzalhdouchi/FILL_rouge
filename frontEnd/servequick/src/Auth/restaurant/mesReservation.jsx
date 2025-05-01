@@ -100,6 +100,19 @@ const handleReview = (reservationId, review) => {
         }
     });
 };
+const handleTabChange = (tab) => {
+    setActiveTab(tab);
+};
+
+return (
+    <div>
+        <div>
+            <button onClick={() => handleTabChange('upcoming')}>À venir</button>
+            <button onClick={() => handleTabChange('past')}>Passées</button>
+            <button onClick={() => handleTabChange('cancelled')}>Annulées</button>
+        </div>
+    </div>
+);
 
     return (
         <div>
