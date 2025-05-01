@@ -23,6 +23,12 @@ const Register = () => {
 <input type="text" name="phone" placeholder="Téléphone" />
 <input type="text" name="address" placeholder="Adresse" />
 
+<select name="role">
+  <option value="user">Utilisateur</option>
+  <option value="restaurateur">Restaurateur</option>
+  <option value="livreur">Livreur</option>
+</select>
+
       </div>
     </div>
   );
