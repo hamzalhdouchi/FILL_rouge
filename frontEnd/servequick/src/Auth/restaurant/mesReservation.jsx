@@ -112,6 +112,25 @@ return (
             <button onClick={() => handleTabChange('cancelled')}>Annulées</button>
         </div>
     </div>
+const filteredReservations = reservations.filter(reservation => {
+    if (activeTab === 'upcoming') return reservation.date >= new Date();
+    if (activeTab === 'past') return reservation.date < new Date();
+    if (activeTab === 'cancelled') return reservation.status === 'cancelled';
+    return true;
+});
+
+return (
+    <div>
+        <div>
+            {filteredReservations.map(reservation => (
+                <div key={reservation.id}>
+                    {/* Affichage des informations de la réservation */}
+                </div>
+            ))}
+        </div>
+    </div>
+);
+
 );
 
     return (
