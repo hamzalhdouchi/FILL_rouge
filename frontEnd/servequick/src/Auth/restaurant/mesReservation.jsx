@@ -71,7 +71,36 @@ const ReservationsPage = () => {
                 SweetAlert.fire('Erreur!', 'Impossible de modifier la réservation.', 'error');
             });
     };
-    
+    const [selectedDishes, setSelectedDishes] = useState([]);
+
+const handleDishSelect = (dish) => {
+    setSelectedDishes([...selectedDishes, dish]);
+};
+
+const removeDishFromSelection = (dishId) => {
+    setSelectedDishes(selectedDishes.filter(dish => dish.id !== dishId));
+};
+
+
+const handleReview = (reservationId, review) => {
+    SweetAlert.fire({
+        title: 'Laissez un avis',
+        input: 'textarea',
+        inputPlaceholder: 'Votre avis...',
+        showCancelButton: true,
+    }).then(result => {
+        if (result.isConfirmed) {
+            axios.post(`/api/reviews`, { reservationId, review: result.value })
+                .then(() => {
+                    SweetAlert.fire('Merci!', 'Votre avis a été ajouté.', 'success');
+                })
+                .catch(error => {
+                    SweetAlert.fire('Erreur!', 'Impossible d\'ajouter l\'avis.', 'error');
+                });
+        }
+    });
+};
+
     return (
         <div>
            
