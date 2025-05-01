@@ -199,6 +199,27 @@ const AddIngredientsModal = ({ closeModal, fetchdata }) => {
     </fieldset>
   ))}
 </form>
+<div className="flex justify-between items-center pt-2">
+  <button
+    type="button"
+    onClick={addIngredientField}
+    disabled={formState.isLoading}
+    className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded text-wood-700 bg-wood-100 hover:bg-wood-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wood-500"
+  >
+    Ajouter un ingrédient
+  </button>
+  
+  {formState.ingredients.length > 1 && (
+    <button
+      type="button"
+      onClick={() => removeIngredientField(formState.ingredients.length - 1)}
+      disabled={formState.isLoading}
+      className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded text-red-600 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+    >
+      Supprimer le dernier ingrédient
+    </button>
+  )}
+</div>
 
 
   return (
