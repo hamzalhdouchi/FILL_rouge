@@ -161,5 +161,40 @@ const StatCard = ({ title, value, icon, color, trend }) => (
         setNewStatut(commande.statut);
         setShowStatusModal(true);
       };
+      return (
+        <div className="bg-wood-50 min-h-screen flex">
+          <div className="bg-wood-50">
+            <div className="min-h-screen flex">
+              <aside className={`w-64 bg-wood-800 text-white fixed h-full z-10  md:block`}>
+                <div className="p-4 border-b border-wood-700">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 rounded-full bg-wood-600 flex items-center justify-center">
+                      <i className="bx bx-restaurant text-xl"></i>
+                    </div>
+                    <div>
+                      <h1 className="font-bold text-lg brand-text">Serve Quick</h1>
+                      <p className="text-xs text-wood-300">Gestion Restaurant</p>
+                    </div>
+                  </div>
+                </div>
+    
+                <nav className="mt-6">
+                  <div className="px-4 mb-2 text-xs uppercase text-wood-400 font-semibold">Principal</div>
+                  <Link to="/commandes" className="flex items-center px-4 py-3 text-wood-300 hover:text-white hover:bg-wood-700 transition-colors">
+                    <i className="bx bxs-receipt text-xl mr-3"></i>
+                    <span>Gestion des Commandes</span>
+                  </Link>
+                  <Link to="/reservations" className="flex items-center px-4 py-3 text-wood-300 hover:text-white hover:bg-wood-700 transition-colors">
+                    <i className="bx bxs-calendar-check text-xl mr-3"></i>
+                    <span>Gestion des Réservations</span>
+                  </Link>
+                  {/* ... suite des liens ... */}
+                </nav>
+              </aside>
+            </div>
+          </div>
+        </div>
+      );
+    };
     
 );
