@@ -20,3 +20,11 @@ const TABLE_STATUSES = [
       setFormState(prev => ({ ...prev, error: null }));
     }
   }, [formState.numeroDeTable, formState.capacite, formState.statut]);
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setFormState(prev => ({
+      ...prev,
+      [name]: value,
+      touched: { ...prev.touched, [name]: true }
+    }));
+  }, []);
