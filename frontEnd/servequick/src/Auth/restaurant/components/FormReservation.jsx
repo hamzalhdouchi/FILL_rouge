@@ -131,3 +131,15 @@ const TableReservationModal = ({
               {/* placeholder for future content if needed */}
             </div>
           </div>
+          <div className="mt-6">
+            <button type="submit" className="w-full font-serif py-3 px-4 bg-gradient-to-r from-wood-600 to-wood-700 text-white font-medium rounded-lg hover:from-wood-700 hover:to-wood-800 transition-all shadow-md hover:shadow-lg">
+              Confirmer la réservation
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default TableReservationModal;
