@@ -37,6 +37,9 @@ const Register = () => {
   <input type="file" name="file" />
 )}
 
+const handleChange = (e) => {
+  setFormData({ ...formData, [e.target.name]: e.target.value });
+};
 <button type="submit">S'inscrire</button>
       </div>
     </div>
