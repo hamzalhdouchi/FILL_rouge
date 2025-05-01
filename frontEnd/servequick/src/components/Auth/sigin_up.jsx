@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const navigate = useNavigate();
 import axios from "axios";
-
+import Swal from "sweetalert2";
 const Register = () => {
     const [formData, setFormData] = useState({
         name: "",
