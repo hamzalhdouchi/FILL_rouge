@@ -39,6 +39,47 @@ const UserProfile = ({ id_user }) => {
   }
 
   return <div className="p-6">Profil utilisateur</div>;
+  // ... code précédent inchangé
+
+const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+  
+  // ... dans le return, remplacer "Profil utilisateur" par :
+  
+  <form>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label className="block text-sm font-medium mb-1">Nom d'utilisateur</label>
+        <input type="text" name="username" value={user.username} onChange={handleChange} className="w-full p-2 border rounded" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-1">Prénom</label>
+        <input type="text" name="first_name" value={user.first_name} onChange={handleChange} className="w-full p-2 border rounded" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-1">Email</label>
+        <input type="email" name="email" value={user.email} onChange={handleChange} className="w-full p-2 border rounded" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-1">Téléphone</label>
+        <input type="tel" name="phone" value={user.phone} onChange={handleChange} className="w-full p-2 border rounded" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-1">Last Password</label>
+        <input type="password" name="last_password" value={user.last_password} onChange={handleChange} className="w-full p-2 border rounded" />
+      </div>
+      <div>
+        <label className="block text-sm font-medium mb-1">Confirmer le mot de passe</label>
+        <input type="password" name="new_password" value={user.new_password} onChange={handleChange} className="w-full p-2 border rounded" />
+      </div>
+    </div>
+  </form>
+  
 };
 
 export default UserProfile;
