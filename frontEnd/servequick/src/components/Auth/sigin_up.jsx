@@ -41,6 +41,10 @@ const handleChange = (e) => {
   setFormData({ ...formData, [e.target.name]: e.target.value });
 };
 <button type="submit">S'inscrire</button>
+const handleFileChange = (e) => {
+  setFormData({ ...formData, file: e.target.files[0] });
+};
+
       </div>
     </div>
   );
