@@ -22,3 +22,16 @@ const BonAppetitDashboard = () => {
         }
       }, []);
     
+      useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setMenuOpen(false);
+          }
+        };
+    
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, []);
+    
