@@ -141,6 +141,23 @@ return (
         </div>
     );
 };
+return (
+    <div>
+        <div>
+            <button onClick={() => handleTabChange('upcoming')}>À venir</button>
+            <button onClick={() => handleTabChange('past')}>Passées</button>
+            <button onClick={() => handleTabChange('cancelled')}>Annulées</button>
+        </div>
+        <div>
+            {filteredReservations.map(reservation => (
+                <div key={reservation.id}>
+                    <button onClick={() => handleModify(reservation)}>Modifier</button>
+                    <button onClick={() => handleCancel(reservation.id)}>Annuler</button>
+                </div>
+            ))}
+        </div>
+    </div>
+);
 
 
 );
