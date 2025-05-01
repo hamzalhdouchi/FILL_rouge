@@ -52,4 +52,26 @@ export default function CreatePlatModal({ closeModal, selectedPlat, fetchPlats }
     });
 
     setIsLoading(true);
-
+    try {
+        let response;
+        if (selectedPlat) {
+          response = await axios.post(`http://localhost:8000/api/plats/${selectedPlat.id}?_method=PUT`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          });
+        } else {
+          response = await axios.post('http://localhost:8000/api/plats', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+          });
+        }
+  
+        Swal.fire({
+          title: "Succès",
+          text: response.data.message || "Plat mis à jour avec succès.",
+          icon: "success",
+          timer: 900,
+          showConfirmButton: false,
+        });
+  
+        closeModal();
+        fetchPlats();
+  
