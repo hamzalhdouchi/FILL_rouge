@@ -107,4 +107,13 @@ const TABLE_STATUSES = [
         const hasError = (field) => {
             return formState.touched[field] && validateField(field, formState[field]);
           };
+          return (
+            <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+              <div className="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden animate-fade-in">
+                <div className="bg-wood-700 text-white py-4 px-6 sticky top-0 z-10">
+                  <div className="flex justify-between items-center">
+                    <h2 className="text-xl font-bold">
+                      {isEditMode ? 'Modifier la Table' : 'Ajouter une Table'}
+                    </h2>
+
         
