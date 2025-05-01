@@ -49,3 +49,33 @@ const Login = ({ isLoading, setIsLoading }) => {
           sessionStorage.setItem("token", token);
           sessionStorage.setItem("role", role);
           sessionStorage.setItem("user", JSON.stringify(user));
+
+          if (role === 2) {
+            const res = await axios.get(`http://localhost:8000/api/restaurants/${user_id}`); 
+            const restaurantData = res.data.original.data;
+  
+            if (restaurantData.status === 'accepted') {
+              sessionStorage.setItem("restaurant", JSON.stringify(restaurantData));
+              Swal.fire({
+                icon: "success",
+                title: message,
+                text: "Bienvenue sur votre tableau de bord",
+                timer: 2000,
+                showConfirmButton: false,
+              });
+              window.location.href = "/commandes";
+  
+            } else if (restaurantData.status === 'rejected') {
+              Swal.fire({
+                icon: "error",
+                title: "Erreur de connexion",
+                text: "Votre restaurant a été refusé",
+              });
+  
+            } else if (restaurantData.status === 'En Attent') {
+              Swal.fire({
+                icon: "error",
+                title: "Erreur de connexion",
+                text: "Votre restaurant est en attente de validation",
+              });
+            }
