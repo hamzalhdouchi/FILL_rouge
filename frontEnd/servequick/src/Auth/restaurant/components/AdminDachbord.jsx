@@ -6,3 +6,12 @@ import { MdRestaurantMenu } from "react-icons/md";
 import { IoMdStats } from "react-icons/io";
 import Chart from "react-apexcharts";
 import BASE_URL from "../apiConfig";
+
+const BonAppetitDashboard = () => {
+    const navigate = useNavigate();
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [user, setUser] = useState(null);
+    const [stats, setStats] = useState(null);
+    const [chartData, setChartData] = useState({ series: [], options: {} });
+    const dropdownRef = useRef(null);
+  
