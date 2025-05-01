@@ -121,6 +121,27 @@ const AddIngredientsModal = ({ closeModal, fetchdata }) => {
     const value = formState.ingredients[index][field];
     return isTouched && validateField(field, value, index);
   };
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden animate-fade-in">
+        <div className="bg-wood-700 text-white py-4 px-6 sticky top-0 z-10">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xl font-bold font-serif">Ajouter des Ingrédients</h2>
+            <button 
+              onClick={closeModal} 
+              className="text-white hover:text-wood-200 transition-colors focus:outline-none"
+              disabled={formState.isLoading}
+              aria-label="Fermer la modal"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
   
 
   return (
