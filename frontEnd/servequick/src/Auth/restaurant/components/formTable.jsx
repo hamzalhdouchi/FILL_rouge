@@ -28,3 +28,11 @@ const TABLE_STATUSES = [
       touched: { ...prev.touched, [name]: true }
     }));
   }, []);
+  const validateField = (field, value) => {
+    if (!value && field !== 'qrCode') return 'Ce champ est requis';
+    if (field === 'numeroDeTable' && !/^\d+$/.test(value)) return 'Doit être un nombre';
+    if (field === 'capacite' && (!Number.isInteger(Number(value)) || value < 1) ){
+      return 'Doit être un nombre entier positif';
+    }
+    return null;
+  };
