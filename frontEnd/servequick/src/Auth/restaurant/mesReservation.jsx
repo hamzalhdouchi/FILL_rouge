@@ -30,6 +30,27 @@ const ReservationsPage = () => {
             fetchReservations();
         }
     }, [user, activeTab]);
+    const handleCancel = (reservationId) => {
+        SweetAlert.fire({
+            title: 'Êtes-vous sûr ?',
+            text: 'Cette réservation sera annulée.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Oui, annuler',
+            cancelButtonText: 'Non, garder',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`/api/reservations/${reservationId}`)
+                    .then(() => {
+                        fetchReservations();
+                        SweetAlert.fire('Annulée!', 'Votre réservation a été annulée.', 'success');
+                    })
+                    .catch(error => {
+                        SweetAlert.fire('Erreur!', 'Impossible d\'annuler la réservation.', 'error');
+                    });
+            }
+        });
+    };
     
     return (
         <div>
