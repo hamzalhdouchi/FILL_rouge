@@ -19,6 +19,8 @@ const Register = () => {
       <input type="text" name="name" placeholder="Nom" />
 <input type="email" name="email" placeholder="Email" />
 <input type="password" name="password" placeholder="Mot de passe" />
+<input type="password" name="password_confirmation" placeholder="Confirmer mot de passe" />
+
       </div>
     </div>
   );
