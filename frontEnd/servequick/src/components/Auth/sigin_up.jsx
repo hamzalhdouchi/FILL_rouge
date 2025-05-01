@@ -37,6 +37,7 @@ const Register = () => {
   <input type="file" name="file" />
 )}
 
+<button type="submit">S'inscrire</button>
       </div>
     </div>
   );
