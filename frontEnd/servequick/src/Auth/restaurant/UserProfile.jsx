@@ -79,6 +79,65 @@ const handleChange = (e) => {
       </div>
     </div>
   </form>
+  import Swal from 'sweetalert2';
+  const [errors, setErrors] = useState({});
+  const [success, setSuccess] = useState(false);
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrors({});
+  
+    try {
+      const updatedUser = {
+        nom_utilisateur: user.username,
+        prenom: user.first_name,
+        email: user.email,
+        telephone: user.phone,
+      };
+  
+      if (user.last_password && user.new_password) {
+        updatedUser.last_password = user.last_password;
+        updatedUser.new_password = user.new_password;
+      }
+  
+      const response = await axios.put(`http://127.0.0.1:8000/api/User/${id_user}/update-profile`, updatedUser);
+  
+      Swal.fire({
+        icon: 'success',
+        title: 'Profil mis à jour avec succès!',
+        text: response.data.message,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+  
+      setTimeout(() => {
+        window.location.reload();
+      }, 1200);
+    } catch (error) {
+      if (error.response) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: error.response.data.message || 'Une erreur est survenue.',
+        });
+        if (error.response.data.errors) {
+          setErrors(error.response.data.errors);
+        } else {
+          setErrors({ general: ['Erreur inconnue.'] });
+        }
+      }
+    }
+  };
+  
+  // ... dans le formulaire
+  <form onSubmit={handleSubmit}>
+    {/* les inputs précédents */}
+    <div className="mt-6">
+      <button type="submit" className="bg-wood-500 hover:bg-wood-600 text-white font-bold py-2 px-6 rounded">
+        Enregistrer
+      </button>
+    </div>
+  </form>
   
 };
 
