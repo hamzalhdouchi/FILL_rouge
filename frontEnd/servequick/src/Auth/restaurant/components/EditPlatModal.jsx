@@ -28,3 +28,20 @@ const EditPlatModal = ({ open, onClose, plat, onUpdate, idPlate, ingredients }) 
       });
     }
   }, [plat]);
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === 'image') {
+      setFormData({ ...formData, image: files[0] });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
+  const validateForm = () => {
+    if (!formData.nom_plat || !formData.prix || !formData.temps_Preparation || !formData.categorie_id) {
+      setError('Tous les champs obligatoires doivent être remplis.');
+      return false;
+    }
+    setError(null);
+    return true;
+  };
