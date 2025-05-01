@@ -40,3 +40,13 @@ export default function Contact() {
                 <label htmlFor="subject" className="text-wood-700 font-medium mb-2 block">Sujet</label>
                 <input type="text" id="subject" value={formData.subject} onChange={handleChange} className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-wood-500" />
               </div>
+              <div className="mb-6">
+                <label htmlFor="message" className="text-wood-700 font-medium mb-2 block">Message</label>
+                <textarea id="message" rows="5" value={formData.message} onChange={handleChange} className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-wood-500" />
+              </div>
+
+              <button type="submit" className="w-full bg-wood-700 hover:bg-wood-800 text-white font-bold py-3 px-4 rounded-md transition duration-300">
+                Envoyer le Message
+              </button>
+            </form>
+          </div>
