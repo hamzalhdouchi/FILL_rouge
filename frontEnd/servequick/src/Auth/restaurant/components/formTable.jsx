@@ -87,4 +87,21 @@ const TABLE_STATUSES = [
     
           fetchTables();
           closeModal();
-    
+        } catch (error) {
+            console.error('Erreur:', error);
+            const errorMessage = error.response?.data?.message || 
+                                error.response?.data?.errors?.join('\n') || 
+                                `Erreur lors de ${isEditMode ? 'la mise à jour' : 'la création'} de la table`;
+      
+            setFormState(prev => ({ ...prev, error: errorMessage }));
+      
+            await Swal.fire({
+              title: "Erreur",
+              text: errorMessage,
+              icon: "error",
+            });
+          } finally {
+            setFormState(prev => ({ ...prev, isLoading: false }));
+          }
+        }, [formState, restaurantId, isEditMode, initialData, validateForm, closeModal, fetchTables]);
+      
