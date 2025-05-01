@@ -33,6 +33,10 @@ const Register = () => {
   <textarea name="description" placeholder="Description du restaurant" />
 )}
 
+{formData.role === "restaurateur" && (
+  <input type="file" name="file" />
+)}
+
       </div>
     </div>
   );
