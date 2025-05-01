@@ -12,6 +12,21 @@ const Page404 = () => {
         <p className="text-lg text-wood-700 mb-6">Le chef n'a pas pu trouver la page que vous cherchiez.</p>
       </div>
     </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/"
+              className="px-6 py-3 border-2 border-wood-600 text-wood-600 rounded-full hover:bg-wood-600 hover:text-white transition font-medium shadow-md"
+            >
+              Retour à Login
+            </a>
+            <button
+              onClick={() => window.history.back()}
+              className="text-wood-700 hover:text-wood-600 hover:underline transition font-medium"
+            >
+              Retourner
+            </button>
+          </div>
+  
   );
 };
 
