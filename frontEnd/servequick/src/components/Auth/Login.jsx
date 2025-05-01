@@ -26,3 +26,15 @@ const Login = ({ isLoading, setIsLoading }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post("http://localhost:8000/api/login", formData);
+
+      if (response.status === 200) {
+        const { token, user, message } = response.data;
+        const role = user.role_id;
+        const user_id = user.id;
