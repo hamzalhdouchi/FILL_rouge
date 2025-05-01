@@ -71,7 +71,23 @@ const OrderModal = ({
       className="w-full px-4 py-2 border border-wood-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-wood-500 focus:border-transparent"
     ></textarea>
   </div>
-  
+  <div className="flex space-x-4">
+  <button 
+    type="button"
+    onClick={addplateToSelection}
+    className="flex-1 py-3 px-4 bg-gradient-to-r from-wood-600 to-wood-700 text-white font-medium rounded-lg hover:from-wood-700 hover:to-wood-800 transition-all shadow-md hover:shadow-lg"
+  >
+    Ajouter à ma commande
+  </button>
+  <button 
+    type="button"
+    onClick={closeModal}
+    className="py-3 px-4 border border-wood-300 text-wood-700 font-medium rounded-lg hover:bg-wood-50 transition-colors"
+  >
+    Annuler       
+  </button>
+</div>
+
   );
 };
 
