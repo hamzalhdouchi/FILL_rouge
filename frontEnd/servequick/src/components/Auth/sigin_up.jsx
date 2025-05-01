@@ -20,6 +20,8 @@ const Register = () => {
 <input type="email" name="email" placeholder="Email" />
 <input type="password" name="password" placeholder="Mot de passe" />
 <input type="password" name="password_confirmation" placeholder="Confirmer mot de passe" />
+<input type="text" name="phone" placeholder="Téléphone" />
+<input type="text" name="address" placeholder="Adresse" />
 
       </div>
     </div>
