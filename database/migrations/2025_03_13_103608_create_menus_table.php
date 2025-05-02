@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('name_Menu', function (Blueprint $table) {
             $table->id(); 
             $table->string('name_Menu');
             $table->boolean('isActif')->default(true);
