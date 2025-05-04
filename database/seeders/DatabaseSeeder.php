@@ -16,11 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('roles')->insert([
-            ['Role_name' => 'admin'],
-            ['Role_name' => 'livreur'],
-            ['Role_name' => 'client']
-        ]);
+      
     
         \App\Models\User::factory(10)->create();
         \App\Models\Restaurant::factory(10)->create();

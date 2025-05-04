@@ -13,7 +13,12 @@ class roleSeed extends Seeder
      */
     public function run(): void
     {
-        
+        DB::table('roles')->insert([
+            ['Role_name' => 'client'],
+            ['Role_name' => 'restaurant'],
+            ['Role_name' => 'livreur'],
+            ['Role_name' => 'admin'],
+        ]);
         
     }
 }
